@@ -8,7 +8,6 @@ import './node.css';
 
 class Node extends Component {
   constructor(props) {
-    console.log("Creating node")
     super(props);
   }
 
@@ -19,7 +18,6 @@ class Node extends Component {
   }
 
   handleHeadingMouseDown = (e) =>{
-    console.log("heading clicked")
     this.setState({"mousedown":{x:e.clientX,y:e.clientY}})
     this.setState({
       mouseMoveListener: <EventListener target={document} onMouseMoveCapture={this.handleMouseMove} />,
@@ -84,8 +82,6 @@ class Node extends Component {
     })
 
     if(e.target.classList.contains("nodePanelFooterSelect")){
-      console.log(e.target)
-      console.log(e.target.parentNode)
       e.target.style.backgroundColor="#007bff"
     }
   }
@@ -94,7 +90,6 @@ class Node extends Component {
 
     if(e.target.classList.contains("nodePanelFooterSelect")){
       console.log(e.target)
-      console.log(e.target.parentNode)
       e.target.style.backgroundColor="#28a745"
     }
 
@@ -102,8 +97,6 @@ class Node extends Component {
 
   handleMouseOutFooter = (e) =>{
     if(e.target.classList.contains("nodePanelFooterSelect")){
-      console.log(e.target)
-      console.log(e.target.parentNode)
       e.target.style.backgroundColor="#007bff"
     }
 
@@ -128,9 +121,9 @@ class Node extends Component {
         </Panel.Body>
         <Panel.Footer className="nodePanelFooter">
           <Row>
-            <Col onMouseDown={this.handleFooterMouseDown.bind(this)}  className="nodePanelFooterSelect bg-primary"> &#10231;</Col>
+            <Col onMouseDown={this.handleFooterMouseDown.bind(this)} reactid={this.props.reactid} className="nodePanelFooterSelect bg-primary"> &#10231;</Col>
             <Col>
-              <Button className="nodeEditButton">
+              <Button onClick={()=>this.props.editNodeCallback(this.props.reactid)} className="nodeEditButton">
                 Edit
               </Button>
             </Col>

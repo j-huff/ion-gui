@@ -8,6 +8,8 @@
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.2.0",
     "react-event-listener": "^0.6.4",
+    "react-native": "^0.57.4",
+    "react-native-uuid-generator": "^4.0.1",
     "react-scripts": "1.0.17",
     "react-svg": "^6.0.24"
   },
