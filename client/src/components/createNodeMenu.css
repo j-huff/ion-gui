@@ -1,0 +1,13 @@
+
+
+#createNodePanel{
+	position: absolute;
+	width:300px;
+	margin:0;
+
+	text-align: left;
+}
+
+#createNodePanel .help-block{
+	color:#ef1313!important
+}

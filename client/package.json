@@ -1,0 +1,21 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.4",
+    "react-dom": "^16.2.0",
+    "react-event-listener": "^0.6.4",
+    "react-scripts": "1.0.17",
+    "react-svg": "^6.0.24"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:5000"
+}

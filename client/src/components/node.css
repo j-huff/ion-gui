@@ -1,0 +1,14 @@
+
+
+.nodePanel{
+	position: absolute;
+	width:200px;
+	margin:0;
+	text-align: left;
+}
+.nodePanelFooter{
+	user-select:none;
+	background-color: #007bff;
+	text-align: center;
+}
+
