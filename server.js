@@ -2,14 +2,21 @@ const express = require('express');
 
 const app = express();
 
-app.get('/api/customers', (req, res) => {
-  const customers = [
-    {id: 1, firstName: 'John', lastName: 'Doe'},
-    {id: 2, firstName: 'Brad', lastName: 'Traversy'},
-    {id: 3, firstName: 'Mary', lastName: 'Swanson'},
-  ];
+const fs = require('fs');
+const projectFilesFolder='./data/projectFiles/'
 
-  res.json(customers);
+app.get('/api/projectFiles', (req, res) => {
+	projects = []
+	fs.readdirSync(projectFilesFolder).forEach(file => {
+		var contents = fs.readFileSync(projectFilesFolder+file, 'utf8');
+		var json = JSON.parse(contents)
+		var meta = json.meta
+		projects.push({filename:file,meta:meta})
+	})
+	console.log(projects)
+	res.json(projects)
+	console.log("projectFiles")
+
 });
 
 const port = 5000;

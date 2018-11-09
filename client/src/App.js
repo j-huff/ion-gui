@@ -5,7 +5,7 @@ import ContextMenu from './components/contextMenu';
 import CreateNodeMenu from './components/createNodeMenu';
 import Node from './components/node';
 import NodeEditor from './components/nodeEditor';
-import {Panel} from 'react-bootstrap'
+import {Panel,FormControl, Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
 
 
 function uuidv4() {
@@ -14,6 +14,8 @@ function uuidv4() {
     return v.toString(16);
   });
 }
+
+var remoteURL = 'localhost:5000'
 
 class App extends Component {
 
@@ -26,12 +28,34 @@ class App extends Component {
       nodeComps: [],
       nodes: [],
       activeStroke: "",
+      projectFiles:"",
     }
+    this.fetchProjects()
 
     this.nodeMap = new Map();
 
     this.createNodeMenu = React.createRef();
   }
+
+  fetchProjects() {
+  // Where we're fetching data from
+    fetch('/api/projectFiles')
+      // We get the API response and receive data in JSON format...
+      .then(response => response.json())
+      // ...then we update the users state
+      .then(data =>
+        console.log(data)
+        // this.setState({
+        //   users: data,
+        //   isLoading: false,
+        // })
+      )
+      // Catch any errors we hit and update the app
+      .catch(error =>
+        console.log(error.message)
+       );
+  }
+
   contextMenu = (e) => {
 
     this.setState({
@@ -164,15 +188,28 @@ class App extends Component {
     return conflicts.res
   }
 
+
+
   render() {
 
     return (
       <div id="MyApp" className="App" onClick={this.handleClick.bind(this)}>
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">React Express Starter 1</h1>
-        </header>
-        hello
+        
+        <Navbar id="topNav">
+          <Navbar.Header>
+            <Navbar.Brand>
+              <FormControl id="projectTitle" type="text" value="My Project"/>
+            </Navbar.Brand>
+          </Navbar.Header>
+          <Nav>
+            <Navbar.Text>
+              Author: 
+            </Navbar.Text>
+            <Navbar.Text>
+              John Huff
+            </Navbar.Text>
+          </Nav>
+        </Navbar>
 
         <div className="page-center" onContextMenu={this.contextMenu.bind(this)}>
           {this.state.nodeComps}
@@ -188,6 +225,14 @@ class App extends Component {
         </div>
         <div className="page-left"></div>
         <div className="page-right">
+
+          <Panel id="ProjectInfo" defaultExpanded>
+          <Panel.Heading >
+            <Panel.Title toggle componentClass="h3">Project</Panel.Title>
+          </Panel.Heading>
+          
+          </Panel>
+
           <Panel id="nodeEditor" defaultExpanded>
           <Panel.Heading >
             <Panel.Title toggle componentClass="h3">Edit Node</Panel.Title>
@@ -196,8 +241,6 @@ class App extends Component {
           </Panel>
           
         </div>
-
-        
 
       </div>
     );

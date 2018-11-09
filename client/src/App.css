@@ -49,7 +49,9 @@
   pointer-events:none
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#topNav{
+  z-index: 1000
+}
+input#projectTitle{
+  background-color: "white";
 }
