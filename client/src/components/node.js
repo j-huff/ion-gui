@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import EventListener from 'react-event-listener';
-import {Panel} from 'react-bootstrap'
+import {Panel, Row, Col,Button, Grid} from 'react-bootstrap'
 
 
 import './node.css';
@@ -83,7 +83,7 @@ class Node extends Component {
       mouseOutListener: null
     })
 
-    if(e.target.classList.contains("nodePanelFooter")){
+    if(e.target.classList.contains("nodePanelFooterSelect")){
       console.log(e.target)
       console.log(e.target.parentNode)
       e.target.style.backgroundColor="#007bff"
@@ -92,7 +92,7 @@ class Node extends Component {
 
   handleMouseOverFooter = (e) =>{
 
-    if(e.target.classList.contains("nodePanelFooter")){
+    if(e.target.classList.contains("nodePanelFooterSelect")){
       console.log(e.target)
       console.log(e.target.parentNode)
       e.target.style.backgroundColor="#28a745"
@@ -101,7 +101,7 @@ class Node extends Component {
   }
 
   handleMouseOutFooter = (e) =>{
-    if(e.target.classList.contains("nodePanelFooter")){
+    if(e.target.classList.contains("nodePanelFooterSelect")){
       console.log(e.target)
       console.log(e.target.parentNode)
       e.target.style.backgroundColor="#007bff"
@@ -126,8 +126,16 @@ class Node extends Component {
         <Panel.Body>
           ipn:{this.state.ipn}.0
         </Panel.Body>
-        <Panel.Footer onMouseDown={this.handleFooterMouseDown.bind(this)} className="nodePanelFooter bg-primary">
-          &#10231;
+        <Panel.Footer className="nodePanelFooter">
+          <Row>
+            <Col onMouseDown={this.handleFooterMouseDown.bind(this)}  className="nodePanelFooterSelect bg-primary"> &#10231;</Col>
+            <Col>
+              <Button className="nodeEditButton">
+                Edit
+              </Button>
+            </Col>
+          </Row>
+          
         </Panel.Footer>
 
       </Panel>

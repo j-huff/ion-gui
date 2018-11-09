@@ -6,9 +6,28 @@
 	margin:0;
 	text-align: left;
 }
+.nodePanel h6{
+	user-select:none;
+}
 .nodePanelFooter{
+	padding-top: 0;
+	padding-bottom: 0;
+}
+.nodePanelFooterSelect{
 	user-select:none;
 	background-color: #007bff;
 	text-align: center;
+	padding: 0;
+	padding-top: 5px;
+	width: 70%;
+	float: left;
+	height: 30px
+}
+
+.nodeEditButton{
+	margin:0;
+	width: 30%;
+	float: left;
+	height: 30px
 }
 
