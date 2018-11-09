@@ -1,10 +1,7 @@
-# React Express Starter Pack
+# ION GUI
 
-> Create full stack apps with React and Express. Run your client and server with a single command. 
+> Create and manage configurations for ION-DTN
 
-### Redux Version
-This version does not include Redux
-[Click Here For Redux Version](https://github.com/bradtraversy/react_redux_express_starter) 
 
 ## Quick Start
 
@@ -31,8 +28,7 @@ npm run client
 
 ### Author
 
-Brad Traversy
-[Traversy Media](http://www.traversymedia.com)
+John Huff
 
 ### Version
 
@@ -41,4 +37,3 @@ Brad Traversy
 ### License
 
 This project is licensed under the MIT License
-# ion-gui
