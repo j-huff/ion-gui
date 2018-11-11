@@ -5,105 +5,63 @@ import {Panel,Button, FormGroup, ControlLabel, FormControl, HelpBlock} from 'rea
 import './createNodeMenu.css';
 
 class CreateNodeMenu extends Component {
-  constructor() {
-    console.log("Creating node")
-    super();
-    this.state = {
-      "name": null,
-      "ipn":null
-    }
-  }
-
 
   componentDidMount() {
 
-  }
-  openNewNodeMenu(){
-    console.log("New node menu")
-  }
-
-  handleClick(e) {
-    console.log('The link was clicked.');
   }
 
   selectItem(command){
     this.props.parentCallback("CreateNode",this.props.x,this.props.y)
   }
 
-  handleInputChange(e){
-    var label = e.target.attributes.getNamedItem('label').value
-    var value = e.target.value
-    console.log(label)
-    this.setState({
-      [label]:value
-    })
-    console.log(this.state)
-  }
+  submit = (e) =>{
+    e.preventDefault();
 
-  handleSubmit(){
-    console.log("Submitting node creation")
-    // this.setState({
-    //   "x":this.props.x,
-    //   "y":this.props.y
-    // })
-    var fail = false
-    if(this.state.name == null || this.state.name.length < 1){
-      this.setState({nameHelp:"Name required"})
-      fail = true
-    }else{
-      this.setState({nameHelp:null})
-    }
-
-    if(this.state.ipn == null || parseInt(this.state.ipn) < 1){
-      this.setState({ipnHelp:"number must be greater than 0"})
-      fail = true
-    }else{
-      this.setState({ipnHelp:null})
-    }
-
-
-    if(fail){return}
-
-
+    var t = e.target
+    
     var node = {
-      "name":this.state.name,
-      "ipn":this.state.ipn,
-      "x":this.props.x,
-      "y":this.props.y,
+      name: t.name.value,
+      ipn: t.ipn.value,
+      x: this.props.x,
+      y: this.props.y
     }
-    this.props.parentSubmitCallback(node)
+
+    this.props.submitCallback(node)
   }
 
   handleClose(){
-    console.log("Closing create node menu")
-    this.props.parentCloseCallback("a")
+    this.props.closeCallback()
   }
 
   submissionResponse(res){
-    console.log(res)
+
   }
 
   render() {
+    var display = "none"
+    if(this.props.opened){
+      display = "block"
+    }
     return (
-      <Panel id="createNodePanel" style={{left:this.props.x, top:this.props.y}}>
+      <Panel id="createNodePanel" style={{left:this.props.x, top:this.props.y, display:display}}>
         <Panel.Heading >
           <Panel.Title componentClass="h3">Create Node</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          <form>
+          <form onSubmit={this.submit}>
 
             <FormGroup controlId="NameGroup">
               <ControlLabel>Name</ControlLabel>
-              <FormControl onChange={this.handleInputChange.bind(this)} type="text" label="name" placeholder="Enter name"/>
-              <HelpBlock>{this.state.nameHelp}</HelpBlock>
+              <FormControl type="text" name="name" placeholder="Enter name"/>
+              <HelpBlock>{this.props.helpMessages.name}</HelpBlock>
             </FormGroup>
             <FormGroup controlId="IpnGroup">
               <ControlLabel>IPN (ipn:x.0)</ControlLabel>
-              <FormControl onChange={this.handleInputChange.bind(this)} type="number" label="ipn" placeholder="Enter number"/>
-              <HelpBlock>{this.state.ipnHelp}</HelpBlock>
+              <FormControl type="number" name="ipn" placeholder="Enter number"/>
+              <HelpBlock>{this.props.helpMessages.ipn}</HelpBlock>
             </FormGroup>
             <div className="pull-right">
-            <Button onClick={()=>this.handleClose()}>Close</Button><Button onClick={() => this.handleSubmit()} bsStyle="primary">Submit</Button>
+            <Button onClick={()=>this.handleClose()}>Close</Button><Button type="submit" bsStyle="primary">Submit</Button>
             </div>
           </form>
         </Panel.Body>

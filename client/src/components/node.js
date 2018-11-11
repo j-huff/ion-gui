@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import EventListener from 'react-event-listener';
 import {Panel, Row, Col,Button, Grid} from 'react-bootstrap'
+import Radium from 'radium';
 
 
 import './node.css';
@@ -11,119 +12,39 @@ class Node extends Component {
     super(props);
   }
 
-
   componentDidMount() {
-    this.setState(this.props.data);
-    this.setState({"mousedown":false,mouseMoveListener:null,mouseUpListener:null})
   }
 
   handleHeadingMouseDown = (e) =>{
-    this.setState({"mousedown":{x:e.clientX,y:e.clientY}})
-    this.setState({
-      mouseMoveListener: <EventListener target={document} onMouseMoveCapture={this.handleMouseMove} />,
-      mouseUpListener: <EventListener target={document} onMouseUpCapture={this.handleMouseUp} />
-    })
+    this.props.dragCallback(e,this.props.data.uuid,this.props.data.x,this.props.data.y)
   }
 
   handleFooterMouseDown = (e) =>{
-
-    // document.body.style.userSelect = "none"
-    document.getElementById("root").style.userSelect = "none";
-
-
-    this.setState({"mousedown":{x:e.clientX,y:e.clientY}})
-    this.setState({
-      mouseMoveListener: <EventListener target={document} onMouseMoveCapture={this.handleMouseMoveFooter} />,
-      mouseUpListener: <EventListener target={document} onMouseUpCapture={this.handleMouseUpFooter} />,
-      mouseOverListener: <EventListener target={document} onMouseOverCapture={this.handleMouseOverFooter} />,
-      mouseOutListener: <EventListener target={document} onMouseOutCapture={this.handleMouseOutFooter}/> ,
-    })
-  }
-
-  handleMouseMove = (e) =>{
-    var newX = this.state.x + e.movementX
-    var newY = this.state.y + e.movementY
-    this.setState({
-      x: newX,
-      y:newY
-    })
-
-  }
-  handleMouseUp = (e) =>{
-    this.setState({
-      mouseMoveListener: null,
-      mouseUpListener: null
-    })
-  }
-
-  handleMouseMoveFooter = (e) =>{
-    var data = {
-      mousedown: this.state.mousedown,
-      x: e.clientX,
-      y: e.clientY,
-    }
-    this.props.drawActiveStrokeCallback(data)
-  }
-
-  handleMouseUpFooter = (e) =>{
-
-    var data = {
-      mousedown: {x:-100,y:-100},
-      x: 0,
-      y: 0,
-    }
-    this.props.drawActiveStrokeCallback(data)
-
-    this.setState({
-      mouseMoveListener: null,
-      mouseUpListener: null,
-      mouseOverListener: null,
-      mouseOutListener: null
-    })
-
-    if(e.target.classList.contains("nodePanelFooterSelect")){
-      e.target.style.backgroundColor="#007bff"
-    }
-  }
-
-  handleMouseOverFooter = (e) =>{
-
-    if(e.target.classList.contains("nodePanelFooterSelect")){
-      console.log(e.target)
-      e.target.style.backgroundColor="#28a745"
-    }
-
-  }
-
-  handleMouseOutFooter = (e) =>{
-    if(e.target.classList.contains("nodePanelFooterSelect")){
-      e.target.style.backgroundColor="#007bff"
-    }
-
+    this.props.linkCallback(e,this.props.data.uuid)
   }
 
   render() {
-    if(this.state == null){
-      return (<div></div>);
+
+    var props = this.props.data
+    var hoverStyle = {}
+    if(props.hover){
+      hoverStyle = {backgroundColor: "#28a745"}
     }
     return (
       <div>
-      {this.state.mouseMoveListener}
-      {this.state.mouseUpListener}
-      {this.state.mouseOverListener}
-      {this.state.mouseOutListener}
-      <Panel dictkey={this.state.dictkey} className="nodePanel" style={{left:this.state.x, top:this.state.y}}>
+
+      <Panel className="nodePanel" style={{left:props.x, top:props.y}} onMouseOver={()=>this.props.mouseOverCallback(props.uuid)} onMouseOut={()=>this.props.mouseOutCallback(props.uuid)}>
         <Panel.Heading onMouseDown={this.handleHeadingMouseDown.bind(this)}>
-          <Panel.Title componentClass="h6">{this.state.name}</Panel.Title>
+          <Panel.Title componentClass="h6">{props.name}</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          ipn:{this.state.ipn}.0
+          ipn:{props.ipn}.0
         </Panel.Body>
         <Panel.Footer className="nodePanelFooter">
           <Row>
-            <Col onMouseDown={this.handleFooterMouseDown.bind(this)} reactid={this.props.reactid} className="nodePanelFooterSelect bg-primary"> &#10231;</Col>
+            <Col onMouseDown={this.handleFooterMouseDown.bind(this)} style={hoverStyle} className="nodePanelFooterSelect bg-primary"> &#10231;</Col>
             <Col>
-              <Button onClick={()=>this.props.editNodeCallback(this.props.reactid)} className="nodeEditButton">
+              <Button onClick={()=>this.props.editNodeCallback(props.uuid)} className="nodeEditButton">
                 Edit
               </Button>
             </Col>
@@ -137,4 +58,5 @@ class Node extends Component {
   }
 }
 
+Node = Radium(Node)
 export default Node;

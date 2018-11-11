@@ -6,29 +6,18 @@ import './contextMenu.css';
 
 
 class ContextMenu extends Component {
-  // constructor() {
-  //   super();
-  // }
-
-
-  componentDidMount() {
-
-  }
-  openNewNodeMenu(){
-    console.log("New node menu")
-  }
-
-  handleClick(e) {
-    console.log('The link was clicked.');
-  }
 
   selectItem(command){
     this.props.parentCallback("CreateNode",this.props.x,this.props.y)
   }
 
   render() {
+    var display = "none"
+    if(this.props.opened){
+      display = "block"
+    }
     return (
-      <ListGroup id="contextMenu" style={{left:this.props.x, top:this.props.y}}>
+      <ListGroup id="contextMenu" style={{left:this.props.x, top:this.props.y, display:display}}>
         <ListGroupItem onClick={() => this.selectItem("CreateNode")}>
         Create Node
         </ListGroupItem>
