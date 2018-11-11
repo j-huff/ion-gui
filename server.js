@@ -3,6 +3,7 @@ const app = express();
 
 const fs = require('fs');
 const shortid = require('shortid');
+const path = require('path')
 
 const bodyParser = require("body-parser");
 app.use('/', express.static(__dirname));
@@ -15,10 +16,13 @@ const projectFilesFolder='./data/projectFiles/'
 app.get('/api/projectFiles', (req, res) => {
 	projects = []
 	fs.readdirSync(projectFilesFolder).forEach(file => {
-		var contents = fs.readFileSync(projectFilesFolder+file, 'utf8');
-		var json = JSON.parse(contents)
-		var meta = json.meta
-		projects.push({filename:file,meta:meta})
+		console.log(file)
+		if(path.extname(file) == '.json'){
+			var contents = fs.readFileSync(projectFilesFolder+file, 'utf8');
+			var json = JSON.parse(contents)
+			var meta = json.meta
+			projects.push({filename:file,meta:meta})
+		}
 	})
 	projects = projects.sort(function(a,b){return  b.meta.lastSaved-a.meta.lastSaved})
 	console.log(projects)
