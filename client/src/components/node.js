@@ -34,7 +34,7 @@ class Node extends Component {
       <div>
 
       <Panel className="nodePanel" style={{left:props.x, top:props.y}} onMouseOver={()=>this.props.mouseOverCallback(props.uuid)} onMouseOut={()=>this.props.mouseOutCallback(props.uuid)}>
-        <Panel.Heading onMouseDown={this.handleHeadingMouseDown.bind(this)}>
+        <Panel.Heading className="nodeHeading" onMouseDown={this.handleHeadingMouseDown.bind(this)}>
           <Panel.Title componentClass="h6">{props.name}</Panel.Title>
         </Panel.Heading>
         <Panel.Body>

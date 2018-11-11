@@ -6,6 +6,9 @@
 	margin:0;
 	text-align: left;
 }
+.nodeHeading{
+	cursor: pointer; 
+}
 .nodePanel h6{
 	user-select:none;
 }
@@ -14,6 +17,7 @@
 	padding-bottom: 0;
 }
 .nodePanelFooterSelect{
+	cursor: pointer; 
 	user-select:none;
 	background-color: #007bff;
 	text-align: center;
