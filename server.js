@@ -25,8 +25,6 @@ app.get('/api/projectFiles', (req, res) => {
 		}
 	})
 	projects = projects.sort(function(a,b){return  b.meta.lastSaved-a.meta.lastSaved})
-	console.log(projects)
-	console.log("Projects requested")
 	res.json(projects)
 });
 

@@ -66,7 +66,6 @@ class Editor extends Component {
         headers: { "Content-Type": "application/json" }
       }).then(res => res.json())
       .then(res => {
-        console.log(res);
         this.setState(JSON.parse(res))
       })
     }
@@ -74,7 +73,6 @@ class Editor extends Component {
 
   save = (e) => {
     console.log("Saving project")
-    console.log(this.state)
     fetch("/api/saveProject", {
       method: "POST",
       body: JSON.stringify({id: this.state.meta.id,state:this.state}),
