@@ -52,12 +52,12 @@ class CreateNodeMenu extends Component {
 
             <FormGroup controlId="NameGroup">
               <ControlLabel>Name</ControlLabel>
-              <FormControl type="text" name="name" placeholder="Enter name"/>
+              <FormControl autocomplete="off"  type="text" name="name" placeholder="Enter name"/>
               <HelpBlock>{this.props.helpMessages.name}</HelpBlock>
             </FormGroup>
             <FormGroup controlId="IpnGroup">
               <ControlLabel>IPN (ipn:x.0)</ControlLabel>
-              <FormControl type="number" name="ipn" placeholder="Enter number"/>
+              <FormControl autocomplete="off"  type="number" name="ipn" placeholder="Enter number"/>
               <HelpBlock>{this.props.helpMessages.ipn}</HelpBlock>
             </FormGroup>
             <div className="pull-right">

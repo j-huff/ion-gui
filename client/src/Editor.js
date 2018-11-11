@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import backbutton from "./backbutton.svg" ;
 import './App.css';
 import ContextMenu from './components/contextMenu';
 import CreateNodeMenu from './components/createNodeMenu';
 import Node from './components/node';
 import NodeEditor from './components/nodeEditor';
-import {Panel,FormControl, Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap'
+import {Panel,FormControl, Navbar, Nav, NavItem, NavDropdown, MenuItem, Button} from 'react-bootstrap'
 import Radium from 'radium';
 import EventListener from 'react-event-listener';
 import deepcopy from 'deepcopy';
+import { Redirect, Link } from 'react-router-dom'
 
 
 
@@ -18,8 +19,6 @@ function uuidv4() {
     return v.toString(16);
   });
 }
-
-var remoteURL = 'localhost:5000'
 
 class Editor extends Component {
 
@@ -34,14 +33,58 @@ class Editor extends Component {
       createNodeHelpMessages: {},
       nodeEditor: {},
       links: {},
+      meta: {
+        id: "new",
+        author: "No Author",
+        projectTitle: "Untitled Project"
+      },
     }
     this.draggingNode = false
     this.linkingNode = false
     this.hoveringNode = false
     this.mouseDown = false
-    this.nodeMap = new Map();
     this.createNodeMenu = React.createRef();
     this.nodeEditorRef = React.createRef();
+  }
+
+  componentDidMount(){
+    var params = this.props.match.params
+    if(params.id === undefined || params.id == "new"){
+      this.loading = "loading"
+      fetch('/api/newProjectId').then(res => res.json())
+      .then(res => {
+        var meta = this.state.meta
+        meta["id"] = res
+        this.setState({meta:meta})
+      })
+      
+    }
+    if(this.loading != "loading"){
+      fetch("/api/loadProject", {
+        method: "POST",
+        body: JSON.stringify({id: params.id}),
+        headers: { "Content-Type": "application/json" }
+      }).then(res => res.json())
+      .then(res => {
+        console.log(res);
+        this.setState(JSON.parse(res))
+      })
+    }
+  }
+
+  save = (e) => {
+    console.log("Saving project")
+    console.log(this.state)
+    fetch("/api/saveProject", {
+      method: "POST",
+      body: JSON.stringify({id: this.state.meta.id,state:this.state}),
+      headers: { "Content-Type": "application/json" }
+    }).then(function(res) {
+      
+      console.log("Project saved")
+    }, function(error) {
+      console.log(error.message) //=> String
+    })
   }
 
   handleMouseMove = (e) => {
@@ -68,6 +111,14 @@ class Editor extends Component {
         activeStroke: str
       })
     }
+  }
+
+  changeMeta = (e) => {
+    var name = e.target.name
+    var value = e.target.value
+    var meta = this.state.meta
+    meta[name] = value
+    this.setState({meta:meta})
   }
 
   handleMouseUp = (e) => {
@@ -114,7 +165,7 @@ class Editor extends Component {
     e.preventDefault();
   }
 
-  handleClick(e){
+  handleClick =(e) =>{
     var menu = this.state.contextMenu
     menu["opened"] = false
     this.setState({
@@ -218,16 +269,16 @@ class Editor extends Component {
       helpMessages["name"]= "Name cannot be empty"
     };
 
-    for (let key of this.nodeMap.keys()){
-      if(key == data.reactid){
+    for (let key of Object.keys(this.state.nodes)){
+      if(key == data.uuid){
         continue
       }
-      var val = this.nodeMap.get(key)
-      if(data.ipn == val.data.ipn){
+      var node = this.state.nodes[key]
+      if(data.ipn == node.ipn){
         fail = true
         helpMessages["ipn"]= "IPN must be unique"
       }
-      if(data.name == val.data.name){
+      if(data.name == node.name){
         fail = true
         helpMessages["name"]= "Name must be unique"
       }
@@ -255,6 +306,22 @@ class Editor extends Component {
       nodes: nodes
     })
 
+  }
+
+  selectAll = (e) =>{
+    e.target.select();
+  }
+
+
+  renderRedirect(){
+    var nodeData = this.state
+    if (this.state && this.state.meta.id != "new"){
+      return (
+        <Redirect to={'/editor/'+this.state.meta.id} />
+      );
+    }else{
+      return ("");
+    }
   }
 
   render() {
@@ -317,8 +384,10 @@ class Editor extends Component {
     });
 
     return (
-      <div id="Editor" className="App" onClick={this.handleClick.bind(this)}>
+      <div id="Editor" className="App" onClick={this.handleClick}>
       
+      {this.renderRedirect()}
+
       <EventListener target={document} onMouseMoveCapture={this.handleMouseMove} />
       <EventListener target={document} onMouseUpCapture={this.handleMouseUp} />
       <EventListener target={document} onMouseOverCapture={this.handleMouseOver} />
@@ -326,11 +395,19 @@ class Editor extends Component {
 
         <Navbar id="topNav">
           <Navbar.Header>
-            <Navbar.Text style={{margin: 0, padding: "6px 0"}}>
-            <img src="./backbutton.svg" height={"40px"} width={"40px"} style={{marginLeft:-100}}/>
+            <Navbar.Text style={{margin: 0, padding: "6px 0px"}}>
+              <Link to="/">
+              <img src={backbutton} height={"38px"} width={"38px"} style={{marginLeft:0,opacity: .4}}/>
+              </Link>
             </Navbar.Text>
+            <Navbar.Text style={{margin: 0, padding: "10px 20px"}}>
+              <Button onClick={this.save}>
+                Save
+              </Button>
+            </Navbar.Text>
+            
             <Navbar.Brand>
-              <input key="projectTitle" style={[titleStyle.base]} id="projectTitle" type="text" value="My Project"/>
+              <input onFocus={this.selectAll}  key="projectTitle" onChange={this.changeMeta.bind(this)} style={[titleStyle.base]} id="projectTitle" name="projectTitle" type="text" value={this.state.meta.projectTitle}/>
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
@@ -338,8 +415,9 @@ class Editor extends Component {
               Author: 
             </Navbar.Text>
             <Navbar.Text>
-              <input key="projectAuthor" style={[authorStyle.base]} id="projectAuthor" type="text" value="John Huff"/>
+              <input onFocus={this.selectAll} key="projectAuthor" onChange={this.changeMeta.bind(this)} style={[authorStyle.base]} id="projectAuthor" name="author" type="text" value={this.state.meta.author}/>
             </Navbar.Text>
+            
           </Nav>
         </Navbar>
 

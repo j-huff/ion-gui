@@ -1,0 +1,23 @@
+
+.fileListItem{
+	height: 50px;
+}
+.fileListLink{
+	position: absolute;
+	margin: auto;
+    width: 100%;
+    height: 50px;
+    vertical-align: middle;
+    display: flex; 
+}
+
+.fileListLink:hover{
+	background-color: #EEE;
+	text-decoration: none;
+}
+
+.fileListText{
+	margin: auto; 
+	margin-left: 15px;
+	display: flex; 
+}
