@@ -7,8 +7,6 @@
 
 ``` bash
 
-./init
-
 # Install dependencies for server
 npm install
 
