@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import backbutton from "./backbutton.svg" ;
 import './App.css';
-import ContextMenu from './components/contextMenu';
-import CreateNodeMenu from './components/createNodeMenu';
-import Node from './components/node';
-import NodeEditor from './components/nodeEditor';
+import ContextMenu from './components/editor/contextMenu';
+import CreateNodeMenu from './components/editor/createNodeMenu';
+import Node from './components/editor/node';
+import Links from './components/editor/links';
+import NodeEditor from './components/editor/nodeEditor';
 import {Panel,FormControl, Navbar, Nav, NavItem, NavDropdown, MenuItem, Button} from 'react-bootstrap'
 import Radium from 'radium';
 import EventListener from 'react-event-listener';
@@ -73,6 +74,7 @@ class Editor extends Component {
 
   save = (e) => {
     console.log("Saving project")
+    console.log(this.state)
     fetch("/api/saveProject", {
       method: "POST",
       body: JSON.stringify({id: this.state.meta.id,state:this.state}),
@@ -151,13 +153,13 @@ class Editor extends Component {
     var node1 = nodes[node1_uuid]
     var node2 = nodes[node2_uuid]
     if(!node1.links){
-      node1.links = new Set()
+      node1.links = {}
     }
     if(!node2.links){
-      node2.links = new Set()
+      node2.links = {}
     }
-    node1.links.add(uuid)
-    node2.links.add(uuid)
+    node1.links[uuid] = 1
+    node2.links[uuid] = 1
     nodes[node1_uuid] = node1
     nodes[node2_uuid] = node2
 
@@ -199,7 +201,7 @@ class Editor extends Component {
     })
     var uuid = uuidv4()
     node["uuid"] = uuid
-    node.links = new Set()
+    node.links = {}
 
     var nodes = this.state.nodes;
     nodes[uuid] = node
@@ -327,14 +329,14 @@ class Editor extends Component {
     var nodes = this.state.nodes
     var node = nodes[uuid]
     var links = this.state.links
-    node.links.forEach(function(link_uuid){
+    Object.keys(node.links).forEach(function(link_uuid){
       var link = links[link_uuid]
       var node2_uuid = link.node1_uuid
       if(uuid == node2_uuid){
         node2_uuid = link.node2_uuid
       }
       var node2 = nodes[node2_uuid]
-      node2.links.delete(link_uuid)
+      delete node2.links[link_uuid]
       nodes[node2_uuid] = node2
       delete links[link_uuid]
     })
@@ -403,23 +405,6 @@ class Editor extends Component {
       editNodeCallback={this.editNode}/> 
     });
 
-      
-
-    var link_lines = Object.keys(this.state.links).map((key,idx) => {
-      var l = this.state.links[key]
-      var node1 = this.state.nodes[l.node1_uuid]
-      var node2 = this.state.nodes[l.node2_uuid]
-
-      var x1 = node1.x + 50
-      var y1 = node1.y + 50
-      var vx = node2.x - node1.x
-      var vy = node2.y - node1.y
-      var str = "M "+x1+" "+y1+" q 100 100 "+vx+" "+ vy
-
-      return(
-        <path d={str} key={idx} stroke="red" strokeWidth="3" fill="none" />
-      )
-    });
 
     return (
       <div id="Editor" className="App" onClick={this.handleClick}>
@@ -461,9 +446,8 @@ class Editor extends Component {
 
         <div className="page-center" onContextMenu={this.contextMenu.bind(this)}>
           
-          <svg id="activeStroke" height='20000' width='20000' style={{position:'fixed', top:'0', left:'0'}}>
-            {link_lines}
-          </svg>
+          
+          <Links nodes={this.state.nodes} links={this.state.links} />
 
           {nodes}
 
