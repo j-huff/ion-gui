@@ -133,12 +133,9 @@ class Editor extends Component {
       activeStroke: ""
     })
   }
-  handleMouseOver = (e) => {
-    
-  }
-  handleMouseOut = (e) => {
-    
-  }
+  
+  handleMouseOver = (e) => {}
+  handleMouseOut = (e) => {}
 
   createLink = (node1_uuid, node2_uuid) => {
 
