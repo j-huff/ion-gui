@@ -16,7 +16,6 @@ const projectFilesFolder='./data/projectFiles/'
 app.get('/api/projectFiles', (req, res) => {
 	projects = []
 	fs.readdirSync(projectFilesFolder).forEach(file => {
-		console.log(file)
 		if(path.extname(file) == '.json'){
 			var contents = fs.readFileSync(projectFilesFolder+file, 'utf8');
 			var json = JSON.parse(contents)

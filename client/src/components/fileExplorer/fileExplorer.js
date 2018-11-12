@@ -11,7 +11,6 @@ class FileExplorer extends Component {
 	componentDidMount(){
 		fetch('/api/projectFiles').then(res => res.json())
 		.then(res => {
-			console.log(res);
 			this.setState({
 				files:res
 			})
@@ -22,7 +21,6 @@ class FileExplorer extends Component {
   	if(!this.state){
   		return(<div></div>)
   	}
-  	console.log(this.state.files)
   	const listItems = this.state.files.map((f,idx) =>
   		<ListGroupItem className="fileListItem" style={{padding:0}}>
 		  <Link  to={"/editor/"+f.meta.id} key={idx} className="fileListLink">

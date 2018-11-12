@@ -147,8 +147,22 @@ class Editor extends Component {
       node2_uuid: node2_uuid
     }
     var links = this.state.links
+    var nodes = this.state.nodes
+    var node1 = nodes[node1_uuid]
+    var node2 = nodes[node2_uuid]
+    if(!node1.links){
+      node1.links = new Set()
+    }
+    if(!node2.links){
+      node2.links = new Set()
+    }
+    node1.links.add(uuid)
+    node2.links.add(uuid)
+    nodes[node1_uuid] = node1
+    nodes[node2_uuid] = node2
+
     links[uuid] = link
-    this.setState({links:links})
+    this.setState({links:links, nodes:nodes})
 
   }
   
@@ -185,6 +199,8 @@ class Editor extends Component {
     })
     var uuid = uuidv4()
     node["uuid"] = uuid
+    node.links = new Set()
+
     var nodes = this.state.nodes;
     nodes[uuid] = node
     this.setState({
@@ -304,6 +320,30 @@ class Editor extends Component {
       nodes: nodes
     })
 
+  }
+
+  deleteNode = (uuid) =>{
+    var nodeEditor = {}
+    var nodes = this.state.nodes
+    var node = nodes[uuid]
+    var links = this.state.links
+    node.links.forEach(function(link_uuid){
+      var link = links[link_uuid]
+      var node2_uuid = link.node1_uuid
+      if(uuid == node2_uuid){
+        node2_uuid = link.node2_uuid
+      }
+      var node2 = nodes[node2_uuid]
+      node2.links.delete(link_uuid)
+      nodes[node2_uuid] = node2
+      delete links[link_uuid]
+    })
+    delete nodes[uuid]
+    var nodeEditor = this.state.nodeEditor
+    if(nodeEditor.nodeData.uuid == uuid){
+      nodeEditor.nodeData = null
+    }
+    this.setState({nodes: nodes, links: links, nodeEditor: nodeEditor})
   }
 
   selectAll = (e) =>{
@@ -459,7 +499,8 @@ class Editor extends Component {
             <NodeEditor 
             nodeData={this.state.nodeEditor.nodeData}
             helpMessages={this.state.nodeEditHelpMessages}
-            inputChangeCallback={this.handleNodeEdit}/>
+            inputChangeCallback={this.handleNodeEdit}
+            deleteNodeCallback={this.deleteNode}/>
           </Panel>
           
         </div>
