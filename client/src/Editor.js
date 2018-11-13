@@ -186,6 +186,15 @@ class Editor extends Component {
   }
 
   createNodeSubmit = (node) => {
+    var nodeDefault = {
+      wmKey: 65280,
+      sdrName: "ion",
+      wmSize: 5000000,
+      heapWords: 5000000,
+    }
+
+    Object.assign(node, nodeDefault)
+
     var res = this.checkNodeConflicts(node)
     this.setState({
       createNodeHelpMessages:res.helpMessages
@@ -199,6 +208,8 @@ class Editor extends Component {
     var uuid = uuidv4()
     node["uuid"] = uuid
     node.links = {}
+
+
 
     var nodes = this.state.nodes;
     nodes[uuid] = node
