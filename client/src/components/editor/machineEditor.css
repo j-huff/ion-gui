@@ -1,0 +1,14 @@
+
+.machineListGroup{
+	max-height: 300px;
+	overflow-y: scroll;
+}
+.machineEditButton{
+	float:right;
+	height: 100%;
+	border: none;
+	/*border-left: 1px solid #ddd;*/
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+}

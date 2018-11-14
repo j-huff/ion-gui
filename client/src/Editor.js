@@ -6,6 +6,7 @@ import CreateNodeMenu from './components/editor/createNodeMenu';
 import Node from './components/editor/node';
 import Links from './components/editor/links';
 import NodeEditor from './components/editor/nodeEditor';
+import MachineEditor from './components/editor/machineEditor';
 import {Panel,FormControl, Navbar, Nav, NavItem, NavDropdown, MenuItem, Button} from 'react-bootstrap'
 import Radium from 'radium';
 import EventListener from 'react-event-listener';
@@ -38,6 +39,16 @@ class Editor extends Component {
         id: "new",
         author: "No Author",
         projectTitle: "Untitled Project"
+      },
+      machines: {
+        "1234":{"name": "A","address":"192.168.0.1"},
+        "1235":{"name": "B","address":"192.168.0.1"},
+        "1236":{"name": "B","address":"192.168.0.1"},
+        "1237":{"name": "B","address":"192.168.0.1"},
+        "1238":{"name": "B","address":"192.168.0.1"},
+        "1239":{"name": "B","address":"192.168.0.1"},
+        "1231":{"name": "B","address":"192.168.0.1"},
+        "1232":{"name": "B","address":"192.168.0.1"},
       },
     }
     this.draggingNode = false
@@ -332,6 +343,10 @@ class Editor extends Component {
 
   }
 
+  openAddMachine = () => {
+    console.log("Opening add machine window")
+  }
+
   deleteNode = (uuid) =>{
     var nodeEditor = {}
     var nodes = this.state.nodes
@@ -483,6 +498,10 @@ class Editor extends Component {
           </Panel.Heading>
           
           </Panel>
+
+          <MachineEditor
+          addMachineCallback={this.openAddMachine} 
+          machines={this.state.machines}/>
 
           <Panel id="nodeEditor" defaultExpanded>
           <Panel.Heading >
