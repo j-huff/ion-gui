@@ -7,13 +7,57 @@ import Node from './components/editor/node';
 import Links from './components/editor/links';
 import NodeEditor from './components/editor/nodeEditor';
 import MachineEditor from './components/editor/machineEditor';
-import {Panel,FormControl, Navbar, Nav, NavItem, NavDropdown, MenuItem, Button} from 'react-bootstrap'
+import {Panel, Navbar, Nav, Button} from 'react-bootstrap'
 import Radium from 'radium';
 import EventListener from 'react-event-listener';
-import deepcopy from 'deepcopy';
 import { Redirect, Link } from 'react-router-dom'
 
+function portListFromString(str){
+  var patt = /^\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5})(\s*,\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5}))*\s*$/
+  if(!patt.exec(str)){
+    return null
+  }
 
+  var portlist = []
+  var start
+  var end
+  for(let ports of str.split(",")){
+    var split = ports.split("-")
+    if(split.length === 2){
+      
+      start = Number(split[0])
+      end = Number(split[1])
+      console.log(end)
+      console.log(start)
+      console.log(end < start)
+      if(end < start || end <= 0 || start <= 0 || end > 65535 || start > 65535){
+        console.log(end < start)
+        return null
+      }
+      for(let prev of portlist){
+        if((start >= prev[0] && start <= prev[1])
+          || (end >= prev[0] && end <= prev[1])
+          || (start < prev[0] && end > prev[1])){
+          return null
+        }
+      }
+      portlist.push([start,end])
+    }else{
+      for(let prev of portlist){
+        start = Number(ports)
+        if(start <= 0 || start > 65535){
+          return null
+        }
+        if(start >= prev[0] && start <= prev[1]){
+          return null
+        }
+      }
+      portlist.push([Number(ports),Number(ports)])
+    }
+  }
+  return portlist
+
+}
 
 function uuidv4() {
   return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -33,6 +77,7 @@ class Editor extends Component {
       createNodeMenu: {opened: false},
       nodeEditHelpMessages: {},
       createNodeHelpMessages: {},
+      machineEditHelpMessages: {},
       nodeEditor: {},
       links: {},
       meta: {
@@ -40,16 +85,9 @@ class Editor extends Component {
         author: "No Author",
         projectTitle: "Untitled Project"
       },
-      machines: {
-        "1234":{"name": "A","address":"192.168.0.1"},
-        "1235":{"name": "B","address":"192.168.0.1"},
-        "1236":{"name": "B","address":"192.168.0.1"},
-        "1237":{"name": "B","address":"192.168.0.1"},
-        "1238":{"name": "B","address":"192.168.0.1"},
-        "1239":{"name": "B","address":"192.168.0.1"},
-        "1231":{"name": "B","address":"192.168.0.1"},
-        "1232":{"name": "B","address":"192.168.0.1"},
-      },
+      machines: {},
+      redirect: false,
+      editingMachine: null
     }
     this.draggingNode = false
     this.linkingNode = false
@@ -62,12 +100,13 @@ class Editor extends Component {
   componentDidMount(){
     var params = this.props.match.params
     if(params.id === undefined || params.id == "new"){
+      console.log("Creating new page")
       this.loading = "loading"
       fetch('/api/newProjectId').then(res => res.json())
       .then(res => {
         var meta = this.state.meta
         meta["id"] = res
-        this.setState({meta:meta})
+        this.setState({meta:meta,redirect:true})
       })
       
     }
@@ -79,13 +118,24 @@ class Editor extends Component {
       }).then(res => res.json())
       .then(res => {
         this.setState(JSON.parse(res))
+        this.setState({redirect:true})
       })
+    }
+    if(this.state.redirect == true){
+      this.setState({redirect:false})
+    }
+  }
+  componentDidUpdate(){
+    if(this.state.redirect == true){
+      this.setState({redirect:false})
     }
   }
 
   save = (e) => {
+    if(this.state.meta.id === "new"){
+      return
+    }
     console.log("Saving project")
-    console.log(this.state)
     fetch("/api/saveProject", {
       method: "POST",
       body: JSON.stringify({id: this.state.meta.id,state:this.state}),
@@ -272,6 +322,46 @@ class Editor extends Component {
     })
   }
 
+  checkMachineConflicts(data){
+
+    var fail = false
+    var helpMessages = {}
+
+    if(data.name.trim().length < 1){
+      fail = true
+      helpMessages["name"]= "Name cannot be empty"
+    };
+
+    if(data.address.trim().length < 1){
+      fail = true
+      helpMessages["address"]= "Address cannot be empty"
+    };
+
+    var portlist = portListFromString(data.ports)
+    if(portlist === null){
+      helpMessages["ports"]="Port list invalid"
+    }
+
+
+
+    for (let val of Object.values(this.state.machines)){
+      if(val.uuid == data.uuid){
+        continue
+      }
+      if(val.name.trim() == data.name.trim()){
+        fail = true
+        helpMessages["name"] = "Name must be unique"
+      }
+      if(val.address.trim() == data.address.trim()){
+        fail = true
+        helpMessages["address"] = "Address must be unique"
+      }
+
+    }
+    
+    return {fail:fail,helpMessages:helpMessages}
+  }
+
   handleContextMenuSelect = (command,x,y) =>{
     var menu = this.state.createNodeMenu
     menu["opened"] = true
@@ -347,6 +437,42 @@ class Editor extends Component {
     console.log("Opening add machine window")
   }
 
+  editMachine = (uuid) =>{
+    this.setState({editingMachine: uuid})
+  }
+
+  createMachine = () =>{
+    console.log("creating machine")
+    var uuid = uuidv4()
+    var machines = this.state.machines
+    machines[uuid] = {
+      name: "",
+      address: "",
+      uuid:uuid
+    }
+    this.setState({editingMachine: uuid,machines:machines})
+  }
+
+  doneEditingMachine = () => {
+    this.setState({editingMachine: null})
+  }
+
+  handleMachineEdit = (data) =>{
+    var res = this.checkMachineConflicts(data)
+    this.setState({
+      machineEditHelpMessages:res.helpMessages
+    })
+    if(res.fail){
+      return
+    }
+
+    var machines = this.state.machines
+    var machine = machines[data.uuid]
+    machine = data
+    machines[data.uuid] = machine
+    this.setState(machines:machines)
+  }
+
   deleteNode = (uuid) =>{
     var nodeEditor = {}
     var nodes = this.state.nodes
@@ -378,13 +504,20 @@ class Editor extends Component {
 
   renderRedirect(){
     var nodeData = this.state
-    if (this.state && this.state.meta.id != "new"){
-      return (
-        <Redirect to={'/editor/'+this.state.meta.id} />
-      );
-    }else{
-      return ("");
+    
+    if(this.state.redirect){
+      return(<Redirect to={'/editor/'+this.state.meta.id} />)
     }
+    else{
+      return("")
+    }
+    // if (this.state && this.state.meta.id != "new"){
+    //   return (
+    //     <Redirect to={'/editor/'+this.state.meta.id} />
+    //   );
+    // }else{
+    //   return ("");
+    // }
   }
 
   render() {
@@ -418,6 +551,7 @@ class Editor extends Component {
 
     var nodes = Object.keys(this.state.nodes).map((key,idx) => {
       var n = this.state.nodes[key]
+
       return <Node 
       key={n.uuid}
       data={n}
@@ -425,7 +559,8 @@ class Editor extends Component {
       linkCallback={this.nodeLinkBegin}
       mouseOverCallback={this.nodeMouseOver}
       mouseOutCallback={this.nodeMouseOut}
-      editNodeCallback={this.editNode}/> 
+      editNodeCallback={this.editNode}
+      machine={this.state.machines[n.machine]}/> 
     });
 
 
@@ -500,8 +635,14 @@ class Editor extends Component {
           </Panel>
 
           <MachineEditor
-          addMachineCallback={this.openAddMachine} 
-          machines={this.state.machines}/>
+          addMachineCallback={this.openAddMachine}
+          machineData={this.state.machines[this.state.editingMachine]} 
+          machines={this.state.machines}
+          editMachineCallback={this.editMachine}
+          doneEditingCallback={this.doneEditingMachine}
+          inputChangeCallback={this.handleMachineEdit}
+          createMachineCallback={this.createMachine}
+          helpMessages={this.state.machineEditHelpMessages}/>
 
           <Panel id="nodeEditor" defaultExpanded>
           <Panel.Heading >
@@ -510,6 +651,7 @@ class Editor extends Component {
             <NodeEditor 
             nodeData={this.state.nodeEditor.nodeData}
             helpMessages={this.state.nodeEditHelpMessages}
+            machineList={this.state.machines}
             inputChangeCallback={this.handleNodeEdit}
             deleteNodeCallback={this.deleteNode}/>
           </Panel>

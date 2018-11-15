@@ -22,7 +22,7 @@ class FileExplorer extends Component {
   		return(<div></div>)
   	}
   	const listItems = this.state.files.map((f,idx) =>
-  		<ListGroupItem className="fileListItem" style={{padding:0}}>
+  		<ListGroupItem key={idx} className="fileListItem" style={{padding:0}}>
 		  <Link  to={"/editor/"+f.meta.id} key={idx} className="fileListLink">
 		   	<div className="fileListText"> {f.meta.projectTitle}</div>
 		   </Link>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Panel,Button,PanelGroup,Form,Col, FormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap'
+import Select from 'react-select'
 
 
 import './nodeEditor.css';
@@ -38,36 +39,62 @@ class NodeEditor extends Component {
     var name = e.target.name
     var value = e.target.value
     var data = this.props.nodeData
-    data[name] = value
-    console.log(data)
-    this.props.inputChangeCallback(data)
 
+    data[name] = value
+    console.log(name + " " + value)
+    this.props.inputChangeCallback(data)
+  }
+
+  handleSelect = (obj) =>{
+    this.handleInputChange({target:{name:"machine",value:obj.value}})
   }
 
   renderControls(){
     var nodeData = this.props.nodeData
     var helpMessages = this.props.helpMessages
+
+    
+
     if (nodeData){
+      var options = []
+      for(let m of Object.values(this.props.machineList)) {
+        options.push({label:m.name,value: m.uuid})     
+      }
+      console.log(nodeData.machine)
+
+      // if(!nodeData.machine){
+      //   options.unshift({value: "select",label:"select"})
+      // }
+      console.log(this.props.machineList)
+      console.log(nodeData.machine)
+      var mach = this.props.machineList[nodeData.machine]
+      var placeholder="select"
+      if(mach){
+        placeholder=mach.name
+      }
+      const machineSelect = <Select
+          options={options}
+          placeholder={placeholder}
+          onChange={this.handleSelect.bind(this)}
+          clearable={false}/>
+
+      
       return (
         <Form horizontal>
+
           <FormGroup controlId="formHorizontalEmail">
             <Col componentClass={ControlLabel} sm={3}>
-              Name
+              Machine
             </Col>
             <Col sm={9}>
-              <FormControl onChange={this.handleInputChange.bind(this)} name="name" type="text" value={nodeData.name} />
-            </Col>
-            <HelpBlock>{helpMessages.name}</HelpBlock>
-          </FormGroup>
-          <FormGroup controlId="formHorizontalEmail">
-            <Col componentClass={ControlLabel} sm={3}>
-              IPN
-            </Col>
-            <Col sm={9}>
-              <FormControl onChange={this.handleInputChange.bind(this)} name="ipn" type="number" value={nodeData.ipn} />
+              {machineSelect}
             </Col>
             <HelpBlock>{helpMessages.ipn}</HelpBlock>
           </FormGroup>
+
+          {this.NodeProp("name","Name","text")}
+          {this.NodeProp("ipn","IPN","text")}
+
           {this.NodeProp("wmKey","wmKey","number")}
           {this.NodeProp("sdrName","SDR Name","text")}
           {this.NodeProp("wmSize","wmSize","number")}

@@ -26,10 +26,23 @@ class Node extends Component {
   render() {
 
     var props = this.props.data
+
     var hoverStyle = {}
     if(props.hover){
       hoverStyle = {backgroundColor: "#28a745"}
     }
+
+    const machineName = () => {
+      if(!this.props.machine){return (
+        <Row ><Col sm={12} style={{color:"red"}}> SELECT MACHINE</Col></Row>
+
+      )}
+      return(
+        <Row ><Col sm={12}> Machine: {this.props.machine.name} </Col></Row>
+      )
+    }
+
+
     return (
       <div>
 
@@ -38,7 +51,8 @@ class Node extends Component {
           <Panel.Title componentClass="h6">{props.name}</Panel.Title>
         </Panel.Heading>
         <Panel.Body>
-          ipn:{props.ipn}.0
+          <Row ><Col sm={4}> ipn:{props.ipn}.0 </Col></Row>
+          {machineName()}
         </Panel.Body>
         <Panel.Footer className="nodePanelFooter">
           <Row>

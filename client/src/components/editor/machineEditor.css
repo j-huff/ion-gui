@@ -12,3 +12,10 @@
 	box-shadow: none;
 	border-radius: 0;
 }
+
+.machineListItem{
+	display: flex;
+	align-items: center;
+	text-align: left;
+	width: 100%;
+}
