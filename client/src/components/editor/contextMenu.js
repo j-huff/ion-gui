@@ -5,6 +5,14 @@ import {ListGroup, ListGroupItem} from 'react-bootstrap'
 import './contextMenu.css';
 
 
+
+function getEditConnectionsSubmenu(links){
+  var items = []
+  for(let link of links){
+    items.push({text:link.name,action:"editLink",})
+  }
+}
+
 class ContextMenu extends Component {
 
   selectItem(command,data){
@@ -21,7 +29,9 @@ class ContextMenu extends Component {
         ]
       case "edge":
         return [
-          {text:"Edit Contact",action:"editContact",data:this.props.data.data.contact}
+          {text:"Edit Contact",action:"editContact",data:this.props.data.data.contact},
+          {text:"Edit Connections",action:"editConnections",submenu:getEditConnectionsSubmenu(this.props.data.data.links)},
+          {text:"Create Connection",action:"createConnection", data:this.props.data.data.contact}
         ]
       default:
         return []
@@ -37,7 +47,7 @@ class ContextMenu extends Component {
     var menuData = this.getMenuData()
     var menuItems = menuData.map((m,idx) =>
 
-      <ListGroupItem onClick={() => this.selectItem(m.action,m.data)}>
+      <ListGroupItem key={idx} onClick={() => this.selectItem(m.action,m.data)}>
         {m.text}
       </ListGroupItem>
     )

@@ -14,20 +14,8 @@ class Links extends Component {
     if(!this.props.links){
     	return(<div></div>);
     }
-  	var link_lines = Object.keys(this.props.links).map((key,idx) => {
-      var l = this.props.links[key]
-      var node1 = this.props.nodes[l.node1_uuid]
-      var node2 = this.props.nodes[l.node2_uuid]
 
-      var x1 = node1.x + 100
-      var y1 = node1.y + 60
-      var x2 = node2.x + 100
-      var y2 = node2.y + 60
-
-      return(
-        <line x1={x1} y1={y1} x2={x2} y2={y2} stroke="red" strokeWidth="3" />
-      )
-    });
+  	
 
     var multiLinks = {}
     var props = this.props
@@ -50,11 +38,37 @@ class Links extends Component {
     	multiLinks[combined].links.push(l)
     })
 
+    Object.values(this.props.contacts).forEach(function(contact){
+      if(!multiLinks[contact.uuid]){
+        multiLinks[contact.uuid] = {
+          node1: props.nodes[contact.node1_uuid],
+          node2: props.nodes[contact.node2_uuid],
+          links: []
+        }
+      }
+    })
+    
+    var link_lines = Object.values(multiLinks).map((l,idx) => {
+
+      var node1 = this.props.nodes[l.node1.uuid]
+      var node2 = this.props.nodes[l.node2.uuid]
+
+      var x1 = node1.x + 100
+      var y1 = node1.y + 70
+      var x2 = node2.x + 100
+      var y2 = node2.y + 70
+
+      return(
+        <line key={idx} x1={x1} y1={y1} x2={x2} y2={y2} stroke="red" strokeWidth="3" />
+      )
+    });
+
     var link_nodes = Object.keys(multiLinks).map((key,idx) => {
       var multiLink = multiLinks[key]
+      var contact = this.props.contacts[key]
       return(
 
-        <LinkNode links={multiLink.links} contact={key} node1={multiLink.node1} node2={multiLink.node2} clickCallback={this.props.clickCallback}/>
+        <LinkNode key={idx} links={multiLink.links} contact={contact} node1={multiLink.node1} node2={multiLink.node2} clickCallback={this.props.clickCallback}/>
       )
     });
 

@@ -20,22 +20,32 @@ const Box = posed.div({
   opened: { height: "300px" }
 })
 
-
-
-const BootomToolbar = (actionHandler, state) => {
-  
-  function renderControls(){
-    return "";
+const ContactEditor = (actionHandler, contactEditor,nodes,contacts) => {
+  if(!contactEditor.contact_uuid){
+    return
   }
+  var contact = contacts[contactEditor.contact_uuid]
+  return(
+    <div>
+      Contact between {nodes[contact.node1_uuid].name} and {nodes[contact.node2_uuid].name} <br/>
+      From: {contact.from} <br/>
+      Until: {contact.until}
+    </div>
+  );
+}
+
+const BottomToolbar = (actionHandler, state, contactEditor,nodes,contacts) => {
 
   return (
 
-    <Box className="bottomToolbarWrapper" pose={state.pose} >
+    <Box className="bottomToolbarWrapper" pose={state.pose} style={{overflow:"hidden"}}>
     <Panel className="bottomToolbar" >
       <Panel.Heading onClick={()=>actionHandler({type:"toggle_bottom_toolbar"})}>
       </Panel.Heading>
 
-      {renderControls()}
+      <Panel.Body>
+        {ContactEditor(actionHandler, contactEditor,nodes,contacts)}
+      </Panel.Body>
 
     </Panel>
     </Box>
@@ -44,4 +54,4 @@ const BootomToolbar = (actionHandler, state) => {
 
 }
 
-export default BootomToolbar;
+export default BottomToolbar;

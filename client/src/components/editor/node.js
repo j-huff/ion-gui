@@ -6,6 +6,14 @@ import Radium from 'radium';
 
 import './node.css';
 
+function getTextWidth(text, font) {
+    // re-use canvas object for better performance
+    var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+    var context = canvas.getContext("2d");
+    context.font = font;
+    var metrics = context.measureText(text);
+    return metrics.width;
+}
 
 class Node extends Component {
   constructor(props) {
@@ -37,8 +45,19 @@ class Node extends Component {
         <Row ><Col sm={12} style={{color:"red"}}> SELECT MACHINE</Col></Row>
 
       )}
+      var name = this.props.machine.name
+
+      if(name.length === 0){
+        name = '\u0000'
+      }
+      var maxLength = 20
+      if(name.length > maxLength){
+        name = name.slice(0,maxLength-2)
+        name = name+"..."
+      }
+      
       return(
-        <Row ><Col sm={12}> Machine: {this.props.machine.name} </Col></Row>
+        <Row ><Col sm={12}>{name} </Col></Row>
       )
     }
 

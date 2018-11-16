@@ -68,7 +68,8 @@ function uuidv4() {
 }
 
 const contactDefault = {
-
+  from: 0,
+  until: 0,
 }
 
 class Editor extends Component {
@@ -123,6 +124,7 @@ class Editor extends Component {
       
     }
     if(this.loading != "loading"){
+      console.log("Loading Project")
       fetch("/api/loadProject", {
         method: "POST",
         body: JSON.stringify({id: params.id}),
@@ -144,6 +146,7 @@ class Editor extends Component {
   }
 
   save = (e) => {
+    console.log("Attempting save")
     if(this.state.meta.id === "new"){
       return
     }
@@ -197,7 +200,7 @@ class Editor extends Component {
   handleMouseUp = (e) => {
 
     if(this.linkingNode && this.hoveringNode){
-      this.createLink(this.linkingNode, this.hoveringNode)
+      this.createContact(this.linkingNode, this.hoveringNode)
     }
 
     this.draggingNode = false
@@ -224,10 +227,26 @@ class Editor extends Component {
     var contacts = this.state.contacts
     contacts[uuid] = {
       ...contactDefault,
+      node1_uuid: node1_uuid,
+      node2_uuid: node2_uuid,
       uuid:uuid
     }
+    this.setState({
+      contacts:contacts,
+      contactEditor:{
+        ...this.state.contactEditor,
+        contact_uuid: uuid
+      },
+      bottomToolbar:{
+        ...this.state.bottomToolbar,
+        pose:'opened'
+      }
+
+    })
       
   }
+
+
 
   createLink = (node1_uuid, node2_uuid) => {
 
@@ -238,7 +257,8 @@ class Editor extends Component {
       uuid: uuid,
       node1_uuid: node1_uuid,
       node2_uuid: node2_uuid,
-      contact_uuid: contact_uuid
+      contact_uuid: contact_uuid,
+      name: "default name"
     }
     var links = this.state.links
     var nodes = this.state.nodes
@@ -261,6 +281,8 @@ class Editor extends Component {
   }
   
   openContextMenu = (e,type,data) => {
+    console.log("Opening context menu")
+    console.log(data)
     this.setState({
       contextMenu:{
         opened: true,
@@ -413,10 +435,11 @@ class Editor extends Component {
         return
       case "editContact":
         console.log("editing contact")
+        console.log(data)
         this.setState({
           contactEditor:{
             ...this.state.contactEditor,
-            contactData: this.state.contacts[data]
+            contactData: this.state.contacts[data.uuid]
           }
           ,
           bottomToolbar:{
@@ -424,6 +447,11 @@ class Editor extends Component {
             pose: 'opened'
           }
         })
+        return
+      case "createConnection":
+        var contact = data
+        console.log("creating connection")
+        this.createLink(contact.node1_uuid,contact.node2_uuid)
         return
     }
   }
@@ -727,7 +755,7 @@ class Editor extends Component {
           
         </div>
 
-        {BottomToolbar(this.actionHandler,this.state.bottomToolbar,this.state.contactEditor)}
+        {BottomToolbar(this.actionHandler,this.state.bottomToolbar,this.state.contactEditor,this.state.nodes,this.state.contacts)}
 
       </div>
     );
