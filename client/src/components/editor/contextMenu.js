@@ -7,20 +7,43 @@ import './contextMenu.css';
 
 class ContextMenu extends Component {
 
-  selectItem(command){
-    this.props.parentCallback("CreateNode",this.props.x,this.props.y)
+  selectItem(command,data){
+    this.props.parentCallback(command,data)
+  }
+
+  getMenuData(){
+    var type = this.props.data.type
+
+    switch(type){
+      case "background":
+        return [
+          {text:"Create Node",action:"CreateNode"}
+        ]
+      case "edge":
+        return [
+          {text:"Edit Contact",action:"editContact",data:this.props.data.data.contact}
+        ]
+      default:
+        return []
+    }
   }
 
   render() {
     var display = "none"
-    if(this.props.opened){
+    if(this.props.data.opened){
       display = "block"
     }
+    var data = this.props.data
+    var menuData = this.getMenuData()
+    var menuItems = menuData.map((m,idx) =>
+
+      <ListGroupItem onClick={() => this.selectItem(m.action,m.data)}>
+        {m.text}
+      </ListGroupItem>
+    )
     return (
-      <ListGroup id="contextMenu" style={{left:this.props.x, top:this.props.y, display:display}}>
-        <ListGroupItem onClick={() => this.selectItem("CreateNode")}>
-        Create Node
-        </ListGroupItem>
+      <ListGroup id="contextMenu" style={{left:data.x, top:data.y, display:display}}>
+        {menuItems}
       </ListGroup>
     );
   }

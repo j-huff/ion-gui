@@ -11,6 +11,7 @@ import {Panel, Navbar, Nav, Button} from 'react-bootstrap'
 import Radium from 'radium';
 import EventListener from 'react-event-listener';
 import { Redirect, Link } from 'react-router-dom'
+import BottomToolbar from './components/editor/bottomToolbar';
 
 function portListFromString(str){
   var patt = /^\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5})(\s*,\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5}))*\s*$/
@@ -66,6 +67,10 @@ function uuidv4() {
   });
 }
 
+const contactDefault = {
+
+}
+
 class Editor extends Component {
 
   constructor(){
@@ -80,6 +85,7 @@ class Editor extends Component {
       machineEditHelpMessages: {},
       nodeEditor: {},
       links: {},
+      contacts: {},
       meta: {
         id: "new",
         author: "No Author",
@@ -87,7 +93,13 @@ class Editor extends Component {
       },
       machines: {},
       redirect: false,
-      editingMachine: null
+      editingMachine: null,
+      contactEditor:{
+        contactData: null
+      },
+      bottomToolbar:{
+        pose: 'closed'
+      }
     }
     this.draggingNode = false
     this.linkingNode = false
@@ -198,13 +210,35 @@ class Editor extends Component {
   handleMouseOver = (e) => {}
   handleMouseOut = (e) => {}
 
+  createContact = (node1_uuid, node2_uuid) =>{
+    if(node1_uuid > node2_uuid){
+      var tmp = node1_uuid
+      node1_uuid = node2_uuid
+      node2_uuid = tmp
+    }
+    var uuid = node1_uuid+node2_uuid
+    if(this.state.contacts[uuid]){
+      return uuid
+    }
+
+    var contacts = this.state.contacts
+    contacts[uuid] = {
+      ...contactDefault,
+      uuid:uuid
+    }
+      
+  }
+
   createLink = (node1_uuid, node2_uuid) => {
+
+    var contact_uuid = this.createContact(node1_uuid, node2_uuid)
 
     var uuid = uuidv4()
     var link = {
       uuid: uuid,
       node1_uuid: node1_uuid,
-      node2_uuid: node2_uuid
+      node2_uuid: node2_uuid,
+      contact_uuid: contact_uuid
     }
     var links = this.state.links
     var nodes = this.state.nodes
@@ -226,10 +260,12 @@ class Editor extends Component {
 
   }
   
-  contextMenu = (e) => {
+  openContextMenu = (e,type,data) => {
     this.setState({
       contextMenu:{
         opened: true,
+        data:data,
+        type: type,
         x: e.clientX,
         y: e.clientY,
       }
@@ -362,15 +398,33 @@ class Editor extends Component {
     return {fail:fail,helpMessages:helpMessages}
   }
 
-  handleContextMenuSelect = (command,x,y) =>{
-    var menu = this.state.createNodeMenu
-    menu["opened"] = true
-    menu["x"] = x
-    menu["y"] = y
-    if(command === "CreateNode"){
-      this.setState({
-        createNodeMenu:menu
-      })
+  handleContextMenuSelect = (command,data) =>{
+
+    switch(command){
+      case "CreateNode":
+        console.log("creating node")
+        var menu = this.state.createNodeMenu
+        menu["opened"] = true
+        menu["x"] = this.state.contextMenu.x
+        menu["y"] = this.state.contextMenu.y
+        this.setState({
+          createNodeMenu:menu
+        })
+        return
+      case "editContact":
+        console.log("editing contact")
+        this.setState({
+          contactEditor:{
+            ...this.state.contactEditor,
+            contactData: this.state.contacts[data]
+          }
+          ,
+          bottomToolbar:{
+            ...this.state.bottomToolbar,
+            pose: 'opened'
+          }
+        })
+        return
     }
   }
 
@@ -520,6 +574,24 @@ class Editor extends Component {
     // }
   }
 
+  actionHandler = (action) =>{
+    console.log(action)
+    switch (action.type) {
+    case 'toggle_bottom_toolbar':
+      var pose = 'closed'
+      if (this.state.bottomToolbar.pose === 'closed'){
+        pose = 'opened'
+      }
+      this.setState({
+        bottomToolbar:{
+          ...this.state.bottomToolbar,
+          pose: pose
+        }
+      })
+      return
+    }
+  }
+
   render() {
 
     var titleStyle = {
@@ -602,28 +674,25 @@ class Editor extends Component {
           </Nav>
         </Navbar>
 
-        <div className="page-center" onContextMenu={this.contextMenu.bind(this)}>
-          
-          
-          <Links nodes={this.state.nodes} links={this.state.links} />
 
-          {nodes}
-
-          <CreateNodeMenu
-          opened={this.state.createNodeMenu.opened}
-          x={this.state.createNodeMenu.x}
-          y={this.state.createNodeMenu.y}
-          closeCallback = {this.closeCreateNodeMenu}
-          submitCallback = {this.createNodeSubmit}
-          helpMessages={this.state.createNodeHelpMessages}/>
-
-          <ContextMenu opened={this.state.contextMenu.opened} x={this.state.contextMenu.x} y={this.state.contextMenu.y} parentCallback={this.handleContextMenuSelect}/> 
-
-          <svg id="activeStroke" height='20000' width='20000' style={{position:'fixed', top:'0', left:'0'}}>
-          <path d={this.state.activeStroke} stroke="blue" strokeWidth="3" fill="none" />
-          </svg>
-          
+        <div className="page-center" onContextMenu={(e) => this.openContextMenu(e,"background")}>
         </div>
+
+        <Links nodes={this.state.nodes} links={this.state.links} contacts={this.state.contacts} clickCallback={this.openContextMenu}/>
+        {nodes}
+        <CreateNodeMenu
+        opened={this.state.createNodeMenu.opened}
+        x={this.state.createNodeMenu.x}
+        y={this.state.createNodeMenu.y}
+        closeCallback = {this.closeCreateNodeMenu}
+        submitCallback = {this.createNodeSubmit}
+        helpMessages={this.state.createNodeHelpMessages}/>
+
+        <ContextMenu data={this.state.contextMenu} parentCallback={this.handleContextMenuSelect}/> 
+        <svg id="activeStroke" height='20000' width='20000' style={{position:'fixed', top:'0', left:'0'}}>
+        <path d={this.state.activeStroke} stroke="blue" strokeWidth="3" fill="none" />
+        </svg>
+
         <div className="page-left"></div>
         <div className="page-right">
 
@@ -657,6 +726,8 @@ class Editor extends Component {
           </Panel>
           
         </div>
+
+        {BottomToolbar(this.actionHandler,this.state.bottomToolbar,this.state.contactEditor)}
 
       </div>
     );

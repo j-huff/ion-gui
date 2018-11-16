@@ -1,0 +1,19 @@
+.bottomToolbarWrapper{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background-color: #FFF;
+  margin:0;
+  padding:0;
+}
+.bottomToolbar{
+	margin:0;
+  height: 100%;
+  border:0 ;
+}
+.bottomToolbar .panel-heading{
+	padding: 0;
+	height: 15px;
+	cursor: pointer;
+	background-color: #007bff;
+}

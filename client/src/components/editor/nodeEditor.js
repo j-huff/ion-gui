@@ -41,7 +41,6 @@ class NodeEditor extends Component {
     var data = this.props.nodeData
 
     data[name] = value
-    console.log(name + " " + value)
     this.props.inputChangeCallback(data)
   }
 
@@ -60,13 +59,11 @@ class NodeEditor extends Component {
       for(let m of Object.values(this.props.machineList)) {
         options.push({label:m.name,value: m.uuid})     
       }
-      console.log(nodeData.machine)
 
       // if(!nodeData.machine){
       //   options.unshift({value: "select",label:"select"})
       // }
-      console.log(this.props.machineList)
-      console.log(nodeData.machine)
+
       var mach = this.props.machineList[nodeData.machine]
       var placeholder="select"
       if(mach){

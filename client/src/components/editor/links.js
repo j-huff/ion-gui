@@ -50,9 +50,11 @@ class Links extends Component {
     	multiLinks[combined].links.push(l)
     })
 
-    var link_nodes = Object.values(multiLinks).map((multiLink,idx) => {
+    var link_nodes = Object.keys(multiLinks).map((key,idx) => {
+      var multiLink = multiLinks[key]
       return(
-        <LinkNode links={multiLink.links} node1={multiLink.node1} node2={multiLink.node2} />
+
+        <LinkNode links={multiLink.links} contact={key} node1={multiLink.node1} node2={multiLink.node2} clickCallback={this.props.clickCallback}/>
       )
     });
 

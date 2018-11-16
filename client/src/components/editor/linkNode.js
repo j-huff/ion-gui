@@ -19,7 +19,9 @@ class LinkNode extends Component {
     var x = (x1+x2)/2
     var y = (y1+y2)/2
     return (
-      <div className="linkNode" style={{top:y,left:x,backgroundColor:"white"}}>
+      <div className="linkNode"
+      style={{top:y,left:x,backgroundColor:"white"}}
+      onContextMenu={(e) => this.props.clickCallback(e,"edge",{contact:this.props.contact,links:this.props.links})}>
         <div className="linkNodeText">
           {this.props.links.length}
         </div>

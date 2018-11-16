@@ -6,16 +6,18 @@
     "deepcopy": "^1.0.0",
     "jquery": "^3.3.1",
     "radium": "^0.25.0",
-    "react": "^16.2.0",
+    "react": "^16.7.0-alpha.0",
     "react-bootstrap": "^0.32.4",
     "react-dom": "^16.2.0",
     "react-event-listener": "^0.6.4",
     "react-native": "^0.57.4",
     "react-native-uuid-generator": "^4.0.1",
+    "react-pose": "^4.0.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.0.17",
     "react-select": "^2.1.1",
-    "react-svg": "^6.0.24"
+    "react-svg": "^6.0.24",
+    "react-test-renderer": "^16.7.0-alpha.0"
   },
   "scripts": {
     "start": "react-scripts start",
