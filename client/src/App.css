@@ -36,13 +36,30 @@
 .page-right{
     width: 400px;
     right:0;
-    background-color: #EEE
+    background-color: none;
 }
+
+.page-right .panel{
+  margin-bottom: 10px;
+}
+
+.page-right a:focus{
+  text-decoration: none;
+}
+
+#page-right-nav{
+  margin-top: 7px;
+}
+.page-right-menu-page{
+  background-color: #FFF
+}
+
+
 .page-center{
     width: 100%;
     padding-left: 100px;
     padding-right: 100px;
-    background-color: #FFF
+    background-color: #EEE
 }
 
 #activeStroke{

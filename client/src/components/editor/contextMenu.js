@@ -6,12 +6,12 @@ import './contextMenu.css';
 
 
 
-function getEditConnectionsSubmenu(links){
-  var items = []
-  for(let link of links){
-    items.push({text:link.name,action:"editLink",})
-  }
-}
+// function getEditConnectionsSubmenu(links){
+//   var items = []
+//   for(let link of links){
+//     items.push({text:link.name,action:"editLink",})
+//   }
+// }
 
 class ContextMenu extends Component {
 
@@ -30,7 +30,7 @@ class ContextMenu extends Component {
       case "edge":
         return [
           {text:"Edit Contact",action:"editContact",data:this.props.data.data.contact},
-          {text:"Edit Connections",action:"editConnections",submenu:getEditConnectionsSubmenu(this.props.data.data.links)},
+          {text:"Edit Connections",action:"editConnections",data:this.props.data.data.links},
           {text:"Create Connection",action:"createConnection", data:this.props.data.data.contact}
         ]
       default:

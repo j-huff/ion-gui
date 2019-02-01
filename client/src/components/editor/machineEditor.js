@@ -13,6 +13,7 @@ import EditIcon from "./edit.svg" ;
 // }
 
 import './machineEditor.css';
+import './editor.css'
 
 
 class MachineEditor extends Component {
@@ -76,24 +77,29 @@ class MachineEditor extends Component {
         </div>
         )
     }
+    var machineList = (
+      <div>NONE</div>
+    )
+    if(this.props.machines.size > 0){
+      machineList = Object.values(this.props.machines).map((m,idx) =>
+        <ListGroupItem key={idx} className="machineListItem" style={{padding:0,height:"40px"}}>
+          <Col className="machineListInner" sm={6}>
+            {m.name}
+          </Col>
+          <Col className="machineListInner" sm={4}>
+            {m.address}
+          </Col>
+          <Col sm={2}>
+          <Button className="machineEditButton" onClick={() => this.props.editMachineCallback(m.uuid)} >
+            <img src={EditIcon} height={"20px"} width={"20px"} style={{marginLeft:0,opacity: .4}}/>
 
-    const machineList = Object.values(this.props.machines).map((m,idx) =>
-      <ListGroupItem key={idx} className="machineListItem" style={{padding:0,height:"40px"}}>
-        <Col className="machineListInner" sm={6}>
-          {m.name}
-        </Col>
-        <Col className="machineListInner" sm={4}>
-          {m.address}
-        </Col>
-        <Col sm={2}>
-        <Button className="machineEditButton" onClick={() => this.props.editMachineCallback(m.uuid)} >
-          <img src={EditIcon} height={"20px"} width={"20px"} style={{marginLeft:0,opacity: .4}}/>
+          </Button>
+          </Col>
 
-        </Button>
-        </Col>
-
-      </ListGroupItem>
-    );
+        </ListGroupItem>
+      );
+    }
+    
 
     return(
       <div>

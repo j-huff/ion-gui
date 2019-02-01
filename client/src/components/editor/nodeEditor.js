@@ -4,6 +4,7 @@ import Select from 'react-select'
 
 
 import './nodeEditor.css';
+import './editor.css'
 
 // class NodeProp extends Component{
 //   render(){
@@ -109,12 +110,16 @@ class NodeEditor extends Component {
 
     return (
 
-
+        <Panel id="nodeEditor" defaultExpanded>
+            <Panel.Heading >
+              <Panel.Title toggle componentClass="h3">Edit Node</Panel.Title>
+            </Panel.Heading>
           <Panel.Body collapsible >
             
             {this.renderControls()}
 
           </Panel.Body>
+        </Panel>
 
     );
   }

@@ -12,6 +12,7 @@ import Radium from 'radium';
 import EventListener from 'react-event-listener';
 import { Redirect, Link } from 'react-router-dom'
 import BottomToolbar from './components/editor/bottomToolbar';
+import LinkEditor from './components/editor/linkEditor';
 
 function portListFromString(str){
   var patt = /^\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5})(\s*,\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5}))*\s*$/
@@ -98,9 +99,13 @@ class Editor extends Component {
       contactEditor:{
         contactData: null
       },
+      linkEditor: {
+        currentLink: null,
+      },
       bottomToolbar:{
         pose: 'closed'
-      }
+      },
+      pageRightActive:'Nodes',
     }
     this.draggingNode = false
     this.linkingNode = false
@@ -250,14 +255,16 @@ class Editor extends Component {
 
   createLink = (node1_uuid, node2_uuid) => {
 
-    var contact_uuid = this.createContact(node1_uuid, node2_uuid)
+    // var contact_uuid = this.createContact(node1_uuid, node2_uuid)
 
     var uuid = uuidv4()
     var link = {
       uuid: uuid,
       node1_uuid: node1_uuid,
       node2_uuid: node2_uuid,
-      contact_uuid: contact_uuid,
+      contacts: [],
+      ranges: [],
+      connections: [],
       name: "default name"
     }
     var links = this.state.links
@@ -453,6 +460,8 @@ class Editor extends Component {
         console.log("creating connection")
         this.createLink(contact.node1_uuid,contact.node2_uuid)
         return
+      case "editConnections":
+        console.log(data)
     }
   }
 
@@ -620,6 +629,79 @@ class Editor extends Component {
     }
   }
 
+  renderPageRight(){
+    var navOptions = ['Nodes','Link']
+
+    const navItems = navOptions.map((d) =>
+      <li onClick={(e) => this.pageRightNavChange(e,d)} class={d == this.state.pageRightActive ? 'active' : ''}><a href="#">{d}</a></li>
+    )
+
+    const nav = (
+      <ul id="page-right-nav" class="nav nav-tabs">
+      {navItems}
+      </ul>
+    )
+    console.log(this.state.pageRightActive)
+    switch(this.state.pageRightActive){
+      case 'Nodes':
+        return(
+          <div>
+          {nav}
+          <div class='page-right-menu-page'>
+            <Panel id="ProjectInfo" defaultExpanded>
+            <Panel.Heading >
+              <Panel.Title toggle componentClass="h3">Project</Panel.Title>
+            </Panel.Heading>
+            
+            </Panel>
+
+            <MachineEditor
+            addMachineCallback={this.openAddMachine}
+            machineData={this.state.machines[this.state.editingMachine]} 
+            machines={this.state.machines}
+            editMachineCallback={this.editMachine}
+            doneEditingCallback={this.doneEditingMachine}
+            inputChangeCallback={this.handleMachineEdit}
+            createMachineCallback={this.createMachine}
+            helpMessages={this.state.machineEditHelpMessages}/>
+
+        
+            <NodeEditor
+            state={this.state.nodeEditor}
+            nodeData={this.state.nodeEditor.nodeData}
+            helpMessages={this.state.nodeEditHelpMessages}
+            machineList={this.state.machines}
+            inputChangeCallback={this.handleNodeEdit}
+            deleteNodeCallback={this.deleteNode}/>
+          </div>
+          </div>)
+      break;
+      case 'Link':
+        return(
+          <div>
+            {nav}
+            {LinkEditor(this.state,this.actionHandler)}
+          </div>
+        )
+      break;
+      default:
+        return(
+          <div>
+            {nav}
+          </div>
+        )
+      break;
+    }
+  }
+
+  pageRightNavChange = (e,newPage) =>
+  { 
+    e.preventDefault();
+    this.setState({
+      pageRightActive: newPage
+    })
+  }
+
   render() {
 
     var titleStyle = {
@@ -723,35 +805,10 @@ class Editor extends Component {
 
         <div className="page-left"></div>
         <div className="page-right">
-
-          <Panel id="ProjectInfo" defaultExpanded>
-          <Panel.Heading >
-            <Panel.Title toggle componentClass="h3">Project</Panel.Title>
-          </Panel.Heading>
           
-          </Panel>
-
-          <MachineEditor
-          addMachineCallback={this.openAddMachine}
-          machineData={this.state.machines[this.state.editingMachine]} 
-          machines={this.state.machines}
-          editMachineCallback={this.editMachine}
-          doneEditingCallback={this.doneEditingMachine}
-          inputChangeCallback={this.handleMachineEdit}
-          createMachineCallback={this.createMachine}
-          helpMessages={this.state.machineEditHelpMessages}/>
-
-          <Panel id="nodeEditor" defaultExpanded>
-          <Panel.Heading >
-            <Panel.Title toggle componentClass="h3">Edit Node</Panel.Title>
-          </Panel.Heading>
-            <NodeEditor 
-            nodeData={this.state.nodeEditor.nodeData}
-            helpMessages={this.state.nodeEditHelpMessages}
-            machineList={this.state.machines}
-            inputChangeCallback={this.handleNodeEdit}
-            deleteNodeCallback={this.deleteNode}/>
-          </Panel>
+          {this.renderPageRight()}
+      
+          
           
         </div>
 
