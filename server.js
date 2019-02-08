@@ -4,6 +4,7 @@ const app = express();
 const fs = require('fs');
 const shortid = require('shortid');
 const path = require('path')
+const child_process = require('child_process')
 
 const bodyParser = require("body-parser");
 app.use('/', express.static(__dirname));
@@ -27,7 +28,36 @@ app.get('/api/projectFiles', (req, res) => {
 	res.json(projects)
 });
 
+app.post('/api/download', (req, res) => {
+	
+	child_process.exec("python3 process_download.py '" + JSON.stringify(req.body)+"'", function callback(error, stdout, stderr){
+	    console.log("python output")
+	    console.log(error)
+	    console.log(stdout)
+	    // result
+	});
+
+	console.log("Downloading")
+	var state = req.body;
+	// console.log(state)
+	var id = req.params.id;
+	var options = {
+	    root: __dirname + '/client/public/',
+	    dotfiles: 'deny',
+	    headers: {
+	        'x-timestamp': Date.now(),
+	        'x-sent': true
+	    }
+ 	 };
+    var fileName = "testFile.zip"; // The default name the browser will use
+    console.log("download attempt")
+    console.log(__dirname+"/client/public/testFile")
+    res.sendFile(fileName,options, function(err){console.log(err)});    
+    // res.json("my body")
+});
+
 app.get('/api/newProjectId', (req, res) => {
+	console.log("New project ID request")
 	res.json(shortid.generate())
 });
 

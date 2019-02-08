@@ -11,8 +11,16 @@ const LinkEditor = (state,actionHandler) => {
     )
 
   return (
-    <div>
+    <div class='page-right-menu-page'>
     {header}
+    <Panel id="ContactEditor" defaultExpanded>
+      <Panel.Heading >
+        <Panel.Title toggle componentClass="h3">Contacts</Panel.Title>
+      </Panel.Heading>
+      <Panel.Body collapsible >
+        
+      </Panel.Body>
+    </Panel>
     <Panel id="LinkEditor" defaultExpanded>
       <Panel.Heading >
         <Panel.Title toggle componentClass="h3">Connections</Panel.Title>

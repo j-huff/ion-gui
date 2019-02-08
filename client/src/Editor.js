@@ -14,6 +14,9 @@ import { Redirect, Link } from 'react-router-dom'
 import BottomToolbar from './components/editor/bottomToolbar';
 import LinkEditor from './components/editor/linkEditor';
 
+var fileDownload = require('js-file-download');
+
+
 function portListFromString(str){
   var patt = /^\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5})(\s*,\s*([0-9]{1,5}|[0-9]{1,5}\s*-\s*[0-9]{1,5}))*\s*$/
   if(!patt.exec(str)){
@@ -163,6 +166,29 @@ class Editor extends Component {
     }).then(function(res) {
       
       console.log("Project saved")
+    }, function(error) {
+      console.log(error.message) //=> String
+    })
+  }
+
+  download = (e) => {
+    console.log("Attempting download")
+    if(this.state.meta.id === "new"){
+      return
+    }
+    console.log("Saving project")
+    fetch("/api/download", {
+      method: "POST",
+      body: JSON.stringify(this.state),
+      headers: { "Content-Type": "application/json" }
+    }).then(function(res) {
+      console.log(res)
+
+      var data = res.blob().then(function(e){
+        console.log(e)
+          fileDownload(e, 'myFile.zip');
+        })
+
     }, function(error) {
       console.log(error.message) //=> String
     })
@@ -544,6 +570,13 @@ class Editor extends Component {
     this.setState({editingMachine: uuid,machines:machines})
   }
 
+  deleteMachine = (uuid) =>{
+    console.log("deleting machine")
+    var machines = this.state.machines
+    delete machines[uuid]
+    this.setState({machines:machines})
+  }
+
   doneEditingMachine = () => {
     this.setState({editingMachine: null})
   }
@@ -630,7 +663,7 @@ class Editor extends Component {
   }
 
   renderPageRight(){
-    var navOptions = ['Nodes','Link']
+    var navOptions = ['Nodes','Link','Hide']
 
     const navItems = navOptions.map((d) =>
       <li onClick={(e) => this.pageRightNavChange(e,d)} class={d == this.state.pageRightActive ? 'active' : ''}><a href="#">{d}</a></li>
@@ -645,7 +678,7 @@ class Editor extends Component {
     switch(this.state.pageRightActive){
       case 'Nodes':
         return(
-          <div>
+          <div id="page-right-inner">
           {nav}
           <div class='page-right-menu-page'>
             <Panel id="ProjectInfo" defaultExpanded>
@@ -663,6 +696,7 @@ class Editor extends Component {
             doneEditingCallback={this.doneEditingMachine}
             inputChangeCallback={this.handleMachineEdit}
             createMachineCallback={this.createMachine}
+            deleteMachineCallback={this.deleteMachine}
             helpMessages={this.state.machineEditHelpMessages}/>
 
         
@@ -678,15 +712,16 @@ class Editor extends Component {
       break;
       case 'Link':
         return(
-          <div>
+          <div id="page-right-inner">
             {nav}
             {LinkEditor(this.state,this.actionHandler)}
           </div>
         )
       break;
+      case 'Hide':
       default:
         return(
-          <div>
+          <div id="page-right-inner">
             {nav}
           </div>
         )
@@ -763,10 +798,15 @@ class Editor extends Component {
               <img src={backbutton} height={"38px"} width={"38px"} style={{marginLeft:0,opacity: .4}}/>
               </Link>
             </Navbar.Text>
-            <Navbar.Text style={{margin: 0, padding: "10px 20px"}}>
+            <Navbar.Text style={{margin: 0, padding: "10px 20px", paddingRight:"0px"}}>
               <Button onClick={this.save}>
                 Save
               </Button>
+            </Navbar.Text>
+            <Navbar.Text style={{margin: 0, padding: "10px 20px",paddingLeft:"10px"}}>
+                <Button onClick={this.download}>
+                  Download
+                </Button>
             </Navbar.Text>
             
             <Navbar.Brand>
@@ -780,8 +820,11 @@ class Editor extends Component {
             <Navbar.Text>
               <input onFocus={this.selectAll} key="projectAuthor" onChange={this.changeMeta.bind(this)} style={[authorStyle.base]} id="projectAuthor" name="author" type="text" value={this.state.meta.author}/>
             </Navbar.Text>
+
+
             
           </Nav>
+
         </Navbar>
 
 

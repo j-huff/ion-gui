@@ -22,10 +22,16 @@
   font-size: large;
 }
 
-.page-left, .page-center, .page-right{
+.page-left, .page-center{
     position: absolute;
     height: 100%;
     bottom: 0;
+    padding-top: 48px;
+}
+
+.page-right{
+    position: absolute;
+    top: 0;
     padding-top: 48px;
 }
 
@@ -37,6 +43,8 @@
     width: 400px;
     right:0;
     background-color: none;
+}
+.page-right-inner{
 }
 
 .page-right .panel{

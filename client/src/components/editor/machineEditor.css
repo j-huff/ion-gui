@@ -19,3 +19,11 @@
 	text-align: left;
 	width: 100%;
 }
+
+.machineDeleteButton{
+	margin-right:5px;
+}
+
+.machineDoneButton{
+	float:right;
+}

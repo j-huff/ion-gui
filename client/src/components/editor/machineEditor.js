@@ -63,15 +63,18 @@ class MachineEditor extends Component {
 
   renderBody(){
     if(this.props.machineData){
+      console.log(this.props.machineData)
       return(
         <div>
         <Form horizontal>
           {this.MachineProp("name","Name","text")}
           {this.MachineProp("address","Address","text")}
           {this.MachineProp("ports","Ports","text")}
-          <Button bsStyle="primary" type="submit" className="machineEditButton" onClick={() => this.props.doneEditingCallback()} >
+          
+          <Button bsStyle="primary" type="submit" className="machineDoneButton" onClick={() => this.props.doneEditingCallback()} >
             Done
           </Button>
+          <Button onClick={""} bsStyle="danger" style={{float:"right"}} className="machineDeleteButton" onClick={() => this.props.deleteMachineCallback(this.props.machineData.uuid)}>Delete</Button>
         </Form>
         
         </div>
@@ -80,7 +83,7 @@ class MachineEditor extends Component {
     var machineList = (
       <div>NONE</div>
     )
-    if(this.props.machines.size > 0){
+    if(Object.values(this.props.machines).length > 0){
       machineList = Object.values(this.props.machines).map((m,idx) =>
         <ListGroupItem key={idx} className="machineListItem" style={{padding:0,height:"40px"}}>
           <Col className="machineListInner" sm={6}>
