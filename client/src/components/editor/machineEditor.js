@@ -40,7 +40,6 @@ class MachineEditor extends Component {
     var value = e.target.value
     var data = this.props.machineData
     data[name] = value
-    console.log(data)
     this.props.inputChangeCallback(data)
   }
 
@@ -63,7 +62,6 @@ class MachineEditor extends Component {
 
   renderBody(){
     if(this.props.machineData){
-      console.log(this.props.machineData)
       return(
         <div>
         <Form horizontal>

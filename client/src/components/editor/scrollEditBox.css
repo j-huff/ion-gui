@@ -1,0 +1,29 @@
+
+.SEBListGroup{
+	max-height: 300px;
+	overflow-y: scroll;
+}
+.SEBEditButton{
+	float:right;
+	height: 100%;
+	border: none;
+	/*border-left: 1px solid #ddd;*/
+	border: none;
+	box-shadow: none;
+	border-radius: 0;
+}
+
+.SEBListItem{
+	display: flex;
+	align-items: center;
+	text-align: left;
+	width: 100%;
+}
+
+.SEBDeleteButton{
+	margin-right:5px;
+}
+
+.SEBDoneButton{
+	float:right;
+}

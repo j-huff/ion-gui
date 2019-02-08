@@ -13,50 +13,46 @@ import './contextMenu.css';
 //   }
 // }
 
-class ContextMenu extends Component {
+const ContextMenu = (actionHandler, state) => {
 
-  selectItem(command,data){
-    this.props.parentCallback(command,data)
+  var type = state.contextMenu.type
+  var menuData = null
+
+  switch(type){
+    case "background":
+      menuData = [
+        {text:"Create Node",action:{type:"createNode",data:null}}
+      ]
+    break;
+    case "edge":
+      menuData = [
+        {text:"Edit Link",action:{type:"editLink",data:state.contextMenu.data}},
+        {text:"Edit Connections",action:{type:"editConnections",data:state.contextMenu.data}},
+        {text:"Create Connection",action:{type:"createConnections",data:state.contextMenu.data}}
+      ]
+    break;
+    default:
+      menuData = []
   }
 
-  getMenuData(){
-    var type = this.props.data.type
 
-    switch(type){
-      case "background":
-        return [
-          {text:"Create Node",action:"CreateNode"}
-        ]
-      case "edge":
-        return [
-          {text:"Edit Contact",action:"editContact",data:this.props.data.data.contact},
-          {text:"Edit Connections",action:"editConnections",data:this.props.data.data.links},
-          {text:"Create Connection",action:"createConnection", data:this.props.data.data.contact}
-        ]
-      default:
-        return []
-    }
+  var display = "none"
+  if(state.contextMenu.opened){
+    display = "block"
   }
+  var data = state.contextMenu.data
+  var menuItems = menuData.map((m,idx) =>
 
-  render() {
-    var display = "none"
-    if(this.props.data.opened){
-      display = "block"
-    }
-    var data = this.props.data
-    var menuData = this.getMenuData()
-    var menuItems = menuData.map((m,idx) =>
+    <ListGroupItem key={idx} onClick={() => actionHandler(m.action)}>
+      {m.text}
+    </ListGroupItem>
+  )
 
-      <ListGroupItem key={idx} onClick={() => this.selectItem(m.action,m.data)}>
-        {m.text}
-      </ListGroupItem>
-    )
-    return (
-      <ListGroup id="contextMenu" style={{left:data.x, top:data.y, display:display}}>
-        {menuItems}
-      </ListGroup>
-    );
-  }
+  return (
+    <ListGroup id="contextMenu" style={{left:state.contextMenu.x, top:state.contextMenu.y, display:display}}>
+      {menuItems}
+    </ListGroup>
+  );
 }
 
 export default ContextMenu;

@@ -29,30 +29,33 @@ app.get('/api/projectFiles', (req, res) => {
 });
 
 app.post('/api/download', (req, res) => {
-	
-	child_process.exec("python3 process_download.py '" + JSON.stringify(req.body)+"'", function callback(error, stdout, stderr){
-	    console.log("python output")
-	    console.log(error)
-	    console.log(stdout)
+	console.log("downloading")
+	child_process.exec("python3.7 process_download.py '" + JSON.stringify(req.body)+"'", function callback(error, stdout, stderr){
+	    // console.log("python output")
+	    // console.log(error)
+	    // console.log(stdout)
 	    // result
+	    var options = {
+		    dotfiles: 'deny',
+		    headers: {
+		        'x-timestamp': Date.now(),
+		        'x-sent': true
+		    }
+	 	 };
+	    zip_filename = stdout
+	    console.log("zip_filename: ")
+	    console.log(zip_filename)
+	    res.sendFile(zip_filename,options, function(err){
+	    	if(err){console.log(err)}
+	    	 fs.unlink(zip_filename,function(err){})
+	    }); 
+		
 	});
 
-	console.log("Downloading")
-	var state = req.body;
-	// console.log(state)
-	var id = req.params.id;
-	var options = {
-	    root: __dirname + '/client/public/',
-	    dotfiles: 'deny',
-	    headers: {
-	        'x-timestamp': Date.now(),
-	        'x-sent': true
-	    }
- 	 };
-    var fileName = "testFile.zip"; // The default name the browser will use
-    console.log("download attempt")
-    console.log(__dirname+"/client/public/testFile")
-    res.sendFile(fileName,options, function(err){console.log(err)});    
+    // var fileName = "testFile.zip"; // The default name the browser will use
+    // console.log("download attempt")
+    // console.log(__dirname+"/client/public/testFile")
+    // res.sendFile(fileName,options, function(err){console.log(err)});    
     // res.json("my body")
 });
 

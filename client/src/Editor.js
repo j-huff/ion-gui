@@ -5,6 +5,8 @@ import ContextMenu from './components/editor/contextMenu';
 import CreateNodeMenu from './components/editor/createNodeMenu';
 import Node from './components/editor/node';
 import Links from './components/editor/links';
+import LinkLines from './components/editor/linkLines';
+
 import NodeEditor from './components/editor/nodeEditor';
 import MachineEditor from './components/editor/machineEditor';
 import {Panel, Navbar, Nav, Button} from 'react-bootstrap'
@@ -88,6 +90,9 @@ class Editor extends Component {
       nodeEditHelpMessages: {},
       createNodeHelpMessages: {},
       machineEditHelpMessages: {},
+
+      helpMessages: {},
+      editingLink: null,
       nodeEditor: {},
       links: {},
       contacts: {},
@@ -109,7 +114,9 @@ class Editor extends Component {
         pose: 'closed'
       },
       pageRightActive:'Nodes',
-    }
+      scrollEditBoxes:{}
+    },
+
     this.draggingNode = false
     this.linkingNode = false
     this.hoveringNode = false
@@ -231,7 +238,7 @@ class Editor extends Component {
   handleMouseUp = (e) => {
 
     if(this.linkingNode && this.hoveringNode){
-      this.createContact(this.linkingNode, this.hoveringNode)
+      this.createLink(this.linkingNode, this.hoveringNode)
     }
 
     this.draggingNode = false
@@ -281,36 +288,30 @@ class Editor extends Component {
 
   createLink = (node1_uuid, node2_uuid) => {
 
-    // var contact_uuid = this.createContact(node1_uuid, node2_uuid)
+    if(node1_uuid > node2_uuid){
+      var tmp = node1_uuid
+      node1_uuid = node2_uuid
+      node2_uuid = tmp
+    }
+    var uuid = node1_uuid+node2_uuid
+    if(this.state.contacts[uuid]){
+      return uuid
+    }
 
-    var uuid = uuidv4()
-    var link = {
-      uuid: uuid,
+    var links = this.state.links
+    links[uuid] = {
+      ...contactDefault,
+      contacts: {},
+      ranges: {},
+      connections: {},
       node1_uuid: node1_uuid,
       node2_uuid: node2_uuid,
-      contacts: [],
-      ranges: [],
-      connections: [],
-      name: "default name"
+      uuid:uuid
     }
-    var links = this.state.links
-    var nodes = this.state.nodes
-    var node1 = nodes[node1_uuid]
-    var node2 = nodes[node2_uuid]
-    if(!node1.links){
-      node1.links = {}
-    }
-    if(!node2.links){
-      node2.links = {}
-    }
-    node1.links[uuid] = 1
-    node2.links[uuid] = 1
-    nodes[node1_uuid] = node1
-    nodes[node2_uuid] = node2
-
-    links[uuid] = link
-    this.setState({links:links, nodes:nodes})
-
+    this.setState({
+      links:links,
+    })
+      
   }
   
   openContextMenu = (e,type,data) => {
@@ -409,6 +410,7 @@ class Editor extends Component {
     var node = this.state.nodes[uuid]
     nodeEditor["nodeData"] = JSON.parse(JSON.stringify(node))
     this.setState({
+      pageRightActive:'Nodes',
       nodeEditor:nodeEditor
     })
   }
@@ -456,12 +458,13 @@ class Editor extends Component {
   handleContextMenuSelect = (command,data) =>{
 
     switch(command){
-      case "CreateNode":
+      case "createNode":
         console.log("creating node")
         var menu = this.state.createNodeMenu
         menu["opened"] = true
         menu["x"] = this.state.contextMenu.x
         menu["y"] = this.state.contextMenu.y
+
         this.setState({
           createNodeMenu:menu
         })
@@ -469,22 +472,14 @@ class Editor extends Component {
       case "editContact":
         console.log("editing contact")
         console.log(data)
-        this.setState({
-          contactEditor:{
-            ...this.state.contactEditor,
-            contactData: this.state.contacts[data.uuid]
-          }
-          ,
-          bottomToolbar:{
-            ...this.state.bottomToolbar,
-            pose: 'opened'
-          }
-        })
+        // this.setState(
+        //   editingLink:
+        // )
         return
       case "createConnection":
-        var contact = data
+        var link = data
         console.log("creating connection")
-        this.createLink(contact.node1_uuid,contact.node2_uuid)
+        this.createConnection(link)
         return
       case "editConnections":
         console.log(data)
@@ -647,18 +642,141 @@ class Editor extends Component {
   actionHandler = (action) =>{
     console.log(action)
     switch (action.type) {
-    case 'toggle_bottom_toolbar':
-      var pose = 'closed'
-      if (this.state.bottomToolbar.pose === 'closed'){
-        pose = 'opened'
-      }
-      this.setState({
-        bottomToolbar:{
-          ...this.state.bottomToolbar,
-          pose: pose
+      case 'toggle_bottom_toolbar':
+        var pose = 'closed'
+        if (this.state.bottomToolbar.pose === 'closed'){
+          pose = 'opened'
         }
-      })
-      return
+        this.setState({
+          bottomToolbar:{
+            ...this.state.bottomToolbar,
+            pose: pose
+          }
+        })
+      break;
+      case 'openContextMenu':
+        var data = action.data;
+        this.openContextMenu(data.e,data.type,data.data);
+      break;
+      case "createNode":
+        console.log("creating node")
+        var menu = this.state.createNodeMenu
+        menu["opened"] = true
+        menu["x"] = this.state.contextMenu.x
+        menu["y"] = this.state.contextMenu.y
+        this.setState({
+          createNodeMenu:menu
+        })
+      break;
+      case "editLink":
+        this.setState({
+          pageRightActive:'Link',
+          editingLink:action.data.link.uuid,
+        })
+      break;
+      case "createContact":
+        if(!this.state.editingLink){break}
+        console.log(this.state.links)
+        var uuid = uuidv4()
+        var links = this.state.links
+        var link = this.state.links[this.state.editingLink]
+        console.log(link)
+        link.contacts[uuid]={
+          "uuid":uuid,
+          "name": "New Contact",
+          "duration": "1000"
+        }
+        links[this.state.editingLink] = link
+        this.setState({
+          links:links
+        },function(){
+
+          this.actionHandler({
+            type: "editScrollItem",
+            data: {
+              name:"contacts",
+              uuid:uuid
+            }
+          })
+        })
+      break;
+      case "createRange":
+        if(!this.state.editingLink){break}
+        console.log(this.state.links)
+        var uuid = uuidv4()
+        var links = this.state.links
+        var link = this.state.links[this.state.editingLink]
+        console.log(link)
+        link.ranges[uuid]={
+          "uuid":uuid,
+          "name": "New Range",
+          "distance": "10"
+        }
+        links[this.state.editingLink] = link
+        this.setState({
+          links:links
+        },function(){
+
+          this.actionHandler({
+            type: "editScrollItem",
+            data: {
+              name:"ranges",
+              uuid:uuid
+            }
+          })
+        })
+      break;
+      case "createConnection":
+        if(!this.state.editingLink){break}
+        console.log(this.state.links)
+        var uuid = uuidv4()
+        var links = this.state.links
+        var link = this.state.links[this.state.editingLink]
+        console.log(link)
+        link.connections[uuid]={
+          "uuid":uuid,
+          "name": "New Connection",
+          "protocol": "TCP"
+        }
+        links[this.state.editingLink] = link
+        this.setState({
+          links:links
+        },function(){
+          this.actionHandler({
+            type: "editScrollItem",
+            data: {
+              name:"connections",
+              uuid:uuid
+            }
+          })
+        })
+      break;
+      case "editConnections":
+        if(!this.state.editingLink){break}
+        console.log(data)
+      break
+      case "editScrollItem":
+        console.log("editScrollItem")
+        console.log(data)
+        var name = action.data.name
+        var scrollEditBoxes = this.state.scrollEditBoxes
+        var editBox = {uuid:action.data.uuid}
+        scrollEditBoxes[name] = editBox
+        this.setState({
+          scrollEditBoxes: scrollEditBoxes
+        })
+      break
+      case "doneEditingScrollItem":
+      console.log("doneEditingScrollItem")
+        console.log(action.data)
+        console.log()
+        var name = action.data
+        var scrollEditBoxes = this.state.scrollEditBoxes
+        var editBox = {uuid:null}
+        scrollEditBoxes[name] = editBox
+        this.setState({
+          scrollEditBoxes: scrollEditBoxes
+        })
     }
   }
 
@@ -674,7 +792,6 @@ class Editor extends Component {
       {navItems}
       </ul>
     )
-    console.log(this.state.pageRightActive)
     switch(this.state.pageRightActive){
       case 'Nodes':
         return(
@@ -714,7 +831,7 @@ class Editor extends Component {
         return(
           <div id="page-right-inner">
             {nav}
-            {LinkEditor(this.state,this.actionHandler)}
+            {LinkEditor(this.actionHandler,this.state)}
           </div>
         )
       break;
@@ -830,8 +947,8 @@ class Editor extends Component {
 
         <div className="page-center" onContextMenu={(e) => this.openContextMenu(e,"background")}>
         </div>
-
-        <Links nodes={this.state.nodes} links={this.state.links} contacts={this.state.contacts} clickCallback={this.openContextMenu}/>
+        
+        {LinkLines(this.actionHandler,this.state)}
         {nodes}
         <CreateNodeMenu
         opened={this.state.createNodeMenu.opened}
@@ -841,7 +958,7 @@ class Editor extends Component {
         submitCallback = {this.createNodeSubmit}
         helpMessages={this.state.createNodeHelpMessages}/>
 
-        <ContextMenu data={this.state.contextMenu} parentCallback={this.handleContextMenuSelect}/> 
+        {ContextMenu(this.actionHandler, this.state)}
         <svg id="activeStroke" height='20000' width='20000' style={{position:'fixed', top:'0', left:'0'}}>
         <path d={this.state.activeStroke} stroke="blue" strokeWidth="3" fill="none" />
         </svg>

@@ -3,8 +3,18 @@ import  sys
 import tempfile
 import os
 import uuid
+import zipfile
+import time
+import shutil
+
 
 from ion_config_utils import *
+
+def zipdir(path, ziph):
+    # ziph is zipfile handle
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            ziph.write(os.path.join(root, file))
 
 def pretty(obj):
 	print(json.dumps(nodes, indent=4, separators=(',',' : ')))
@@ -14,7 +24,9 @@ input_str = str(sys.argv[1])
 input_json = json.loads(input_str)
 # print(input_json['machines'])
 
-path = os.getcwd() + "/tmp/" + str(uuid.uuid4()) +"/"
+tmp_path = os.getcwd() + "/tmp/"
+path_uuid = str(uuid.uuid4())
+path = tmp_path + path_uuid +"/"
 common_path = os.getcwd() + "/config_common/"
 # print ("The current working directory is %s" % path)
 os.mkdir(path)
@@ -32,7 +44,13 @@ for key in nodes:
 	cmd = "cp "+common_path+"* "+new_path
 	os.system(cmd)
 
-	generate_bprc(input_json,key,new_path+"config.bprc")
+	generate_ionconfig(input_json,key,new_path+"config.ionconfig")
+	generate_ionrc(input_json,key,new_path+"config.ionrc")
 
-# print(generate_bprc(input_json))
 
+zip_filename = tmp_path+path_uuid
+shutil.make_archive(zip_filename, 'zip', path)
+# time.sleep(.1)
+ret = "{'filename' : '"+zip_filename+'.zip'+"'}"
+print(zip_filename+".zip",end="")
+shutil.rmtree(tmp_path + path_uuid)
