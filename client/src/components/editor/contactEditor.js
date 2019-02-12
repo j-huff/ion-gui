@@ -9,6 +9,7 @@ const ContactEditor = (actionHandler, state) => {
   var ScrollEditBoxConfig = {
     "data":null,
     "name":"contacts",
+    "parent":"links",
     "updateActionType":"updateContacts",
     "newActionType":"createContact",
     "deleteActionType":"deleteContact",
@@ -19,8 +20,23 @@ const ContactEditor = (actionHandler, state) => {
         "type": "Text", 
       },
       {
-        "label": "Duration",
-        "name": "duration",
+        "label": "From time",
+        "name": "fromTime",
+        "type": "Text", 
+      },
+      {
+        "label": "Until time",
+        "name": "untilTime",
+        "type": "Text", 
+      },
+      {
+        "label": "Transmit Rate (bps)",
+        "name": "rate",
+        "type": "Text", 
+      },
+      {
+        "label": "Confidence",
+        "name": "confidence",
         "type": "Text", 
       },
     ],

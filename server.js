@@ -45,11 +45,13 @@ app.post('/api/download', (req, res) => {
 	    zip_filename = stdout
 	    console.log("zip_filename: ")
 	    console.log(zip_filename)
-	    res.sendFile(zip_filename,options, function(err){
-	    	if(err){console.log(err)}
-	    	 fs.unlink(zip_filename,function(err){})
-	    }); 
-		
+	    console.log(stderr)
+	    if(zip_filename){
+	    	res.sendFile(zip_filename,options, function(err){
+		    if(err){console.log(err)}
+		    	fs.unlink(zip_filename,function(err){})
+		    }); 
+	    }
 	});
 
     // var fileName = "testFile.zip"; // The default name the browser will use

@@ -640,6 +640,9 @@ class Editor extends Component {
   }
 
   actionHandler = (action) =>{
+    if(!action){
+      console.log("No action inputted to action handler")
+    }
     console.log(action)
     switch (action.type) {
       case 'toggle_bottom_toolbar':
@@ -766,6 +769,21 @@ class Editor extends Component {
           scrollEditBoxes: scrollEditBoxes
         })
       break
+      case "scrollItemInputChange":
+        var data = action.data
+        if(data.parent == "links"){
+          console.log("editing link data")
+          var links = this.state.links
+          var link = this.state.links[this.state.editingLink]
+          var prop = link[data.id]
+          var elem = prop[data.uuid]
+          elem[data.name] = data.value
+          prop[data.uuid] = elem
+          link[data.id] = prop
+          links[this.state.editingLink] = link
+          this.setState({links:links})
+        }
+      break;
       case "doneEditingScrollItem":
       console.log("doneEditingScrollItem")
         console.log(action.data)

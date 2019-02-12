@@ -14,15 +14,24 @@ const LinkEditor = (actionHandler,state) => {
     return(
     <Panel>
     <div class="page-right-header">
-    <h4>Select link to edit</h4>
+    <h4 class="warn">Select link to edit</h4>
     </div>
     </Panel>
     )
   }
   if(state.editingLink){
-    header = () =>(
-      <div></div>
-    )
+    var link = state.links[state.editingLink]
+    var node1 = state.nodes[link.node1_uuid]
+    var node2 = state.nodes[link.node2_uuid]
+    header = () =>{
+      return(
+      <Panel>
+      <div class="page-right-header">
+      <h4 >Editing link between {node1.name} and {node2.name}</h4>
+      </div>
+      </Panel>
+      )
+    }
   }
 
   return (

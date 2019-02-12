@@ -7,21 +7,32 @@ const RangeEditor = (actionHandler, state) => {
 	var ScrollEditBoxConfig = {
 	"data":null,
 	"name":"ranges",
+	"parent":"links",
 	"updateActionType":"updateRanges",
 	"newActionType":"createRange",
 	"deleteActionType":"deleteRange",
 	"props": [
-	  {
-		"label": "Name",
-		"name": "name",
-		"type": "Text", 
-	  },
-	  {
-		"label": "Distance",
-		"name": "distance",
-		"type": "Text", 
-	  },
-	],
+      {
+        "label": "Name",
+        "name": "name",
+        "type": "Text", 
+      },
+      {
+        "label": "From time",
+        "name": "fromTime",
+        "type": "Text", 
+      },
+      {
+        "label": "Until time",
+        "name": "untilTime",
+        "type": "Text", 
+      },
+      {
+        "label": "One-Way Light Time",
+        "name": "owlt",
+        "type": "Text", 
+      },
+    ],
 	"previewProps": [{name:"name",width:12}],
   }
 

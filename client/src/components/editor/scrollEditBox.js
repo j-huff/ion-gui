@@ -62,6 +62,14 @@ const ScrollEditBox = (actionHandler, state, config) => {
     	type: config.newActionType,
     	data:null
     }
+
+    var handleInputChange = (e) =>{
+      var editBox = state.scrollEditBoxes[config.name]
+      var name = e.target.name
+      var value = e.target.value
+      actionHandler({type:"scrollItemInputChange",data:{id:config.name,uuid:editBox.uuid,name:name,value:value,parent:config.parent}})
+    }
+
     if(state.scrollEditBoxes[config.name] && state.scrollEditBoxes[config.name].uuid !== null){
     	var editBox = state.scrollEditBoxes[config.name]
     	var formGroups = Object.values(config.props).map((m,idx) => {
@@ -71,7 +79,7 @@ const ScrollEditBox = (actionHandler, state, config) => {
 		          {m.label}
 		        </Col>
 		        <Col sm={9}>
-		          <FormControl onChange={() => actionHandler()} name={m.name} type={m.type} value={config.data[editBox.uuid][m.name]} />
+		          <FormControl onChange={(e) => handleInputChange(e)} name={m.name} type={m.type} value={config.data[editBox.uuid][m.name]} />
 		        </Col>
 		        <HelpBlock></HelpBlock>
 		      </FormGroup>

@@ -8,6 +8,7 @@ const ConnectionEditor = (actionHandler, state) => {
 	var ScrollEditBoxConfig = {
 	"data":null,
 	"name":"connections",
+	"parent":"links",
 	"updateActionType":"updateConnections",
 	"newActionType":"createConnection",
 	"deleteActionType":"deleteConnection",
