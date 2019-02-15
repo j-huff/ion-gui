@@ -75,7 +75,49 @@
 }
 
 #topNav{
+
   z-index: 1000
+}
+.navbar > .container {
+  width: auto;
+}
+
+#readLinkNav{
+  float:right;
+  display: table;
+  height: 56px;
+}
+#readLinkWrapper{
+ display: table-cell;
+  vertical-align: middle;
+}
+#readLinkWrapper label{
+  margin-right: 10px;
+  font-weight: normal;
+  color:#777;
+}
+
+#readLinkInput{
+  border-radius: 5px 5px 5px 5px;
+  border: 1px solid transparent;
+  border-width: 1px 0px 1px 1px;
+  border-color: #ccc;
+  box-shadow: 0 0 0 0;
+  height:30px;
+  color:#777;
+  padding-left: 5px;
+  display: inline-block;
+
+}
+#readLinkCopyButton{
+  height:30px;
+  width: 50px;
+  border-radius: 0px 5px 5px 0px;
+  border: 1px solid transparent;
+  border-color: #ccc;
+  box-shadow: 0 0 0 0;
+  background-color: #337ab7;
+  color:#fff;
 }
 
 #topNav#projectTitle{

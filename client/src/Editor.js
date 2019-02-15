@@ -97,7 +97,6 @@ class Editor extends Component {
       links: {},
       contacts: {},
       meta: {
-        id: "new",
         author: "No Author",
         projectTitle: "Untitled Project"
       },
@@ -114,9 +113,10 @@ class Editor extends Component {
         pose: 'closed'
       },
       pageRightActive:'Nodes',
-      scrollEditBoxes:{}
+      scrollEditBoxes:{},
     },
 
+    this.pageid = "none"
     this.draggingNode = false
     this.linkingNode = false
     this.hoveringNode = false
@@ -127,13 +127,16 @@ class Editor extends Component {
 
   componentDidMount(){
     var params = this.props.match.params
+    this.pageid = params.id
     if(params.id === undefined || params.id == "new"){
       console.log("Creating new page")
       this.loading = "loading"
       fetch('/api/newProjectId').then(res => res.json())
       .then(res => {
+        console.log(res)
+        this.pageid = res.id
         var meta = this.state.meta
-        meta["id"] = res
+        meta["read_id"] = res.read_id
         this.setState({meta:meta,redirect:true})
       })
       
@@ -144,11 +147,23 @@ class Editor extends Component {
         method: "POST",
         body: JSON.stringify({id: params.id}),
         headers: { "Content-Type": "application/json" }
-      }).then(res => res.json())
-      .then(res => {
-        this.setState(JSON.parse(res))
-        this.setState({redirect:true})
       })
+      .then(res => {
+        console.log(res)
+        if(res.ok){
+          res.json().then(res =>{
+            console.log(res)
+            this.pageid = params.id
+            this.setState({...this.state,...JSON.parse(res)})
+            this.setState({redirect:true})
+          })
+        }else if(res.status == 404){          
+          console.log("Project ID not found")
+          this.setState({redirect_404:true})
+        }
+      })
+
+
     }
     if(this.state.redirect == true){
       this.setState({redirect:false})
@@ -162,13 +177,11 @@ class Editor extends Component {
 
   save = (e) => {
     console.log("Attempting save")
-    if(this.state.meta.id === "new"){
-      return
-    }
+
     console.log("Saving project")
     fetch("/api/saveProject", {
       method: "POST",
-      body: JSON.stringify({id: this.state.meta.id,state:this.state}),
+      body: JSON.stringify({id: this.pageid,state:this.state}),
       headers: { "Content-Type": "application/json" }
     }).then(function(res) {
       
@@ -180,9 +193,7 @@ class Editor extends Component {
 
   download = (e) => {
     console.log("Attempting download")
-    if(this.state.meta.id === "new"){
-      return
-    }
+
     console.log("Saving project")
     fetch("/api/download", {
       method: "POST",
@@ -616,6 +627,20 @@ class Editor extends Component {
     this.setState({nodes: nodes, links: links, nodeEditor: nodeEditor})
   }
 
+  copyReadLink = () => {
+    var textField = document.createElement('textarea')
+    var url = window.location.href
+    var splits = url.split("/")
+    splits.pop()
+    url = splits.join("/")
+    textField.innerText = url + "/" + this.state.meta.read_id
+    document.body.appendChild(textField)
+    textField.select()
+    document.execCommand('copy')
+    textField.remove()
+    console.log("Copied to clipboard")
+  }
+
   selectAll = (e) =>{
     e.target.select();
   }
@@ -623,9 +648,11 @@ class Editor extends Component {
 
   renderRedirect(){
     var nodeData = this.state
-    
-    if(this.state.redirect){
-      return(<Redirect to={'/editor/'+this.state.meta.id} />)
+    if(this.state.redirect_404){
+      return(<Redirect to={'/404'} />)
+    }
+    else if(this.state.redirect){
+      return(<Redirect to={'/editor/'+this.pageid} />)
     }
     else{
       return("")
@@ -901,6 +928,12 @@ class Editor extends Component {
       }
     }
 
+    var read_url = window.location.href
+    var splits = read_url.split("/")
+    splits.pop()
+    read_url = splits.join("/")
+    read_url = read_url + "/" + this.state.meta.read_id
+
     var nodes = Object.keys(this.state.nodes).map((key,idx) => {
       var n = this.state.nodes[key]
 
@@ -926,7 +959,8 @@ class Editor extends Component {
       <EventListener target={document} onMouseOverCapture={this.handleMouseOver} />
       <EventListener target={document} onMouseOutCapture={this.handleMouseOut}/> 
 
-        <Navbar id="topNav">
+      
+        <Navbar id="topNav" expand="lg">
           <Navbar.Header>
             <Navbar.Text style={{margin: 0, padding: "6px 0px"}}>
               <Link to="/">
@@ -955,11 +989,14 @@ class Editor extends Component {
             <Navbar.Text>
               <input onFocus={this.selectAll} key="projectAuthor" onChange={this.changeMeta.bind(this)} style={[authorStyle.base]} id="projectAuthor" name="author" type="text" value={this.state.meta.author}/>
             </Navbar.Text>
-
-
-            
           </Nav>
-
+          <Nav id="readLinkNav">
+            <div id="readLinkWrapper">
+              <label> Read-only link </label>
+              <input id="readLinkInput" name="readLink" type="text" value={read_url}/>
+              <input type="submit" id="readLinkCopyButton" value="copy" onClick={(e) => this.copyReadLink()}/>
+            </div>
+          </Nav>
         </Navbar>
 
 
