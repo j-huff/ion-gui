@@ -43,8 +43,79 @@ app.get('/api/projectFiles', (req, res) => {
 	res.json(projects)
 });
 
-app.post('/api/download', (req, res) => {
-	console.log("downloading")
+
+const applyMachineMap = (json, machineMap) => {
+	for(var key in machineMap){		
+  		for(var machine in json.machines){
+  			if(json.machines[machine].name == key){
+  					json.machines[machine].address = machineMap[key]			
+  			}
+  		}
+  	}
+  	return json
+}
+
+const defaultZipOptions = () => {
+	return {
+		    dotfiles: 'deny',
+		    headers: {
+		        'x-timestamp': Date.now(),
+		        'x-sent': true
+		    }
+	 	 };
+}
+const getZip = (json) => {
+	console.log("exporting")
+	child_process.exec("python3.7 process_download.py '" + JSON.stringify(json)+"'", function callback(error, stdout, stderr){
+
+	    
+	    var zip_filename = stdout
+	    console.log(zip_filename)
+	 	return zip_filename
+
+	    
+	});
+}
+
+app.get('/api/downloadZip', (req, res) => {
+	var query = req.query
+	console.log("Download Zip Request")
+	console.log(query)
+
+	var id = query.id
+	var machineMap = JSON.parse(query.machineMap)
+	// var contents = fs.readFileSync(projectFilesFolder+id+'.json', 'utf8');
+	
+	var sql = `SELECT url,
+             read_url,
+             json
+      FROM configs
+      WHERE url  = ? OR read_url = ?`;
+	db.get(sql, [id,id], (err, row) => {
+		if (err) {
+			return console.error(err.message);
+		}
+		if(row){
+		  	var json = JSON.parse(row.json)
+		  	json = applyMachineMap(json,machineMap);
+
+		  	child_process.exec("python3.7 process_download.py '" + JSON.stringify(json)+"'", function callback(error, stdout, stderr){
+
+			    var zip_filename = stdout
+			 	if(zip_filename){
+		    		res.sendFile(zip_filename,defaultZipOptions(), function(err){
+			    		if(err){console.log(err)}
+				    	fs.unlink(zip_filename,function(err){})
+				    }); 
+		   		}
+			    
+			}); 	
+		}
+	});
+});
+
+app.post('/api/export', (req, res) => {
+	console.log("exporting")
 	child_process.exec("python3.7 process_download.py '" + JSON.stringify(req.body)+"'", function callback(error, stdout, stderr){
 	    // console.log("python output")
 	    // console.log(error)

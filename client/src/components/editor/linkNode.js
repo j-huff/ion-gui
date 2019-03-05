@@ -51,6 +51,8 @@ const LinkNode = (actionHandler, state, link) => {
     //   }
     // }
 
+    //To get number of connections (deprecated)
+    //{Object.keys(link.connections).length}
     return (
       <div className="linkNode"
       style={{top:y,left:x,backgroundColor:"white"}}
@@ -66,7 +68,7 @@ const LinkNode = (actionHandler, state, link) => {
       )}
       >
         <div className="linkNodeText">
-          {Object.keys(link.connections).length}
+          {link.protocol}
         </div>
       </div>
     );

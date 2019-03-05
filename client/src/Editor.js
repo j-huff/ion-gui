@@ -78,6 +78,23 @@ const contactDefault = {
   until: 0,
 }
 
+const linkDefault = {
+  contacts: {},
+  ranges: {},
+  connections: {},
+  protocol:"TCP",
+  protocolSettings:{
+    "TCP":{
+      "port1":1,
+      "port2":2,
+    },
+    "UDP":{
+      "port1":1,
+      "port2":2,
+    },
+  }
+}
+
 class Editor extends Component {
 
   constructor(){
@@ -93,7 +110,10 @@ class Editor extends Component {
 
       helpMessages: {},
       editingLink: null,
-      nodeEditor: {},
+      nodeEditor: {
+        showUnusedProtocols: true,
+        editingProtocol: null,
+      },
       links: {},
       contacts: {},
       meta: {
@@ -195,7 +215,7 @@ class Editor extends Component {
     console.log("Attempting download")
 
     console.log("Saving project")
-    fetch("/api/download", {
+    fetch("/api/export", {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: { "Content-Type": "application/json" }
@@ -311,13 +331,13 @@ class Editor extends Component {
 
     var links = this.state.links
     links[uuid] = {
-      ...contactDefault,
-      contacts: {},
-      ranges: {},
-      connections: {},
+      ...linkDefault,
+      
+
       node1_uuid: node1_uuid,
       node2_uuid: node2_uuid,
-      uuid:uuid
+      uuid:uuid,
+      
     }
     this.setState({
       links:links,
@@ -355,6 +375,7 @@ class Editor extends Component {
       sdrName: "ion",
       wmSize: 5000000,
       heapWords: 5000000,
+      endpoints:""
     }
 
     Object.assign(node, nodeDefault)
@@ -795,7 +816,7 @@ class Editor extends Component {
         this.setState({
           scrollEditBoxes: scrollEditBoxes
         })
-      break
+      break;
       case "scrollItemInputChange":
         var data = action.data
         if(data.parent == "links"){
@@ -812,7 +833,7 @@ class Editor extends Component {
         }
       break;
       case "doneEditingScrollItem":
-      console.log("doneEditingScrollItem")
+        console.log("doneEditingScrollItem")
         console.log(action.data)
         console.log()
         var name = action.data
@@ -822,6 +843,55 @@ class Editor extends Component {
         this.setState({
           scrollEditBoxes: scrollEditBoxes
         })
+      break;
+      case "toggleShowUnusedProtocols":
+        console.log("toggleShowUnusedProtocols")
+        this.setState({
+          nodeEditor:{
+            ...this.state.nodeEditor,
+            showUnusedProtocols: !this.state.nodeEditor.showUnusedProtocols
+          }
+        })
+      break;
+      case "updateProtocolSettingsNav":
+        console.log("updateProtocolSettingsNav")
+        this.setState({
+          nodeEditor:{
+            ...this.state.nodeEditor,
+            editingProtocol: action.data
+          }
+        })
+      break;
+      case "changeLinkProtocol":
+        var data=action.data
+        console.log("changeLinkProtocol")
+        var newstate = this.state
+        newstate.links[data.link] = {
+          ...this.state.links[data.link],
+          protocol:data.protocol
+        }
+        this.setState(newstate)
+        console.log(this.state.links[data.link])
+      break;
+      case "updateLinkProtocolSettings":
+        var data=action.data
+        var newstate = this.state
+        newstate.links[data.link].protocolSettings[data.protocol][data.name] = [data.value]
+        this.setState(newstate)
+      break;
+      case "updateNodeProtocolSettings":
+
+      var data=action.data
+      var newstate = this.state
+      
+      newstate.nodes[data.node].protocolSettings[data.protocol][data.name] = [data.value]
+      this.setState(newstate)
+      
+      break
+      default:
+        console.log("Action not implemented: "+action.type);
+      
+
     }
   }
 
@@ -843,12 +913,7 @@ class Editor extends Component {
           <div id="page-right-inner">
           {nav}
           <div class='page-right-menu-page'>
-            <Panel id="ProjectInfo" defaultExpanded>
-            <Panel.Heading >
-              <Panel.Title toggle componentClass="h3">Project</Panel.Title>
-            </Panel.Heading>
-            
-            </Panel>
+
 
             <MachineEditor
             addMachineCallback={this.openAddMachine}
@@ -868,7 +933,10 @@ class Editor extends Component {
             helpMessages={this.state.nodeEditHelpMessages}
             machineList={this.state.machines}
             inputChangeCallback={this.handleNodeEdit}
-            deleteNodeCallback={this.deleteNode}/>
+            deleteNodeCallback={this.deleteNode}
+            actionHandler={this.actionHandler}
+            state={this.state}
+            />
           </div>
           </div>)
       break;
@@ -1005,6 +1073,7 @@ class Editor extends Component {
         
         {LinkLines(this.actionHandler,this.state)}
         {nodes}
+
         <CreateNodeMenu
         opened={this.state.createNodeMenu.opened}
         x={this.state.createNodeMenu.x}

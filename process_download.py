@@ -41,12 +41,13 @@ for key in nodes:
 	new_path = path + node["name"] + "/"
 	node_paths[key] = new_path
 	os.mkdir(new_path)
-	cmd = "cp "+common_path+"* "+new_path
+	cmd = "cp -rp "+common_path+"* "+new_path
 	os.system(cmd)
 
 	generate_ionconfig(input_json,key,new_path+"config.ionconfig")
 	generate_ionrc(input_json,key,new_path+"config.ionrc")
-
+	generate_bprc(input_json,key,new_path+"config.bprc")
+	generate_ipnrc(input_json,key,new_path+"config.ipnrc")
 
 zip_filename = tmp_path+path_uuid
 shutil.make_archive(zip_filename, 'zip', path)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Panel,Button,PanelGroup,Form,Col, FormGroup, ControlLabel, FormControl, HelpBlock} from 'react-bootstrap'
 import Select from 'react-select'
+import ProtocolSettings from './protocolSettings';
 
 
 import './nodeEditor.css';
@@ -97,7 +98,12 @@ class NodeEditor extends Component {
           {this.NodeProp("sdrName","SDR Name","text")}
           {this.NodeProp("wmSize","wmSize","number")}
           {this.NodeProp("heapWords","heapWords","number")}
-          <Button onClick={() => this.props.deleteNodeCallback(nodeData.uuid)} bsStyle="danger" style={{float:"right"}}>Delete</Button>
+
+          <hr/>
+          {this.NodeProp("endpoints","Endpoints","text")}
+          <hr/>
+
+          {ProtocolSettings(this.props.actionHandler, this.props.state, this.props.config)}
         </Form>
       );
     }else{

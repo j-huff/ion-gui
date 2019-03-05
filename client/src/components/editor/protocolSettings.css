@@ -1,0 +1,28 @@
+
+#protocolNav .active a{
+	background-color: #007bff;
+	color:#fff;
+}
+
+#protocolNav a{
+	border-radius: 5px;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#protocolNav label{
+	font-weight: normal;
+}
+
+#protocolNav .form-check-input{
+	position: absolute;
+	margin-top: .1rem;
+	margin-left: -1.25rem;
+	display: inline-block;
+}
+#protocolNav .form-check-label{
+	display: inline-block;
+	margin-left: 1.25rem;
+}
+

@@ -1,4 +1,6 @@
 /node_modules
 package-lock.json 
 /data
+/examples
+/tmp
 __pycache__/

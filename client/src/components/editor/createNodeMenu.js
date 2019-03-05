@@ -3,8 +3,23 @@ import {Panel,Button, FormGroup, ControlLabel, FormControl, HelpBlock} from 'rea
 
 
 import './createNodeMenu.css';
-
+const nodeDefault = {
+    protocolSettings:{
+      TCP:{
+        payloadBytesPerFrame: 1400,
+        overheadBytesPerFrame: 100,
+        nominalDataRate:-1
+      },
+      UDP:{
+        payloadBytesPerFrame: 1400,
+        overheadBytesPerFrame: 100,
+        nominalDataRate:-1
+      }
+    }
+  }
 class CreateNodeMenu extends Component {
+
+
 
   componentDidMount() {
 
@@ -20,6 +35,7 @@ class CreateNodeMenu extends Component {
     var t = e.target
     
     var node = {
+      ...nodeDefault,
       name: t.name.value,
       ipn: t.ipn.value,
       x: this.props.x,
