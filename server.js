@@ -7,6 +7,7 @@ const path = require('path')
 const child_process = require('child_process')
 
 const bodyParser = require("body-parser");
+const ion_config = require('./ion_config')
 app.use('/', express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json()); // support json encoded bodies
@@ -78,14 +79,12 @@ const getZip = (json) => {
 }
 
 app.get('/api/downloadZip', (req, res) => {
-	var query = req.query
 	console.log("Download Zip Request")
-	console.log(query)
-
+	console.log("query: "+req.query.id)
+	var query = req.query
 	var id = query.id
 	var machineMap = JSON.parse(query.machineMap)
-	// var contents = fs.readFileSync(projectFilesFolder+id+'.json', 'utf8');
-	
+
 	var sql = `SELECT url,
              read_url,
              json
@@ -96,20 +95,13 @@ app.get('/api/downloadZip', (req, res) => {
 			return console.error(err.message);
 		}
 		if(row){
-		  	var json = JSON.parse(row.json)
+			var json = JSON.parse(row.json)
 		  	json = applyMachineMap(json,machineMap);
 
-		  	child_process.exec("python3.7 process_download.py '" + JSON.stringify(json)+"'", function callback(error, stdout, stderr){
+			let zip_file = ion_config.configFromJSON(json);
+			zip_file.generateNodeStream({type:'nodebuffer',streamFiles:true})
+				.pipe(res);
 
-			    var zip_filename = stdout
-			 	if(zip_filename){
-		    		res.sendFile(zip_filename,defaultZipOptions(), function(err){
-			    		if(err){console.log(err)}
-				    	fs.unlink(zip_filename,function(err){})
-				    }); 
-		   		}
-			    
-			}); 	
 		}
 	});
 });
@@ -117,10 +109,7 @@ app.get('/api/downloadZip', (req, res) => {
 app.post('/api/export', (req, res) => {
 	console.log("exporting")
 	child_process.exec("python3.7 process_download.py '" + JSON.stringify(req.body)+"'", function callback(error, stdout, stderr){
-	    // console.log("python output")
-	    // console.log(error)
-	    // console.log(stdout)
-	    // result
+
 	    var options = {
 		    dotfiles: 'deny',
 		    headers: {
@@ -159,6 +148,7 @@ app.post('/api/saveProject', (req, res) => {
 	var d = new Date().getTime();
 	console.log("saving project: "+req.body.id)
 	console.log(req.body)
+	console.log(JSON.stringify(req.body.state))
 	var id = req.body.id
 	var state = req.body.state
 	if(id == state.meta.read_id){

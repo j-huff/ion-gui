@@ -6,9 +6,10 @@ import uuid
 import zipfile
 import time
 import shutil
-
+import logging
 
 from ion_config_utils import *
+logging.basicConfig(filename='example.log',level=logging.DEBUG)
 
 def zipdir(path, ziph):
     # ziph is zipfile handle
@@ -19,8 +20,10 @@ def zipdir(path, ziph):
 def pretty(obj):
 	print(json.dumps(nodes, indent=4, separators=(',',' : ')))
 
-# input_str = str(sys.stdin.read())
+#input_str = str(sys.stdin.read())
 input_str = str(sys.argv[1])
+logging.debug(input_str)
+
 input_json = json.loads(input_str)
 # print(input_json['machines'])
 
@@ -48,10 +51,11 @@ for key in nodes:
 	generate_ionrc(input_json,key,new_path+"config.ionrc")
 	generate_bprc(input_json,key,new_path+"config.bprc")
 	generate_ipnrc(input_json,key,new_path+"config.ipnrc")
-
+logging.debug("Outputing to file")
 zip_filename = tmp_path+path_uuid
 shutil.make_archive(zip_filename, 'zip', path)
 # time.sleep(.1)
 ret = "{'filename' : '"+zip_filename+'.zip'+"'}"
 print(zip_filename+".zip",end="")
 shutil.rmtree(tmp_path + path_uuid)
+logging.debug("done")

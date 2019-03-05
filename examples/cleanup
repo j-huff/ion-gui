@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# Scott Burleigh
+# February 26, 2012
+
+echo "Cleaning up old ION..."
+killm
+rm -f ion_nodes A/ion.log A/bpdriverAduFile Remote/ion.log

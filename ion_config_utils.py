@@ -2,10 +2,8 @@ from io import StringIO
 import traceback
 import logging
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(message)s',
-                    handlers=[logging.FileHandler("example1.log"),
-                              logging.StreamHandler()])
+logging.basicConfig(filename='example.log',level=logging.DEBUG)
+
 
 def generate_ionconfig(json_data,node_key,filename):
 	nodes = json_data["nodes"]
@@ -60,11 +58,11 @@ def generate_bprc(json_data,node_key,filename):
 	f.write(f"1\na scheme ipn 'ipnfw' 'ipnadminep'\n")
 
 	
-
-
+	f.write(f"a endpoint ipn:{ipn}.0 q\n")
 	for endpointStr in node["endpoints"].split(','):
+
 		num = int(endpointStr)
-		f.write(f"a endpoint ipn:{ipn}.{endpointStr} x\n")
+		f.write(f"a endpoint ipn:{ipn}.{endpointStr} q\n")
 
 	protocols = set()
 	for link in links:
@@ -82,7 +80,16 @@ def generate_bprc(json_data,node_key,filename):
 			nominalDataRate = node["protocolSettings"]["UDP"]["nominalDataRate"]
 			f.write(f"a protocol udp {payloadBytesPerFrame} {overheadBytesPerFrame} {nominalDataRate}\n")
 
+	#TODO: fix multiple link bug
+	processed_uuids = []
 	for link in links:
+		logging.debug(link["uuid"])
+		if link["uuid"] in processed_uuids:
+			logging.debug("link already processed\n")
+			logging.debug(link)
+
+			continue
+		processed_uuids.append(link["uuid"])
 		if(link["protocol"] == "TCP"):
 			port1 = link["protocolSettings"]["TCP"]["port1"][0]
 			port2 = link["protocolSettings"]["TCP"]["port2"][0]
@@ -97,13 +104,14 @@ def generate_bprc(json_data,node_key,filename):
 			other_machine_uuid = other_node["machine"]
 			other_addr = json_data["machines"][other_machine_uuid]["address"]
 			
+
 			f.write(f"a induct tcp {other_addr}:{port1} tcpcli\n")
 			f.write(f"a outduct tcp {other_addr}:{port2} ''\n")
 
 
 
 
-	f.write("r 'ipnadmin amroc.ipnrc'\nw 1\ns")
+	f.write("r 'ipnadmin config.ipnrc'\ns\n")
 
 	f.close()
 

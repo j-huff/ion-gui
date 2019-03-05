@@ -19,6 +19,7 @@
     "concurrently": "^3.5.1",
     "deep-diff": "^1.0.2",
     "express": "^4.16.2",
+    "jszip": "^3.2.0",
     "reactstrap": "^6.5.0",
     "regex": "^0.1.1",
     "shortid": "^2.2.14",
