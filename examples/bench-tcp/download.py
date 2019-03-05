@@ -3,20 +3,19 @@ import requests
 import shutil
 import zipfile
 import sys
+from ast import literal_eval
 
 URL = "http://localhost:3000/api/downloadZip"
 
-machineMap = {
-	"Machine A": "127.0.0.1",
-	# "Machine B": "192.168.20.25"
-	"Machine B": "127.0.0.1"
-}
-
+input_str = sys.stdin.read()
+print(input_str)
+machineMap = literal_eval(input_str);
+print(machineMap)
+#machineMap = {"Machine A":"localhost"}
 PARAMS = {'id':sys.argv[1],'machineMap':json.dumps(machineMap)}
 
-print("requesting")
 r = requests.get(url = URL, params = PARAMS,stream=True)
-print("request sent")
+
 
 local_filename = "project.zip"
 print()

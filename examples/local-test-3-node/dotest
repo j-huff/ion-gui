@@ -5,47 +5,15 @@
 #
 
 # documentation boilerplate
-source activate
-python download.py n2GS8vogs
-chmod +x */ionstart
-chmod +x */ionstop
 
-CONFIGFILES=" \
-./A/config.bprc \
-./A/config.ionconfig \
-./A/config.ionrc \
-./A/config.ionsecrc \
-./A/config.ipnrc \
-./Remote/config.bprc \
-./Remote/config.ionconfig \
-./Remote/config.ionrc \
-./Remote/config.ionsecrc \
-./Remote/config.ipnrc \
-"
 
-echo "########################################"
-echo
-pwd | sed "s/\/.*\///" | xargs echo "NAME: "
-echo
-echo "PURPOSE: produce simple throughput benchmark results, for direct
-	comparison among computing platforms running ION.  All tests are
-	performed using the DTNRG-standard TCP convergence-layer protocol
-	between neighboring nodes residing on the same computer.  So
-	the results exercise BP in a non-loopback configuration, over
-	loopback TCP/IP; the results are therefore unaffected by network
-	traffic, router performance, or network interface card performance."
-
-echo
-echo "CONFIG: 2 node custom:"
-echo
-for N in $CONFIGFILES
-do
-	echo "$N:"
-	cat $N
-	echo "# EOF"
-	echo
-done
-
+python download.py NH8KRiuyl < machineMap
+chmod +x ./A/ionstart
+chmod +x ./A/ionstop
+chmod +x ./Remote/ionstart
+chmod +x ./Remote/ionstop
+chmod +x ./Middle/ionstart
+chmod +x ./Middle/ionstop
 
 ./cleanup
 sleep 1
@@ -57,11 +25,12 @@ RETVAL=0
 # Start nodes.
 cd A
 ./ionstart
-sleep 1
+cd ../Middle
+./ionstart
 cd ../Remote
 ./ionstart
 
-sleep 3
+sleep 5
 echo ""
 echo "Test 1: 10,000 bundles of 1000 bytes each."
 cd ../Remote
@@ -70,9 +39,8 @@ BPCOUNTER_PID=$!
 sleep 1
 
 cd ../A
-bpdriver 10000 ipn:2.1 ipn:3.1 -10000 &
-
-
+echo "starting bpdriver"
+bpdriver 10000 ipn:2.1 ipn:3.1 -1000 &
 
 # Wait for transmission to finish.
 echo "Waiting for transmission to finish..."
@@ -99,11 +67,6 @@ do
 	fi
 done
 
-./ionstop
-
-cd ../Remote
-./ionstop
-
 if [ $RETVAL -eq 1 ]
 then
 	echo "Test did not complete."
@@ -117,3 +80,5 @@ then
 	echo "...benchmarking terminated."
 	exit $RETVAL
 fi
+
+sleep 20

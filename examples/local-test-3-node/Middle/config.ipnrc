@@ -3,4 +3,5 @@
 # > https://github.com/j-huff/ion-gui
 # > John Huff
 
-a plan 3 tcp/127.0.0.1:3557
+a plan 4 tcp/4
+a plan 3 tcp/localhost:3115

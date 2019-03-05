@@ -1,0 +1,19 @@
+[2019/03/05-08:22:50] [i] No congestion forecast; horizon reached.
+[2019/03/05-08:22:50] [i] ionwarn finished.
+[2019/03/05-08:22:50] [i] rfxclock is running.
+[2019/03/05-08:22:52] [i] Bundle security is enabled.
+[2019/03/05-08:22:53] [i] bptransit is running.
+[2019/03/05-08:22:53] [i] ipnadminep is running.
+[2019/03/05-08:22:53] [i] tcpcli is running [192.168.20.5:3113].
+[2019/03/05-08:22:53] [i] ipnfw is running.
+[2019/03/05-08:22:53] [i] bpclock is running.
+[2019/03/05-08:25:39] [i] bpclock has ended.
+[2019/03/05-08:25:40] [i] bptransit has ended.
+[2019/03/05-08:25:40] [i] Endpoint has been stopped.
+[2019/03/05-08:25:40] [i] Administrative endpoint terminated.
+[2019/03/05-08:25:40] [i] ipnadminep has ended.
+[2019/03/05-08:25:40] [i] ipnfw forwarder has ended.
+[2019/03/05-08:25:40] [i] rfxclock has ended.
+[2019/03/05-08:25:40] [i] tcpcli server thread has ended.
+[2019/03/05-08:25:43] [i] tcpcli clock thread has ended.
+[2019/03/05-08:25:43] [i] tcpcli has ended.

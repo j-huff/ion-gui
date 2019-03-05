@@ -5,4 +5,4 @@
 
 echo "Cleaning up old ION..."
 killm
-rm -f ion_nodes A/ion.log A/bpdriverAduFile Remote/ion.log
+rm -f ion_nodes A/ion.log A/bpdriverAduFile B/ion.log

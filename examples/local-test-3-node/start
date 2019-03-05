@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# Scott Burleigh
+# February 26, 2012
+#
+
+# documentation boilerplate
+
+
+python download.py NH8KRiuyl < machineMap
+chmod +x ./A/ionstart
+chmod +x ./A/ionstop
+chmod +x ./Remote/ionstart
+chmod +x ./Remote/ionstop
+chmod +x ./Middle/ionstart
+chmod +x ./Middle/ionstop
+
+./cleanup
+sleep 1
+echo "Starting ION..."
+export ION_NODE_LIST_DIR=$PWD
+rm -f ./ion_nodes
+RETVAL=0
+
+# Start nodes.
+cd A
+./ionstart
+cd ../Middle
+./ionstart
+cd ../Remote
+./ionstart
+

@@ -20,20 +20,47 @@ const generate_ionrc = (state,uuid) => {
     let log = "";
     let node = state.nodes[uuid];
 
-    str += '1 '+node.ipn+' config.ionconfig\n';
+    str += '1 '+node.ipn+' config.ionconfig\n@ 0\n';
 
     let links = [];
     for(var link_uuid in state.links){
         let link = state.links[link_uuid];
-        if(link.node1_uuid != node.uuid && link.node2_uuid != node.uuid){
-            continue;
-        }
+        // if(link.node1_uuid != node.uuid && link.node2_uuid != node.uuid){
+        //     continue;
+        // }
+        let node1 = state.nodes[link.node1_uuid]
+        let node2 = state.nodes[link.node2_uuid]
         for(const key in link.contacts){
-            const contact = links.contacts[key];
-            str += ' a contact +'+contact.fromTime+' '+
+            const contact = link.contacts[key];
+            console.log(contact)
+            str += ' a contact +'+contact.fromTime+' +'+
                 contact.untilTime + ' ' +
+                node1.ipn + ' ' +
+                node2.ipn + ' ' +
                 contact.rate + ' ' +
-                contact.confidence + '\n';
+                contact.confidence +
+                '\n';
+            str += ' a contact +'+contact.fromTime+' +'+
+                contact.untilTime + ' ' +
+                node2.ipn + ' ' +
+                node1.ipn + ' ' +
+                contact.rate + ' ' +
+                contact.confidence +
+                '\n';
+        }
+        for(const key in link.ranges){
+            const range = link.ranges[key];
+            console.log(range)
+            str += ' a range +'+range.fromTime+' +'+
+                range.untilTime + ' ' +
+                node1.ipn + ' ' +
+                node2.ipn + ' ' +
+                range.owlt + '\n';
+            str += ' a range +'+range.fromTime+' +'+
+                range.untilTime + ' ' +
+                node1.ipn + ' ' +
+                node2.ipn + ' ' +
+                range.owlt + '\n';
         }
     }
 
@@ -54,7 +81,7 @@ const generate_bprc = (state, uuid) => {
     }
 
     let links = [];
-    for(const key in state.links){
+    for(let key in state.links){
         let link = state.links[key];
         if(link.node1_uuid == node.uuid || link.node2_uuid == node.uuid){
             links.push(link);
@@ -100,7 +127,7 @@ const generate_bprc = (state, uuid) => {
             outduct_port = link.protocolSettings.TCP.port2;
             other_uuid = link.node1_uuid;
             if(node.uuid === other_uuid){
-                other_uuid = link.node1_uuid;
+                other_uuid = link.node2_uuid;
                 str += ""
             }
 
@@ -108,10 +135,12 @@ const generate_bprc = (state, uuid) => {
             let other_machine_uuid = other.machine;
             let other_addr = state.machines[other_machine_uuid].address;
 
+            let local_address = state.machines[node.machine].address
+
             if(node.uuid == link.node1_uuid){
-                str += "a induct tcp "+other_addr+":"+outduct_port+" tcpcli\n";
+                str += "a induct tcp "+local_address+":"+outduct_port+" tcpcli\n";
             }else{
-                str += "a induct tcp "+other_addr+":"+induct_port+" tcpcli\n";
+                str += "a induct tcp "+local_address+":"+induct_port+" tcpcli\n";
                 str += "a outduct tcp "+other_addr+":"+outduct_port+" ''\n";
             }
         }
@@ -135,6 +164,8 @@ const generate_ipnrc = (state, uuid) => {
         }
     }
 
+    str += "a plan " + node.ipn + " tcp/"+node.ipn+"\n";
+
     let processed_uuids = new Set();
     links.forEach(function(link){
         console.log(link.protocolSettings)
@@ -153,7 +184,7 @@ const generate_ipnrc = (state, uuid) => {
             outduct_port = link.protocolSettings.TCP.port2;
             other_uuid = link.node1_uuid;
             if(node.uuid === other_uuid){
-                other_uuid = link.node1_uuid;
+                other_uuid = link.node2_uuid;
                 str += ""
             }
 
@@ -219,7 +250,6 @@ const generate_header = () => {
 
 exports.configFromJSON = function(state){
     console.log("config from JSON")
-    console.log(state)
     let zip = new JSZip();
     let log = "";
     let header = generate_header();

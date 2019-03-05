@@ -51,7 +51,8 @@ const ProtocolSettings = (actionHandler, state, config) => {
       }
     }
 
-    var editingNode = state.nodeEditor.node_uuid;
+    var editingNode = state.editingLink;
+
     var node = state.nodes[editingNode]
 
     var forms = Object.values(config.protocols).map((protocol,idx) =>{

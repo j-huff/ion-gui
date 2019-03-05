@@ -1,0 +1,631 @@
+[2019/03/05-05:59:46] [i] rfxclock is running.
+[2019/03/05-05:59:46] [i] No congestion forecast; horizon reached.
+[2019/03/05-05:59:46] [i] ionwarn finished.
+[2019/03/05-05:59:48] [i] Bundle security is enabled.
+[2019/03/05-05:59:49] [i] bpclock is running.
+[2019/03/05-05:59:49] [i] tcpcli is running [127.0.0.1:3557].
+[2019/03/05-05:59:49] [i] ipnfw is running.
+[2019/03/05-05:59:49] [i] ipnadminep is running.
+[2019/03/05-05:59:49] [i] bptransit is running.
+[2019/03/05-05:59:52] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-05:59:52] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-05:59:52] [i] bpclm is running: ipn:2.0
+[2019/03/05-05:59:56] [i] bpcounter has ended.
+[2019/03/05-05:59:57] [i] Outduct has been stopped: #:5
+[2019/03/05-05:59:57] [i] tcpcli session output stopped: #:5
+[2019/03/05-05:59:57] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-05:59:57] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:00:00] [i] ipnfw forwarder has ended.
+[2019/03/05-06:00:00] [i] Endpoint has been stopped.
+[2019/03/05-06:00:00] [i] Administrative endpoint terminated.
+[2019/03/05-06:00:00] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:00:00] [i] ipnadminep has ended.
+[2019/03/05-06:00:00] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:00:00] [i] bpclock has ended.
+[2019/03/05-06:00:00] [i] tcpcli server thread has ended.
+[2019/03/05-06:00:00] [i] bptransit has ended.
+[2019/03/05-06:00:01] [?] Can't close llcv.
+[2019/03/05-06:00:03] [i] tcpcli clock thread has ended.
+[2019/03/05-06:00:03] [i] tcpcli has ended.
+[2019/03/05-06:00:04] [i] rfxclock has ended.
+[2019/03/05-06:25:30] [i] rfxclock is running.
+[2019/03/05-06:25:30] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:25:30] [i] ionwarn finished.
+[2019/03/05-06:25:32] [i] Bundle security is enabled.
+[2019/03/05-06:25:33] [i] ipnadminep is running.
+[2019/03/05-06:25:33] [i] tcpcli is running [127.0.0.1:3113].
+[2019/03/05-06:25:33] [i] bpclock is running.
+[2019/03/05-06:25:33] [i] ipnfw is running.
+[2019/03/05-06:25:33] [i] bptransit is running.
+[2019/03/05-06:25:43] [i] tcpcli server thread has ended.
+[2019/03/05-06:25:43] [i] bpcounter has ended.
+[2019/03/05-06:25:46] [i] tcpcli clock thread has ended.
+[2019/03/05-06:25:46] [i] tcpcli has ended.
+[2019/03/05-06:27:26] [i] rfxclock is running.
+[2019/03/05-06:27:26] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:27:26] [i] ionwarn finished.
+[2019/03/05-06:27:28] [i] Bundle security is enabled.
+[2019/03/05-06:27:29] [i] ipnfw is running.
+[2019/03/05-06:27:29] [i] bptransit is running.
+[2019/03/05-06:27:29] [i] tcpcli is running [127.0.0.1:3113].
+[2019/03/05-06:27:29] [i] bpclock is running.
+[2019/03/05-06:27:29] [i] ipnadminep is running.
+[2019/03/05-06:27:39] [i] tcpcli server thread has ended.
+[2019/03/05-06:27:39] [i] bpcounter has ended.
+[2019/03/05-06:27:42] [i] tcpcli clock thread has ended.
+[2019/03/05-06:27:42] [i] tcpcli has ended.
+[2019/03/05-06:28:19] [i] rfxclock is running.
+[2019/03/05-06:28:19] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:28:19] [i] ionwarn finished.
+[2019/03/05-06:28:21] [i] Bundle security is enabled.
+[2019/03/05-06:28:22] [i] bptransit is running.
+[2019/03/05-06:28:22] [i] ipnadminep is running.
+[2019/03/05-06:28:22] [i] tcpcli is running [127.0.0.1:3113].
+[2019/03/05-06:28:22] [i] bpclock is running.
+[2019/03/05-06:28:22] [i] ipnfw is running.
+[2019/03/05-06:28:42] [i] tcpcli server thread has ended.
+[2019/03/05-06:28:42] [i] bpcounter has ended.
+[2019/03/05-06:28:44] [i] tcpcli clock thread has ended.
+[2019/03/05-06:28:44] [i] tcpcli has ended.
+[2019/03/05-06:36:12] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:36:12] [i] ionwarn finished.
+[2019/03/05-06:36:12] [i] rfxclock is running.
+[2019/03/05-06:36:14] [i] Bundle security is enabled.
+[2019/03/05-06:36:14] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:36:15] [i] ipnadminep is running.
+[2019/03/05-06:36:15] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:36:15] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:36:15] [i] bptransit is running.
+[2019/03/05-06:36:15] [i] ipnfw is running.
+[2019/03/05-06:36:15] [i] bpclock is running.
+[2019/03/05-06:36:15] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:36:15] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:36:21] [i] bpcounter has ended.
+[2019/03/05-06:38:19] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:38:19] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:38:19] [i] bpclock has ended.
+[2019/03/05-06:38:19] [i] bptransit has ended.
+[2019/03/05-06:38:20] [i] Endpoint has been stopped.
+[2019/03/05-06:38:20] [i] Administrative endpoint terminated.
+[2019/03/05-06:38:20] [i] ipnadminep has ended.
+[2019/03/05-06:38:20] [i] ipnfw forwarder has ended.
+[2019/03/05-06:38:20] [i] rfxclock has ended.
+[2019/03/05-06:38:20] [i] tcpcli server thread has ended.
+[2019/03/05-06:38:20] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:38:20] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:38:20] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:38:22] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:38:22] [?] Can't close llcv.
+[2019/03/05-06:38:23] [i] tcpcli clock thread has ended.
+[2019/03/05-06:38:23] [i] tcpcli has ended.
+[2019/03/05-06:38:33] [i] rfxclock is running.
+[2019/03/05-06:38:33] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:38:33] [i] ionwarn finished.
+[2019/03/05-06:38:35] [i] Bundle security is enabled.
+[2019/03/05-06:38:35] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:38:36] [i] bptransit is running.
+[2019/03/05-06:38:36] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:38:36] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:38:36] [i] ipnfw is running.
+[2019/03/05-06:38:36] [i] ipnadminep is running.
+[2019/03/05-06:38:36] [i] bpclock is running.
+[2019/03/05-06:38:37] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:38:37] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:38:39] at line 80 of bp/library/libbp.c, Endpoint not known. (3.1)
+[2019/03/05-06:38:39] at line 119 of bp/test/bpcounter.c, Can't open own endpoint. (ipn:3.1)
+[2019/03/05-06:38:54] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:38:54] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:38:54] [i] bpclock has ended.
+[2019/03/05-06:38:54] [i] bptransit has ended.
+[2019/03/05-06:38:54] [i] Endpoint has been stopped.
+[2019/03/05-06:38:54] [i] Administrative endpoint terminated.
+[2019/03/05-06:38:54] [i] ipnadminep has ended.
+[2019/03/05-06:38:54] [i] ipnfw forwarder has ended.
+[2019/03/05-06:38:54] [i] rfxclock has ended.
+[2019/03/05-06:38:54] [i] tcpcli server thread has ended.
+[2019/03/05-06:38:55] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:38:55] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:38:55] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:38:56] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:38:56] [?] Can't close llcv.
+[2019/03/05-06:38:57] [i] tcpcli clock thread has ended.
+[2019/03/05-06:38:57] [i] tcpcli has ended.
+[2019/03/05-06:39:07] [i] rfxclock is running.
+[2019/03/05-06:39:07] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:39:07] [i] ionwarn finished.
+[2019/03/05-06:39:09] [i] Bundle security is enabled.
+[2019/03/05-06:39:09] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:39:10] [i] bpclock is running.
+[2019/03/05-06:39:10] [i] bptransit is running.
+[2019/03/05-06:39:10] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:39:10] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:39:10] [i] ipnadminep is running.
+[2019/03/05-06:39:10] [i] ipnfw is running.
+[2019/03/05-06:39:11] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:39:11] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:39:13] at line 80 of bp/library/libbp.c, Endpoint not known. (3.1)
+[2019/03/05-06:39:13] at line 119 of bp/test/bpcounter.c, Can't open own endpoint. (ipn:3.1)
+[2019/03/05-06:39:15] [i] tcpcli server thread has ended.
+[2019/03/05-06:39:15] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:39:15] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:39:15] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:39:15] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:39:16] [?] Can't close llcv.
+[2019/03/05-06:39:18] [i] tcpcli clock thread has ended.
+[2019/03/05-06:39:18] [i] tcpcli has ended.
+[2019/03/05-06:39:53] [i] rfxclock is running.
+[2019/03/05-06:39:53] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:39:53] [i] ionwarn finished.
+[2019/03/05-06:39:55] [i] Bundle security is enabled.
+[2019/03/05-06:39:55] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:39:56] [i] ipnadminep is running.
+[2019/03/05-06:39:56] [i] ipnfw is running.
+[2019/03/05-06:39:56] [i] bptransit is running.
+[2019/03/05-06:39:56] [i] bpclock is running.
+[2019/03/05-06:39:56] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:39:56] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:39:57] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:39:57] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:39:59] at line 80 of bp/library/libbp.c, Endpoint not known. (3.1)
+[2019/03/05-06:39:59] at line 119 of bp/test/bpcounter.c, Can't open own endpoint. (ipn:3.1)
+[2019/03/05-06:41:28] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:41:28] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:41:28] [i] bpclock has ended.
+[2019/03/05-06:41:28] [i] bptransit has ended.
+[2019/03/05-06:41:28] [i] Endpoint has been stopped.
+[2019/03/05-06:41:28] [i] Administrative endpoint terminated.
+[2019/03/05-06:41:28] [i] ipnadminep has ended.
+[2019/03/05-06:41:28] [i] ipnfw forwarder has ended.
+[2019/03/05-06:41:28] [i] rfxclock has ended.
+[2019/03/05-06:41:29] [i] tcpcli server thread has ended.
+[2019/03/05-06:41:29] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:41:29] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:41:29] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:41:29] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:41:29] [?] Can't close llcv.
+[2019/03/05-06:41:31] [i] tcpcli clock thread has ended.
+[2019/03/05-06:41:31] [i] tcpcli has ended.
+[2019/03/05-06:41:41] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:41:41] [i] ionwarn finished.
+[2019/03/05-06:41:41] [i] rfxclock is running.
+[2019/03/05-06:41:43] [i] Bundle security is enabled.
+[2019/03/05-06:41:43] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:41:44] [i] bptransit is running.
+[2019/03/05-06:41:44] [i] bpclock is running.
+[2019/03/05-06:41:44] [i] ipnadminep is running.
+[2019/03/05-06:41:44] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:41:44] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:41:44] [i] ipnfw is running.
+[2019/03/05-06:41:45] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:41:45] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:41:51] [i] bpcounter has ended.
+[2019/03/05-06:44:02] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:44:02] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:44:02] [i] bpclock has ended.
+[2019/03/05-06:44:02] [i] bptransit has ended.
+[2019/03/05-06:44:02] [i] Endpoint has been stopped.
+[2019/03/05-06:44:02] [i] Administrative endpoint terminated.
+[2019/03/05-06:44:02] [i] ipnadminep has ended.
+[2019/03/05-06:44:03] [i] ipnfw forwarder has ended.
+[2019/03/05-06:44:03] [i] rfxclock has ended.
+[2019/03/05-06:44:03] [i] tcpcli server thread has ended.
+[2019/03/05-06:44:03] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:44:03] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:44:03] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:44:04] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:44:04] [?] Can't close llcv.
+[2019/03/05-06:44:05] [i] tcpcli clock thread has ended.
+[2019/03/05-06:44:05] [i] tcpcli has ended.
+[2019/03/05-06:44:15] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:44:15] [i] ionwarn finished.
+[2019/03/05-06:44:15] [i] rfxclock is running.
+[2019/03/05-06:44:18] [i] Bundle security is enabled.
+[2019/03/05-06:44:18] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:44:19] [i] ipnfw is running.
+[2019/03/05-06:44:19] [i] ipnadminep is running.
+[2019/03/05-06:44:19] [i] bptransit is running.
+[2019/03/05-06:44:19] [i] bpclock is running.
+[2019/03/05-06:44:19] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:44:19] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:44:19] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:44:19] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:44:25] [i] bpcounter has ended.
+[2019/03/05-06:45:47] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:45:47] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:45:47] [i] bpclock has ended.
+[2019/03/05-06:45:47] [i] bptransit has ended.
+[2019/03/05-06:45:47] [i] Endpoint has been stopped.
+[2019/03/05-06:45:47] [i] Administrative endpoint terminated.
+[2019/03/05-06:45:47] [i] ipnadminep has ended.
+[2019/03/05-06:45:47] [i] ipnfw forwarder has ended.
+[2019/03/05-06:45:47] [i] rfxclock has ended.
+[2019/03/05-06:45:48] [i] tcpcli server thread has ended.
+[2019/03/05-06:45:48] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:45:48] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:45:48] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:45:49] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:45:50] [?] Can't close llcv.
+[2019/03/05-06:45:51] [i] tcpcli clock thread has ended.
+[2019/03/05-06:45:51] [i] tcpcli has ended.
+[2019/03/05-06:46:00] [i] rfxclock is running.
+[2019/03/05-06:46:00] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:46:00] [i] ionwarn finished.
+[2019/03/05-06:46:02] [i] Bundle security is enabled.
+[2019/03/05-06:46:02] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:46:03] [i] ipnadminep is running.
+[2019/03/05-06:46:03] [i] bpclock is running.
+[2019/03/05-06:46:03] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:46:03] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:46:03] [i] ipnfw is running.
+[2019/03/05-06:46:03] [i] bptransit is running.
+[2019/03/05-06:46:04] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:46:04] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:46:10] [i] bpcounter has ended.
+[2019/03/05-06:50:49] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:50:49] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:50:49] [i] bpclock has ended.
+[2019/03/05-06:50:49] [i] bptransit has ended.
+[2019/03/05-06:50:49] [i] Endpoint has been stopped.
+[2019/03/05-06:50:49] [i] Administrative endpoint terminated.
+[2019/03/05-06:50:49] [i] ipnadminep has ended.
+[2019/03/05-06:50:49] [i] ipnfw forwarder has ended.
+[2019/03/05-06:50:50] [i] rfxclock has ended.
+[2019/03/05-06:50:50] [i] tcpcli server thread has ended.
+[2019/03/05-06:50:50] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:50:50] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:50:50] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:50:51] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:50:51] [?] Can't close llcv.
+[2019/03/05-06:50:52] [i] tcpcli clock thread has ended.
+[2019/03/05-06:50:52] [i] tcpcli has ended.
+[2019/03/05-06:51:03] [i] rfxclock is running.
+[2019/03/05-06:51:03] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:51:03] [i] ionwarn finished.
+[2019/03/05-06:51:05] [i] Bundle security is enabled.
+[2019/03/05-06:51:05] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:51:06] [i] ipnadminep is running.
+[2019/03/05-06:51:06] [i] ipnfw is running.
+[2019/03/05-06:51:06] [i] bpclock is running.
+[2019/03/05-06:51:06] [i] bptransit is running.
+[2019/03/05-06:51:06] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:51:06] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:51:06] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:51:06] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:51:12] [i] bpcounter has ended.
+[2019/03/05-06:52:17] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:52:17] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:52:17] [i] bpclock has ended.
+[2019/03/05-06:52:17] [i] bptransit has ended.
+[2019/03/05-06:52:18] [i] Endpoint has been stopped.
+[2019/03/05-06:52:18] [i] Administrative endpoint terminated.
+[2019/03/05-06:52:18] [i] ipnadminep has ended.
+[2019/03/05-06:52:18] [i] ipnfw forwarder has ended.
+[2019/03/05-06:52:18] [i] rfxclock has ended.
+[2019/03/05-06:52:18] [i] tcpcli server thread has ended.
+[2019/03/05-06:52:18] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:52:18] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:52:18] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:52:19] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:52:20] [?] Can't close llcv.
+[2019/03/05-06:52:21] [i] tcpcli clock thread has ended.
+[2019/03/05-06:52:21] [i] tcpcli has ended.
+[2019/03/05-06:53:04] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:53:04] [i] ionwarn finished.
+[2019/03/05-06:53:04] [i] rfxclock is running.
+[2019/03/05-06:53:06] [i] Bundle security is enabled.
+[2019/03/05-06:53:06] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:53:07] [i] bptransit is running.
+[2019/03/05-06:53:07] [i] ipnfw is running.
+[2019/03/05-06:53:07] [i] ipnadminep is running.
+[2019/03/05-06:53:07] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:53:07] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:53:07] [i] bpclock is running.
+[2019/03/05-06:53:08] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:53:08] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:53:14] [i] bpcounter has ended.
+[2019/03/05-06:54:01] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:54:01] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:54:01] [i] bpclock has ended.
+[2019/03/05-06:54:02] [i] bptransit has ended.
+[2019/03/05-06:54:02] [i] Endpoint has been stopped.
+[2019/03/05-06:54:02] [i] Administrative endpoint terminated.
+[2019/03/05-06:54:02] [i] ipnadminep has ended.
+[2019/03/05-06:54:02] [i] ipnfw forwarder has ended.
+[2019/03/05-06:54:02] [i] rfxclock has ended.
+[2019/03/05-06:54:02] [i] tcpcli server thread has ended.
+[2019/03/05-06:54:02] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:54:02] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:54:02] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:54:03] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:54:04] [?] Can't close llcv.
+[2019/03/05-06:54:05] [i] tcpcli clock thread has ended.
+[2019/03/05-06:54:05] [i] tcpcli has ended.
+[2019/03/05-06:54:15] [i] rfxclock is running.
+[2019/03/05-06:54:15] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:54:15] [i] ionwarn finished.
+[2019/03/05-06:54:17] [i] Bundle security is enabled.
+[2019/03/05-06:54:17] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:54:18] [i] bptransit is running.
+[2019/03/05-06:54:18] [i] ipnfw is running.
+[2019/03/05-06:54:18] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:54:18] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:54:18] [i] bpclock is running.
+[2019/03/05-06:54:18] [i] ipnadminep is running.
+[2019/03/05-06:54:19] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:54:19] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:54:25] [i] bpcounter has ended.
+[2019/03/05-06:55:07] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:55:07] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:55:07] [i] bpclock has ended.
+[2019/03/05-06:55:07] [i] bptransit has ended.
+[2019/03/05-06:55:07] [i] Endpoint has been stopped.
+[2019/03/05-06:55:07] [i] Administrative endpoint terminated.
+[2019/03/05-06:55:07] [i] ipnadminep has ended.
+[2019/03/05-06:55:07] [i] ipnfw forwarder has ended.
+[2019/03/05-06:55:07] [i] rfxclock has ended.
+[2019/03/05-06:55:08] [i] tcpcli server thread has ended.
+[2019/03/05-06:55:08] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:55:08] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:55:08] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:55:09] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:55:09] [?] Can't close llcv.
+[2019/03/05-06:55:10] [i] tcpcli clock thread has ended.
+[2019/03/05-06:55:10] [i] tcpcli has ended.
+[2019/03/05-06:55:20] [i] rfxclock is running.
+[2019/03/05-06:55:20] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:55:20] [i] ionwarn finished.
+[2019/03/05-06:55:22] [i] Bundle security is enabled.
+[2019/03/05-06:55:22] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:55:23] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-06:55:23] [i] ipnadminep is running.
+[2019/03/05-06:55:23] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-06:55:23] [i] bptransit is running.
+[2019/03/05-06:55:23] [i] bpclock is running.
+[2019/03/05-06:55:23] [i] ipnfw is running.
+[2019/03/05-06:55:24] [i] tcpcli admin thread has started: ipn:2.0
+[2019/03/05-06:55:24] [i] tcpcli sender thread has started: ipn:2.0
+[2019/03/05-06:55:30] [i] bpcounter has ended.
+[2019/03/05-06:56:29] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-06:56:29] [i] bpclm has ended: ipn:2.0
+[2019/03/05-06:56:29] [i] bpclock has ended.
+[2019/03/05-06:56:29] [i] bptransit has ended.
+[2019/03/05-06:56:30] [i] Endpoint has been stopped.
+[2019/03/05-06:56:30] [i] Administrative endpoint terminated.
+[2019/03/05-06:56:30] [i] ipnadminep has ended.
+[2019/03/05-06:56:30] [i] ipnfw forwarder has ended.
+[2019/03/05-06:56:30] [i] rfxclock has ended.
+[2019/03/05-06:56:30] [i] tcpcli server thread has ended.
+[2019/03/05-06:56:30] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-06:56:30] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-06:56:30] [i] tcpcli sender thread has ended: ipn:2.0
+[2019/03/05-06:56:31] [i] tcpcli receiver thread has ended: ipn:2.0
+[2019/03/05-06:56:32] [?] Can't close llcv.
+[2019/03/05-06:56:33] [i] tcpcli clock thread has ended.
+[2019/03/05-06:56:33] [i] tcpcli has ended.
+[2019/03/05-06:56:43] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:56:43] [i] ionwarn finished.
+[2019/03/05-06:56:43] [i] rfxclock is running.
+[2019/03/05-06:56:45] [i] Bundle security is enabled.
+[2019/03/05-06:56:45] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:56:46] [i] bptransit is running.
+[2019/03/05-06:56:46] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-06:56:46] [i] bpclock is running.
+[2019/03/05-06:56:46] [i] ipnadminep is running.
+[2019/03/05-06:56:46] [i] ipnfw is running.
+[2019/03/05-06:57:03] [i] bpcounter has ended.
+[2019/03/05-06:57:19] [i] rfxclock is running.
+[2019/03/05-06:57:19] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:57:19] [i] ionwarn finished.
+[2019/03/05-06:57:21] [i] Bundle security is enabled.
+[2019/03/05-06:57:21] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:57:22] [i] ipnfw is running.
+[2019/03/05-06:57:22] [i] ipnadminep is running.
+[2019/03/05-06:57:22] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-06:57:22] [i] bptransit is running.
+[2019/03/05-06:57:22] [i] bpclock is running.
+[2019/03/05-06:59:04] [i] bpcounter has ended.
+[2019/03/05-06:59:36] [i] No congestion forecast; horizon reached.
+[2019/03/05-06:59:36] [i] ionwarn finished.
+[2019/03/05-06:59:36] [i] rfxclock is running.
+[2019/03/05-06:59:38] [i] Bundle security is enabled.
+[2019/03/05-06:59:38] [i] bpclm is running: ipn:2.0
+[2019/03/05-06:59:39] [i] bpclock is running.
+[2019/03/05-06:59:39] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-06:59:39] [i] ipnfw is running.
+[2019/03/05-06:59:39] [i] ipnadminep is running.
+[2019/03/05-06:59:39] [i] bptransit is running.
+[2019/03/05-07:01:37] [i] bpcounter has ended.
+[2019/03/05-07:01:52] [i] rfxclock is running.
+[2019/03/05-07:01:52] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:01:52] [i] ionwarn finished.
+[2019/03/05-07:01:54] [i] Bundle security is enabled.
+[2019/03/05-07:01:54] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:01:55] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:01:55] [i] bptransit is running.
+[2019/03/05-07:01:55] [i] ipnadminep is running.
+[2019/03/05-07:01:55] [i] bpclock is running.
+[2019/03/05-07:01:55] [i] ipnfw is running.
+[2019/03/05-07:03:16] [i] bpcounter has ended.
+[2019/03/05-07:03:31] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:03:31] [i] ionwarn finished.
+[2019/03/05-07:03:31] [i] rfxclock is running.
+[2019/03/05-07:03:33] [i] Bundle security is enabled.
+[2019/03/05-07:03:33] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:03:34] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:03:34] [i] bptransit is running.
+[2019/03/05-07:03:34] [i] ipnfw is running.
+[2019/03/05-07:03:34] [i] ipnadminep is running.
+[2019/03/05-07:03:34] [i] bpclock is running.
+[2019/03/05-07:05:12] [i] bpcounter has ended.
+[2019/03/05-07:05:31] [i] rfxclock is running.
+[2019/03/05-07:05:31] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:05:31] [i] ionwarn finished.
+[2019/03/05-07:05:33] [i] Bundle security is enabled.
+[2019/03/05-07:05:33] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:05:34] [i] ipnadminep is running.
+[2019/03/05-07:05:34] [i] bptransit is running.
+[2019/03/05-07:05:34] [i] ipnfw is running.
+[2019/03/05-07:05:34] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:05:34] [i] bpclock is running.
+[2019/03/05-07:05:38] [i] bpcounter has ended.
+[2019/03/05-07:06:47] [i] rfxclock is running.
+[2019/03/05-07:06:47] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:06:47] [i] ionwarn finished.
+[2019/03/05-07:06:49] [i] Bundle security is enabled.
+[2019/03/05-07:06:49] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:06:50] [i] bptransit is running.
+[2019/03/05-07:06:50] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:06:50] [i] ipnfw is running.
+[2019/03/05-07:06:50] [i] ipnadminep is running.
+[2019/03/05-07:06:50] [i] bpclock is running.
+[2019/03/05-07:07:08] [i] rfxclock is running.
+[2019/03/05-07:07:08] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:07:08] [i] ionwarn finished.
+[2019/03/05-07:07:10] [i] Bundle security is enabled.
+[2019/03/05-07:07:10] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:07:11] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:07:11] [i] bptransit is running.
+[2019/03/05-07:07:11] [i] ipnfw is running.
+[2019/03/05-07:07:11] [i] ipnadminep is running.
+[2019/03/05-07:07:11] [i] bpclock is running.
+[2019/03/05-07:08:13] [i] bpcounter has ended.
+[2019/03/05-07:08:39] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:08:39] [i] ionwarn finished.
+[2019/03/05-07:08:39] [i] rfxclock is running.
+[2019/03/05-07:08:41] [i] Bundle security is enabled.
+[2019/03/05-07:08:41] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:08:42] [i] bptransit is running.
+[2019/03/05-07:08:42] [i] bpclock is running.
+[2019/03/05-07:08:42] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:08:42] [i] ipnadminep is running.
+[2019/03/05-07:08:42] [i] ipnfw is running.
+[2019/03/05-07:10:14] [i] bpcounter has ended.
+[2019/03/05-07:10:29] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:10:29] [i] ionwarn finished.
+[2019/03/05-07:10:29] [i] rfxclock is running.
+[2019/03/05-07:10:31] [i] Bundle security is enabled.
+[2019/03/05-07:10:31] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:10:32] [i] bpclock is running.
+[2019/03/05-07:10:32] [i] bptransit is running.
+[2019/03/05-07:10:32] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:10:32] [i] ipnfw is running.
+[2019/03/05-07:10:32] [i] ipnadminep is running.
+[2019/03/05-07:10:37] [i] bpcounter has ended.
+[2019/03/05-07:10:53] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:10:53] [i] ionwarn finished.
+[2019/03/05-07:10:53] [i] rfxclock is running.
+[2019/03/05-07:10:55] [i] Bundle security is enabled.
+[2019/03/05-07:10:55] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:10:56] [i] bpclock is running.
+[2019/03/05-07:10:56] [i] bptransit is running.
+[2019/03/05-07:10:56] [i] ipnadminep is running.
+[2019/03/05-07:10:56] [i] ipnfw is running.
+[2019/03/05-07:10:56] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:11:06] [i] bpcounter has ended.
+[2019/03/05-07:11:21] [i] rfxclock is running.
+[2019/03/05-07:11:21] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:11:21] [i] ionwarn finished.
+[2019/03/05-07:11:23] [i] Bundle security is enabled.
+[2019/03/05-07:11:23] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:11:24] [i] bpclock is running.
+[2019/03/05-07:11:24] [i] ipnadminep is running.
+[2019/03/05-07:11:24] [i] ipnfw is running.
+[2019/03/05-07:11:24] [i] bptransit is running.
+[2019/03/05-07:11:24] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:12:57] [i] bpcounter has ended.
+[2019/03/05-07:14:07] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:14:07] [i] ionwarn finished.
+[2019/03/05-07:14:07] [i] rfxclock is running.
+[2019/03/05-07:14:09] [i] Bundle security is enabled.
+[2019/03/05-07:14:09] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:14:10] [i] bpclock is running.
+[2019/03/05-07:14:10] [i] bptransit is running.
+[2019/03/05-07:14:10] [i] ipnfw is running.
+[2019/03/05-07:14:10] [i] ipnadminep is running.
+[2019/03/05-07:14:10] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:19:24] [i] Plan has been stopped: ipn:2.0
+[2019/03/05-07:19:24] [i] bpclm has ended: ipn:2.0
+[2019/03/05-07:19:24] [i] bpclock has ended.
+[2019/03/05-07:19:25] [i] bptransit has ended.
+[2019/03/05-07:19:25] [i] Endpoint has been stopped.
+[2019/03/05-07:19:25] [i] Administrative endpoint terminated.
+[2019/03/05-07:19:25] [i] ipnadminep has ended.
+[2019/03/05-07:19:25] [i] ipnfw forwarder has ended.
+[2019/03/05-07:19:25] [i] rfxclock has ended.
+[2019/03/05-07:20:02] [i] rfxclock is running.
+[2019/03/05-07:20:02] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:20:02] [i] ionwarn finished.
+[2019/03/05-07:20:04] [i] Bundle security is enabled.
+[2019/03/05-07:20:04] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:20:05] [i] bptransit is running.
+[2019/03/05-07:20:05] [i] bpclock is running.
+[2019/03/05-07:20:05] [i] ipnadminep is running.
+[2019/03/05-07:20:05] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:20:05] [i] ipnfw is running.
+[2019/03/05-07:20:17] [i] bpcounter has ended.
+[2019/03/05-07:20:32] [i] rfxclock is running.
+[2019/03/05-07:20:32] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:20:32] [i] ionwarn finished.
+[2019/03/05-07:20:34] [i] Bundle security is enabled.
+[2019/03/05-07:20:34] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:20:35] [i] bpclock is running.
+[2019/03/05-07:20:35] [i] ipnadminep is running.
+[2019/03/05-07:20:35] [i] bptransit is running.
+[2019/03/05-07:20:35] [i] ipnfw is running.
+[2019/03/05-07:20:35] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-07:20:35] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-07:20:36] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-07:20:38] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-07:20:42] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-07:20:50] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-07:20:57] [i] tcpcli server thread has ended.
+[2019/03/05-07:20:57] [i] bpcounter has ended.
+[2019/03/05-07:20:59] [i] tcpcli clock thread has ended.
+[2019/03/05-07:20:59] [i] tcpcli has ended.
+[2019/03/05-07:21:12] [i] rfxclock is running.
+[2019/03/05-07:21:12] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:21:12] [i] ionwarn finished.
+[2019/03/05-07:21:14] [i] Bundle security is enabled.
+[2019/03/05-07:21:14] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:21:15] [i] bptransit is running.
+[2019/03/05-07:21:15] [i] bpclock is running.
+[2019/03/05-07:21:15] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:21:15] [i] ipnfw is running.
+[2019/03/05-07:21:15] [i] ipnadminep is running.
+[2019/03/05-07:21:50] [i] bpcounter has ended.
+[2019/03/05-07:24:01] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:24:01] [i] ionwarn finished.
+[2019/03/05-07:24:01] [i] rfxclock is running.
+[2019/03/05-07:24:03] [i] Bundle security is enabled.
+[2019/03/05-07:24:03] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:24:04] [i] bpclock is running.
+[2019/03/05-07:24:04] [i] ipnadminep is running.
+[2019/03/05-07:24:04] [i] bptransit is running.
+[2019/03/05-07:24:04] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:24:04] [i] ipnfw is running.
+[2019/03/05-07:24:18] [i] bpcounter has ended.
+[2019/03/05-07:25:23] [i] rfxclock is running.
+[2019/03/05-07:25:23] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:25:23] [i] ionwarn finished.
+[2019/03/05-07:25:25] [i] Bundle security is enabled.
+[2019/03/05-07:25:25] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:25:26] [i] bptransit is running.
+[2019/03/05-07:25:26] [i] ipnfw is running.
+[2019/03/05-07:25:26] [i] bpclock is running.
+[2019/03/05-07:25:26] [i] ipnadminep is running.
+[2019/03/05-07:25:26] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:26:11] [i] bpcounter has ended.
+[2019/03/05-07:28:27] [i] rfxclock is running.
+[2019/03/05-07:28:27] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:28:27] [i] ionwarn finished.
+[2019/03/05-07:29:20] [i] rfxclock is running.
+[2019/03/05-07:29:20] [i] No congestion forecast; horizon reached.
+[2019/03/05-07:29:20] [i] ionwarn finished.
+[2019/03/05-07:29:22] [i] Bundle security is enabled.
+[2019/03/05-07:29:22] [i] bpclm is running: ipn:2.0
+[2019/03/05-07:29:23] [i] bptransit is running.
+[2019/03/05-07:29:23] [i] ipnadminep is running.
+[2019/03/05-07:29:23] at line 2846 of bp/tcp/tcpcli.c, Can't initialize TCP server socket: Cannot assign requested address
+[2019/03/05-07:29:23] [i] ipnfw is running.
+[2019/03/05-07:29:23] [i] bpclock is running.
+[2019/03/05-07:31:59] [i] bpcounter has ended.

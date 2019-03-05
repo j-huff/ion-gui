@@ -1,0 +1,44 @@
+[2019/03/05-11:30:28] [i] rfxclock is running.
+[2019/03/05-11:30:28] [i] No congestion forecast; horizon reached.
+[2019/03/05-11:30:28] [i] ionwarn finished.
+[2019/03/05-11:30:29] [i] No congestion forecast; horizon reached.
+[2019/03/05-11:30:29] [i] ionwarn finished.
+[2019/03/05-11:30:30] [i] No congestion forecast; horizon reached.
+[2019/03/05-11:30:30] [i] ionwarn finished.
+[2019/03/05-11:30:30] [i] Bundle security is enabled.
+[2019/03/05-11:30:30] [?] Unknown duct: tcp/2
+[2019/03/05-11:30:30] [?]   Attaching duct to plan: ipn:2.0
+[2019/03/05-11:30:30] [i] bpclm is running: ipn:2.0
+[2019/03/05-11:30:30] [i] bpclm is running: ipn:4.0
+[2019/03/05-11:30:31] [i] ipnadminep is running.
+[2019/03/05-11:30:31] [i] bpclock is running.
+[2019/03/05-11:30:31] [i] ipnfw is running.
+[2019/03/05-11:30:31] [i] bptransit is running.
+[2019/03/05-11:30:31] [i] tcpcli is running [127.0.0.1:3112].
+[2019/03/05-11:30:31] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-11:30:32] [x] src from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] [x] fwd from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] [x] xmt from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] [x] rcv from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] [x] dlv from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] [x] ctr from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] [x] rfw from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] [x] exp from 1969/12/31-19:00:00 to 2019/03/05-11:30:32: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/05-11:30:32] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-11:30:34] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (127.0.0.1:3113)
+[2019/03/05-11:30:38] [i] Connected to TCP socket: 127.0.0.1:3113
+[2019/03/05-11:30:38] [i] tcpcli sender thread has started: ipn:4.0
+[2019/03/05-11:30:38] [i] tcpcli admin thread has started: ipn:4.0
+[2019/03/05-11:31:01] [i] tcpcli server thread has ended.
+[2019/03/05-11:31:02] [i] Outduct has been stopped: localhost:3113
+[2019/03/05-11:31:02] [i] tcpcli session output stopped: localhost:3113
+[2019/03/05-11:31:02] [i] tcpcli sender thread has ended: ipn:4.0
+[2019/03/05-11:35:53] [i] rfxclock is running.
+[2019/03/05-11:35:53] [i] No congestion forecast; horizon reached.
+[2019/03/05-11:35:53] [i] ionwarn finished.
+[2019/03/05-11:35:54] [i] No congestion forecast; horizon reached.
+[2019/03/05-11:35:54] [i] ionwarn finished.
+[2019/03/05-11:37:18] at line 2095 of bp/library/libbpP.c, Can't find BP database.
+[2019/03/05-11:37:18] at line 604 of bp/ipn/ipnadmin.c, ipnadmin can't attach to BP
+[2019/03/05-11:38:45] at line 2095 of bp/library/libbpP.c, Can't find BP database.
+[2019/03/05-11:38:45] at line 604 of bp/ipn/ipnadmin.c, ipnadmin can't attach to BP

@@ -9,7 +9,6 @@ a endpoint ipn:2.0 q
 a endpoint ipn:2.1 q
 a endpoint ipn:2.2 q
 a protocol tcp 1400 100 -1
-a induct tcp 127.0.0.1:3556 tcpcli
-a outduct tcp 127.0.0.1:3557 ''
+a induct tcp 192.168.20.5:3113 tcpcli
 r 'ipnadmin config.ipnrc'
 s

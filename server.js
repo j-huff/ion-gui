@@ -46,14 +46,19 @@ app.get('/api/projectFiles', (req, res) => {
 
 
 const applyMachineMap = (json, machineMap) => {
-	for(var key in machineMap){		
-  		for(var machine in json.machines){
-  			if(json.machines[machine].name == key){
-  					json.machines[machine].address = machineMap[key]			
+	console.log("Machine map")
+	let remapped = {...json};
+	for(let map_key in machineMap){
+		console.log(map_key)
+  		for(let machine_key in json.machines){
+
+  			if(remapped.machines[machine_key].name == map_key){
+				console.log("remapping")
+				remapped.machines[machine_key].address = machineMap[map_key]
   			}
   		}
   	}
-  	return json
+  	return remapped
 }
 
 const defaultZipOptions = () => {
@@ -81,9 +86,10 @@ const getZip = (json) => {
 app.get('/api/downloadZip', (req, res) => {
 	console.log("Download Zip Request")
 	console.log("query: "+req.query.id)
-	var query = req.query
-	var id = query.id
-	var machineMap = JSON.parse(query.machineMap)
+	const query = req.query
+	const id = query.id
+	console.log(query.machineMap)
+	const machineMap = JSON.parse(query.machineMap)
 
 	var sql = `SELECT url,
              read_url,
@@ -95,10 +101,10 @@ app.get('/api/downloadZip', (req, res) => {
 			return console.error(err.message);
 		}
 		if(row){
-			var json = JSON.parse(row.json)
-		  	json = applyMachineMap(json,machineMap);
+			const json = JSON.parse(row.json)
+		  	let remapped = applyMachineMap(json,machineMap);
 
-			let zip_file = ion_config.configFromJSON(json);
+			let zip_file = ion_config.configFromJSON(remapped);
 			zip_file.generateNodeStream({type:'nodebuffer',streamFiles:true})
 				.pipe(res);
 
