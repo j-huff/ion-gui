@@ -20,8 +20,10 @@ const generate_ionrc = (state,uuid) => {
     let log = "";
     let node = state.nodes[uuid];
 
-    str += '1 '+node.ipn+' config.ionconfig\n@ 0\n';
-
+    str += '1 '+node.ipn+' config.ionconfig\n';
+    // str += 'e 1\nv\ns\n'
+    str += 'v\n'
+    str += 's\n'
     let links = [];
     for(var link_uuid in state.links){
         let link = state.links[link_uuid];
@@ -33,14 +35,14 @@ const generate_ionrc = (state,uuid) => {
         for(const key in link.contacts){
             const contact = link.contacts[key];
             console.log(contact)
-            str += ' a contact +'+contact.fromTime+' +'+
+            str += 'a contact +'+contact.fromTime+' +'+
                 contact.untilTime + ' ' +
                 node1.ipn + ' ' +
                 node2.ipn + ' ' +
                 contact.rate + ' ' +
                 contact.confidence +
                 '\n';
-            str += ' a contact +'+contact.fromTime+' +'+
+            str += 'a contact +'+contact.fromTime+' +'+
                 contact.untilTime + ' ' +
                 node2.ipn + ' ' +
                 node1.ipn + ' ' +
@@ -51,20 +53,20 @@ const generate_ionrc = (state,uuid) => {
         for(const key in link.ranges){
             const range = link.ranges[key];
             console.log(range)
-            str += ' a range +'+range.fromTime+' +'+
+            str += 'a range +'+range.fromTime+' +'+
                 range.untilTime + ' ' +
                 node1.ipn + ' ' +
                 node2.ipn + ' ' +
                 range.owlt + '\n';
-            str += ' a range +'+range.fromTime+' +'+
+            str += 'a range +'+range.fromTime+' +'+
                 range.untilTime + ' ' +
-                node1.ipn + ' ' +
                 node2.ipn + ' ' +
+                node1.ipn + ' ' +
                 range.owlt + '\n';
         }
     }
 
-    str += 's\nm horizon +0\n';
+    // str += 's\nm horizon +0\n';
 
     return {str:str,log:log}
 }
@@ -77,6 +79,9 @@ const generate_bprc = (state, uuid) => {
     str += "1\na scheme ipn 'ipnfw' 'ipnadminep'\n";
 
     for(const endpointStr in node.endpoints.split(',')){
+        if(endpointStr == "0"){
+            continue
+        }
         str += 'a endpoint ipn:'+node.ipn+'.'+endpointStr+ ' q\n'
     }
 
@@ -138,15 +143,18 @@ const generate_bprc = (state, uuid) => {
             let local_address = state.machines[node.machine].address
 
             if(node.uuid == link.node1_uuid){
-                str += "a induct tcp "+local_address+":"+outduct_port+" tcpcli\n";
+                str += "a induct tcp localhost:"+outduct_port+" tcpcli\n";
             }else{
-                str += "a induct tcp "+local_address+":"+induct_port+" tcpcli\n";
+                str += "a induct tcp localhost:"+outduct_port+" tcpcli\n";
                 str += "a outduct tcp "+other_addr+":"+outduct_port+" ''\n";
+                str += "a plan ipn:"+other.ipn+".0\n"
+                str += "a planduct ipn:"+other.ipn+".0 tcp "+other_addr+":"+outduct_port+"\n";
             }
         }
     });
 
-    str += "r 'ipnadmin config.ipnrc'\ns\n";
+    str += 's\n';
+    // str += "r 'ipnadmin config.ipnrc'\ns\n";
 
     return {str:str,log:log}
 };

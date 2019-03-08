@@ -1,19 +1,5 @@
 #!/bin/bash
-#
-# Scott Burleigh
-# February 26, 2012
-#
 
-# documentation boilerplate
-
-
-#python download.py M9OB77Skc < machineMap
-scp Remote/* john@sagerlt:/home/john/gitwork/ion-gui/examples/bench-tcp/Remote
-scp dotest_remote john@sagerlt:/home/john/gitwork/ion-gui/examples/bench-tcp
-ssh john@sagerlt "cd gitwork/ion-gui/examples/bench-tcp; ./cleanup; ./dotest_remote" &
-sleep 1
-chmod +x ./A/ionstart
-chmod +x ./A/ionstop
 chmod +x ./Remote/ionstart
 chmod +x ./Remote/ionstop
 
@@ -24,13 +10,17 @@ export ION_NODE_LIST_DIR=$PWD
 rm -f ./ion_nodes
 RETVAL=0
 
-# Start nodes.
-cd A
+cd Remote
 ./ionstart
-sleep 5
 
-cd ../A
-bpdriver 10000 ipn:2.1 ipn:3.1 -1000 &
+sleep 1
+echo ""
+echo "Test 1: 10,000 bundles of 1000 bytes each."
+
+sleep 1
+bpcounter ipn:3.1 10000 &
+BPCOUNTER_PID=$!
+sleep 1
 
 # Wait for transmission to finish.
 echo "Waiting for transmission to finish..."
@@ -57,16 +47,3 @@ do
 	fi
 done
 
-if [ $RETVAL -eq 1 ]
-then
-	echo "Test did not complete."
-	echo "Stopping ION..."
-	cd ../2.bench.tcp
-	./ionstop &
-	cd ../3.bench.tcp
-	./ionstop &
-	sleep 5
-	killm
-	echo "...benchmarking terminated."
-	exit $RETVAL
-fi

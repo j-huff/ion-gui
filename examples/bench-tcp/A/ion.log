@@ -1,19 +1,36 @@
-[2019/03/05-08:22:50] [i] No congestion forecast; horizon reached.
-[2019/03/05-08:22:50] [i] ionwarn finished.
-[2019/03/05-08:22:50] [i] rfxclock is running.
-[2019/03/05-08:22:52] [i] Bundle security is enabled.
-[2019/03/05-08:22:53] [i] bptransit is running.
-[2019/03/05-08:22:53] [i] ipnadminep is running.
-[2019/03/05-08:22:53] [i] tcpcli is running [192.168.20.5:3113].
-[2019/03/05-08:22:53] [i] ipnfw is running.
-[2019/03/05-08:22:53] [i] bpclock is running.
-[2019/03/05-08:25:39] [i] bpclock has ended.
-[2019/03/05-08:25:40] [i] bptransit has ended.
-[2019/03/05-08:25:40] [i] Endpoint has been stopped.
-[2019/03/05-08:25:40] [i] Administrative endpoint terminated.
-[2019/03/05-08:25:40] [i] ipnadminep has ended.
-[2019/03/05-08:25:40] [i] ipnfw forwarder has ended.
-[2019/03/05-08:25:40] [i] rfxclock has ended.
-[2019/03/05-08:25:40] [i] tcpcli server thread has ended.
-[2019/03/05-08:25:43] [i] tcpcli clock thread has ended.
-[2019/03/05-08:25:43] [i] tcpcli has ended.
+[2019/03/08-14:10:02] [i] rfxclock is running.
+[2019/03/08-14:10:02] [i] No congestion collapse predicted.
+[2019/03/08-14:10:02] [i] ionwarn finished.
+[2019/03/08-14:10:03] [i] No congestion collapse predicted.
+[2019/03/08-14:10:03] [i] ionwarn finished.
+[2019/03/08-14:10:04] [i] Bundle security is enabled.
+[2019/03/08-14:10:04] [i] bptransit is running.
+[2019/03/08-14:10:04] [i] ipnadminep is running.
+[2019/03/08-14:10:04] [i] ipnfw is running.
+[2019/03/08-14:10:04] [i] tcpcli is running [127.0.0.1:4557].
+[2019/03/08-14:10:04] [i] bpclm is running: ipn:3.0
+[2019/03/08-14:10:04] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:10:04] [i] bpclock is running.
+[2019/03/08-14:10:05] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:10:05] [x] src from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:05] [x] fwd from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:05] [x] xmt from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:05] [x] rcv from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:05] [x] dlv from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:05] [x] ctr from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:05] [x] rfw from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:05] [x] exp from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
+[2019/03/08-14:10:07] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:10:11] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:10:19] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:10:35] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:10:55] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:11:15] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:11:35] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:11:55] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:12:15] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:12:35] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:12:53] [i] tcpcli server thread has ended.
+[2019/03/08-14:12:55] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
+[2019/03/08-14:12:56] [i] tcpcli clock thread has ended.
+[2019/03/08-14:12:56] [i] tcpcli has ended.
