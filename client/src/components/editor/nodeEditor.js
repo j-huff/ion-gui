@@ -104,6 +104,11 @@ class NodeEditor extends Component {
           <hr/>
 
           {ProtocolSettings(this.props.actionHandler, this.props.state, this.props.config)}
+          <hr/>
+          <Button className="btn btn-danger" style={{float:"right"}}
+          onClick={(e)=>this.props.actionHandler({"type":"deleteNode","data":nodeData.uuid})}>
+          Delete Node
+          </Button>
         </Form>
       );
     }else{

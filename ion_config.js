@@ -108,7 +108,7 @@ const generate_bprc = (state, uuid) => {
         }
         else if(protocol == "UDP"){
             let settings = node.protocolSettings["UDP"];
-            str += 'a protocol tcp ' +
+            str += 'a protocol udp ' +
                 settings.payloadBytesPerFrame +' ' +
                 settings.overheadBytesPerFrame + ' ' +
                 settings.nominalDataRate + '\n';
@@ -143,9 +143,9 @@ const generate_bprc = (state, uuid) => {
             let local_address = state.machines[node.machine].address
 
             if(node.uuid == link.node1_uuid){
-                str += "a induct tcp localhost:"+outduct_port+" tcpcli\n";
+                str += "a induct tcp 0.0.0.0:"+outduct_port+" tcpcli\n";
             }else{
-                str += "a induct tcp localhost:"+outduct_port+" tcpcli\n";
+                str += "a induct tcp 0.0.0.0:"+outduct_port+" tcpcli\n";
                 str += "a outduct tcp "+other_addr+":"+outduct_port+" ''\n";
                 str += "a plan ipn:"+other.ipn+".0\n"
                 str += "a planduct ipn:"+other.ipn+".0 tcp "+other_addr+":"+outduct_port+"\n";

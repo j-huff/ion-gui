@@ -50,8 +50,8 @@ const ProtocolSettings = (actionHandler, state, config) => {
         }
       }
     }
-
-    var editingNode = state.editingLink;
+    console.log(this.state)
+    var editingNode = state.nodeEditor["node_uuid"];
 
     var node = state.nodes[editingNode]
 

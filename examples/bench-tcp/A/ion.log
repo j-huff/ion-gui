@@ -1,36 +1,18 @@
-[2019/03/08-14:10:02] [i] rfxclock is running.
-[2019/03/08-14:10:02] [i] No congestion collapse predicted.
-[2019/03/08-14:10:02] [i] ionwarn finished.
-[2019/03/08-14:10:03] [i] No congestion collapse predicted.
-[2019/03/08-14:10:03] [i] ionwarn finished.
-[2019/03/08-14:10:04] [i] Bundle security is enabled.
-[2019/03/08-14:10:04] [i] bptransit is running.
-[2019/03/08-14:10:04] [i] ipnadminep is running.
-[2019/03/08-14:10:04] [i] ipnfw is running.
-[2019/03/08-14:10:04] [i] tcpcli is running [127.0.0.1:4557].
-[2019/03/08-14:10:04] [i] bpclm is running: ipn:3.0
-[2019/03/08-14:10:04] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:10:04] [i] bpclock is running.
-[2019/03/08-14:10:05] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:10:05] [x] src from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:05] [x] fwd from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:05] [x] xmt from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:05] [x] rcv from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:05] [x] dlv from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:05] [x] ctr from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:05] [x] rfw from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:05] [x] exp from 1969/12/31-19:00:00 to 2019/03/08-14:10:05: (0) 0 0 (1) 0 0 (2) 0 0 (+) 0 0
-[2019/03/08-14:10:07] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:10:11] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:10:19] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:10:35] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:10:55] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:11:15] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:11:35] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:11:55] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:12:15] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:12:35] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:12:53] [i] tcpcli server thread has ended.
-[2019/03/08-14:12:55] at line 3401 of ici/library/platform.c, Can't connect to TCP socket: Connection refused (192.168.20.27:4557)
-[2019/03/08-14:12:56] [i] tcpcli clock thread has ended.
-[2019/03/08-14:12:56] [i] tcpcli has ended.
+[2019/04/09-12:54:45] [i] rfxclock is running.
+[2019/04/09-12:54:47] [i] Bundle security is enabled.
+[2019/04/09-12:54:47] [i] bptransit is running.
+[2019/04/09-12:54:47] [i] ipnadminep is running.
+[2019/04/09-12:54:47] [i] bpclock is running.
+[2019/04/09-12:54:47] [i] tcpcli is running [0.0.0.0:4556].
+[2019/04/09-12:54:47] [i] ipnfw is running.
+[2019/04/09-12:54:50] [i] tcpcli sender thread has started: ipn:3.0
+[2019/04/09-12:54:50] [i] tcpcli admin thread has started: ipn:3.0
+[2019/04/09-12:54:50] [i] bpclm is running: ipn:3.0
+[2019/04/09-12:55:54] [i] tcpcli server thread has ended.
+[2019/04/09-12:55:55] at line 1901 of bp/tcp/tcpcli.c, irecv() error on TCP socket: Bad file descriptor (#:5)
+[2019/04/09-12:55:55] [?] tcpcl session lost (seg header): ipn:3.0
+[2019/04/09-12:55:55] [i] tcpcli sender thread has ended: ipn:3.0
+[2019/04/09-12:55:55] [i] tcpcli receiver thread has ended: ipn:3.0
+[2019/04/09-12:55:55] at line 231 of ici/library/llcv.c, llcv_close: cond_destroy failed.: Resource temporarily unavailable
+[2019/04/09-12:55:56] [i] tcpcli clock thread has ended.
+[2019/04/09-12:55:56] [i] tcpcli has ended.

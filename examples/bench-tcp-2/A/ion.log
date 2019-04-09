@@ -1,0 +1,15 @@
+[2019/04/02-12:31:21] [i] rfxclock is running.
+[2019/04/02-12:31:23] [i] Bundle security is enabled.
+[2019/04/02-12:31:23] [i] bptransit is running.
+[2019/04/02-12:31:23] [i] bpclock is running.
+[2019/04/02-12:31:23] [i] ipnfw is running.
+[2019/04/02-12:31:23] [i] ipnadminep is running.
+[2019/04/02-12:31:23] [?] Invalid port number.: 2
+[2019/04/02-12:31:23] [?] tcpcli: can't get induct IP address: localhost:2
+[2019/04/02-12:34:31] [i] bpclock has ended.
+[2019/04/02-12:34:31] [i] bptransit has ended.
+[2019/04/02-12:34:32] [i] Endpoint has been stopped.
+[2019/04/02-12:34:32] [i] Administrative endpoint terminated.
+[2019/04/02-12:34:32] [i] ipnadminep has ended.
+[2019/04/02-12:34:32] [i] ipnfw forwarder has ended.
+[2019/04/02-12:34:32] [i] rfxclock has ended.

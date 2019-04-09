@@ -1,0 +1,14 @@
+#!/bin/bash
+
+chmod +x ./Remote/ionstart
+chmod +x ./Remote/ionstop
+
+./cleanup
+sleep 1
+echo "Starting ION..."
+export ION_NODE_LIST_DIR=$PWD
+rm -f ./ion_nodes
+RETVAL=0
+
+cd Remote
+./ionstart

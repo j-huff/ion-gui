@@ -692,6 +692,7 @@ class Editor extends Component {
       console.log("No action inputted to action handler")
     }
     console.log(action)
+    console.log
     switch (action.type) {
       case 'toggle_bottom_toolbar':
         var pose = 'closed'
@@ -888,6 +889,21 @@ class Editor extends Component {
       this.setState(newstate)
       
       break
+      case "deleteNode":
+        var uuid = action.data
+        var nodes = this.state.nodes;
+        delete nodes[uuid]
+        
+        var links = this.state.links;
+        for (var key in this.state.links){
+          var link = this.state.links[key]
+          if(link.node1_uuid == uuid || link.node2_uuid == uuid){
+            delete links[key]
+          }
+        }
+
+        this.setState({nodes:nodes,links:links})
+
       default:
         console.log("Action not implemented: "+action.type);
       
@@ -1095,8 +1111,6 @@ class Editor extends Component {
           
           
         </div>
-
-        {BottomToolbar(this.actionHandler,this.state.bottomToolbar,this.state.contactEditor,this.state.nodes,this.state.contacts)}
 
       </div>
     );
